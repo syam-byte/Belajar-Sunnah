@@ -274,7 +274,77 @@ nav a.active {
     transform: translateY(0);
   }
 }
-  
+
+/* TAB NAVIGASI BELAJAR-SUNNAH */
+.bs-tabs {
+  max-width: 900px;
+  margin: 18px auto;
+  padding: 0 15px;
+}
+
+.bs-tab-menu {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px;
+  background: #DED4C1;
+  border: 1px solid #d5cbb9;
+  border-radius: 6px;
+}
+
+.bs-tab {
+  flex: 0 0 auto;
+  padding: 10px 15px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: #245580;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bs-tab.active {
+  background: #fffdf7;
+  border-color: #d5cbb9;
+  color: #173b5b;
+}
+
+.bs-tab-panel {
+  margin-top: 12px;
+  padding: 20px;
+  background: rgba(255, 253, 247, 0.88);
+  border: 1px solid #ded4c1;
+  border-radius: 6px;
+}
+
+.bs-tab-panel[hidden] {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .bs-tabs {
+    padding: 0 10px;
+  }
+
+  .bs-tab-menu {
+    justify-content: flex-start;
+  }
+
+  .bs-tab-panel {
+    padding: 16px;
+  }
+}
+
+main > .bs-tab-panel {
+  max-width: 900px;
+  margin: 0 auto 22px;
+}
+
+main > .bs-tab-panel[hidden] {
+  display: none !important;
+}
+
 </style>
   
 </head>
@@ -286,84 +356,135 @@ nav a.active {
   <p>Perpustakaan Hadis Berbahasa Indonesia</p>
 </header>
 
-<nav aria-label="Navigasi utama">
-  <a href="#beranda">Beranda</a>
-  <a href="#koleksi">Koleksi Hadis</a>
-  <a href="#penelitian">Sanad dan Perawi</a>
-  <a href="#tentang">Tentang</a>
-</nav>
+<!-- TAB NAVIGASI BELAJAR-SUNNAH -->
+<section class="bs-tabs">
+
+  <div class="bs-tab-menu" role="tablist"
+       aria-label="Navigasi perpustakaan hadis">
+
+    <button class="bs-tab active"
+      role="tab" aria-selected="true"
+      aria-controls="bs-beranda"
+      id="tab-beranda" type="button">
+      Beranda
+    </button>
+
+    <button class="bs-tab"
+      role="tab" aria-selected="false"
+      aria-controls="bs-hadis"
+      id="tab-hadis" type="button">
+      Koleksi Hadis
+    </button>
+
+    <button class="bs-tab"
+      role="tab" aria-selected="false"
+      aria-controls="bs-sanad"
+      id="tab-sanad" type="button">
+      Sanad
+    </button>
+
+    <button class="bs-tab"
+      role="tab" aria-selected="false"
+      aria-controls="bs-perawi"
+      id="tab-perawi" type="button">
+      Biografi Perawi
+    </button>
+
+  </div>
+
+</section>
+
 
 <main>
 
-<section id="beranda" class="card">
-  <h2>Selamat Datang</h2>
+  <!-- TAB 1: BERANDA -->
+  <section class="bs-tab-panel"
+    id="bs-beranda"
+    role="tabpanel"
+    aria-labelledby="tab-beranda">
 
-  <p>Belajar-Sunnah adalah proyek perpustakaan hadis berbahasa Indonesia untuk membantu pembaca mempelajari hadis, menelusuri sumber periwayatan, dan mengenali para perawi.</p>
+    <h2>Selamat Datang</h2>
 
-  <p>Setiap hadis perlu diperiksa berdasarkan sumber, sanad, matan, dan keterangan ilmiah yang dapat dipertanggungjawabkan.</p>
-</section>
+    <p>Belajar-Sunnah adalah proyek perpustakaan hadis berbahasa Indonesia untuk membantu pembaca mempelajari hadis, menelusuri sumber periwayatan, dan mengenali para perawi.</p>
 
-<section id="koleksi">
-  <h2>Koleksi Hadis</h2>
+    <p>Setiap hadis perlu diperiksa berdasarkan sumber, sanad, matan, dan keterangan ilmiah yang dapat dipertanggungjawabkan.</p>
 
-  <a class="card" href="#shahih-bukhari">
+    <h3>Tentang Belajar-Sunnah</h3>
+
+    <p>Website ini dikembangkan sebagai sarana belajar, dokumentasi, dan penelitian hadis. Tujuannya adalah memudahkan pembaca memeriksa sumber, bukan sekadar membaca kutipan tanpa rujukan.</p>
+
+  </section>
+
+
+  <!-- TAB 2: KOLEKSI HADIS -->
+  <section class="bs-tab-panel"
+    id="bs-hadis"
+    role="tabpanel"
+    aria-labelledby="tab-hadis"
+    hidden>
+
+    <h2>Koleksi Hadis</h2>
+
+    <h3>Hadis: Menuntut Ilmu</h3>
+
+    <p><strong>Dari Anas bin Malik radhiyallahu ‘anhu, bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong></p>
+
+    <p dir="rtl" lang="ar"
+      style="font-size:26px;line-height:2;text-align:right;">
+      طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ
+    </p>
+
+    <p><strong>Latin:</strong><br>
+      Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.
+    </p>
+
+    <p><strong>Artinya:</strong><br>
+      Menuntut ilmu wajib bagi setiap Muslim.
+    </p>
+
+    <p><strong>Sumber:</strong><br>
+      Sunan Ibnu Majah, no. 224.
+    </p>
+
+    <hr>
+
     <h3>Shahih Al-Bukhari</h3>
-    <p>Tempat untuk menyusun hadis, teks Arab, transliterasi Latin, terjemahan Indonesia, dan referensi hadis.</p>
-  </a>
 
-  <a class="card" href="#penelitian">
-    <h3>Penelitian Sanad dan Perawi</h3>
-    <p>Menelusuri urutan sanad, biografi perawi, serta sumber penilaian para ulama hadis.</p>
-  </a>
-</section>
+    <p>Koleksi hadis akan ditambahkan secara bertahap dengan menyertakan nomor hadis dan rujukan yang jelas.</p>
 
-<section id="hadis-menuntut-ilmu" class="notice">
-  <h2>Hadis: Menuntut Ilmu</h2>
+  </section>
 
-  <p>
-    <strong>Dari Anas bin Malik radhiyallahu ‘anhu, bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong>
-  </p>
 
-  <p dir="rtl" lang="ar"
-     style="font-size:26px; line-height:2; text-align:right;">
-    طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ
-  </p>
+  <!-- TAB 3: SANAD -->
+  <section class="bs-tab-panel"
+    id="bs-sanad"
+    role="tabpanel"
+    aria-labelledby="tab-sanad"
+    hidden>
 
-  <p>
-    <strong>Latin:</strong><br>
-    Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.
-  </p>
+    <h2>Penelitian Sanad</h2>
 
-  <p>
-    <strong>Artinya:</strong><br>
-    Menuntut ilmu wajib bagi setiap Muslim.
-  </p>
+    <p>Bagian ini digunakan untuk menelusuri urutan sanad, hubungan guru dan murid, serta sumber periwayatan setiap hadis.</p>
 
-  <p>
-    <strong>Sumber:</strong><br>
-    Sunan Ibnu Majah, no. 224.
-  </p>
-</section>
+    <p>Informasi sanad akan dilengkapi berdasarkan kitab hadis dan sumber biografi perawi yang dapat diperiksa.</p>
 
-<section id="shahih-bukhari" class="notice">
-  <h2>Shahih Al-Bukhari</h2>
+  </section>
 
-  <p>Koleksi hadis akan ditambahkan secara bertahap dengan menyertakan nomor hadis dan rujukan yang jelas.</p>
-</section>
 
-<section id="penelitian" class="notice">
-  <h2>Penelitian Sanad dan Perawi</h2>
+  <!-- TAB 4: BIOGRAFI PERAWI -->
+  <section class="bs-tab-panel"
+    id="bs-perawi"
+    role="tabpanel"
+    aria-labelledby="tab-perawi"
+    hidden>
 
-  <p>Setiap perawi akan ditampilkan berdasarkan sumber biografi yang dapat diperiksa, termasuk kitab rijal hadis dan keterangan ulama yang relevan.</p>
+    <h2>Biografi Perawi</h2>
 
-  <p>Indeks nama perawi A–Z dan pop-up biografi akan dikembangkan pada tahap berikutnya.</p>
-</section>
+    <p>Bagian ini akan memuat nama lengkap perawi, kunyah, guru, murid, tahun hidup, dan penilaian ulama hadis jika tersedia dalam sumber rujukan.</p>
 
-<section id="tentang" class="notice">
-  <h2>Tentang Belajar-Sunnah</h2>
+    <p>Indeks nama perawi A–Z dan pop-up biografi akan dikembangkan pada tahap berikutnya.</p>
 
-  <p>Website ini dikembangkan sebagai sarana belajar, dokumentasi, dan penelitian hadis. Tujuannya adalah memudahkan pembaca memeriksa sumber, bukan sekadar membaca kutipan tanpa rujukan.</p>
-</section>
+  </section>
 
 </main>
 
@@ -371,6 +492,29 @@ nav a.active {
   <p>Belajar-Sunnah · Perpustakaan Hadis Berbahasa Indonesia</p>
   <p>Belajar, meneliti, dan memeriksa sumber dengan cermat.</p>
 </footer>
+
+
+<script>
+document.querySelectorAll('.bs-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.bs-tab').forEach(function(item) {
+      item.classList.remove('active');
+      item.setAttribute('aria-selected', 'false');
+    });
+
+    document.querySelectorAll('.bs-tab-panel').forEach(function(panel) {
+      panel.hidden = true;
+    });
+
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+
+    document.getElementById(
+      tab.getAttribute('aria-controls')
+    ).hidden = false;
+  });
+});
+</script>
 
 </body>
 </html>
