@@ -4,92 +4,210 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Belajar-Sunnah, perpustakaan hadis berbahasa Indonesia.">
+<meta name="theme-color" content="#ffffff">
+
 <title>Belajar-Sunnah</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+}
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f1f4f7;
-  color: #263746;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f4f4;
+  color: #333333;
   line-height: 1.7;
 }
 
+/* HEADER */
 header {
-  background: #d9ecf7;
-  padding: 30px 15px;
+  background: #ffffff;
+  padding: 25px 15px;
   text-align: center;
-  border-bottom: 4px solid #9bc8e0;
+  border-bottom: 1px solid #dddddd;
 }
 
 header h1 {
   margin: 0;
-  color: #174b70;
-  font-size: 30px;
+  color: #245580;
+  font-size: 29px;
+  letter-spacing: 0.3px;
 }
 
 header p {
-  margin-bottom: 0;
-  color: #526b7c;
+  margin: 5px 0 0;
+  color: #777777;
+  font-size: 14px;
 }
 
+/* NAVIGASI */
 nav {
-  background: white;
-  padding: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #eeeeee;
+  border-bottom: 1px solid #d5d5d5;
+  padding: 8px 10px;
   text-align: center;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 nav a {
   display: inline-block;
-  margin: 4px 8px;
-  color: #174b70;
+  margin: 2px 5px;
+  padding: 6px 10px;
+  color: #245580;
   text-decoration: none;
+  font-size: 14px;
   font-weight: bold;
+  border-radius: 4px;
 }
 
+nav a:hover,
+nav a:focus {
+  background: #ffffff;
+  color: #173b5b;
+}
+
+/* KONTEN */
 main {
-  max-width: 850px;
+  width: 100%;
+  max-width: 900px;
   margin: 25px auto;
   padding: 0 15px;
 }
 
 section {
   margin-bottom: 22px;
+  scroll-margin-top: 80px;
+}
+
+/* PANEL PUTIH */
+.card,
+.notice {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 14px;
+  overflow-wrap: break-word;
 }
 
 .card {
   display: block;
-  background: white;
-  padding: 20px;
-  margin-top: 14px;
-  border-radius: 10px;
-  border-left: 5px solid #9bc8e0;
-  color: #263746;
+  color: #333333;
   text-decoration: none;
+  border-left: 4px solid #a9c9df;
+  transition: border-color 0.2s ease;
 }
 
-h2, h3 {
-  color: #174b70;
+a.card:hover {
+  border-left-color: #245580;
+  background: #fdfdfd;
 }
 
+.card h2,
 .card h3 {
   margin-top: 0;
 }
 
-.notice {
-  background: #e7eef3;
-  padding: 18px;
-  border-radius: 10px;
+/* JUDUL */
+h2,
+h3 {
+  color: #245580;
+  line-height: 1.4;
 }
 
+h2 {
+  font-size: 22px;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+/* PANEL INFORMASI */
+.notice {
+  border-left: 4px solid #d0d0d0;
+}
+
+.notice h2 {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 10px;
+}
+
+/* TEKS ARAB */
+[dir="rtl"] {
+  font-family: "Traditional Arabic", "Noto Naskh Arabic",
+               "Times New Roman", serif;
+  color: #222222;
+  overflow-wrap: normal;
+}
+
+/* TAUTAN */
+a {
+  color: #245580;
+}
+
+/* FOOTER */
 footer {
-  background: #d9ecf7;
-  padding: 20px;
+  background: #eeeeee;
+  border-top: 1px solid #d5d5d5;
+  padding: 20px 15px;
   text-align: center;
-  color: #526b7c;
-  font-size: 14px;
+  color: #666666;
+  font-size: 13px;
+}
+
+footer p {
+  margin: 4px 0;
+}
+
+/* TAMPILAN HP */
+@media (max-width: 600px) {
+  header {
+    padding: 20px 12px;
+  }
+
+  header h1 {
+    font-size: 25px;
+  }
+
+  main {
+    margin: 18px auto;
+    padding: 0 10px;
+  }
+
+  .card,
+  .notice {
+    padding: 16px;
+    border-radius: 4px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 17px;
+  }
+
+  nav {
+    text-align: left;
+  }
 }
 </style>
 </head>
@@ -101,7 +219,7 @@ footer {
   <p>Perpustakaan Hadis Berbahasa Indonesia</p>
 </header>
 
-<nav>
+<nav aria-label="Navigasi utama">
   <a href="#beranda">Beranda</a>
   <a href="#koleksi">Koleksi Hadis</a>
   <a href="#penelitian">Sanad dan Perawi</a>
@@ -112,14 +230,16 @@ footer {
 
 <section id="beranda" class="card">
   <h2>Selamat Datang</h2>
+
   <p>Belajar-Sunnah adalah proyek perpustakaan hadis berbahasa Indonesia untuk membantu pembaca mempelajari hadis, menelusuri sumber periwayatan, dan mengenali para perawi.</p>
+
   <p>Setiap hadis perlu diperiksa berdasarkan sumber, sanad, matan, dan keterangan ilmiah yang dapat dipertanggungjawabkan.</p>
 </section>
 
 <section id="koleksi">
   <h2>Koleksi Hadis</h2>
 
-  <a class="card" href="#bukhari">
+  <a class="card" href="#shahih-bukhari">
     <h3>Shahih Al-Bukhari</h3>
     <p>Tempat untuk menyusun hadis, teks Arab, transliterasi Latin, terjemahan Indonesia, dan referensi hadis.</p>
   </a>
@@ -130,30 +250,51 @@ footer {
   </a>
 </section>
 
-<section id="bukhari" class="notice">  
-  <h2>Hadis: Menuntut Ilmu</h2>    <p><strong>dari Anas bin Malik radhiyallahu ‘anhu berkata bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong></p>    <p dir="rtl" lang="ar" style="font-size: 26px; line-height: 2; text-align: right;">  
-    طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ  
-  </p>    <p><strong>Latin:</strong><br>  
-    Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.  
-  </p>    <p><strong>Artinya:</strong><br>  
-    Menuntut ilmu wajib bagi setiap Muslim.  
-  </p>    <p><strong>Sumber:</strong><br>  
-    Sunan Ibnu Majah, no. 224
-  </p>  
+<section id="hadis-menuntut-ilmu" class="notice">
+  <h2>Hadis: Menuntut Ilmu</h2>
+
+  <p>
+    <strong>Dari Anas bin Malik radhiyallahu ‘anhu, bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong>
+  </p>
+
+  <p dir="rtl" lang="ar"
+     style="font-size:26px; line-height:2; text-align:right;">
+    طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ
+  </p>
+
+  <p>
+    <strong>Latin:</strong><br>
+    Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.
+  </p>
+
+  <p>
+    <strong>Artinya:</strong><br>
+    Menuntut ilmu wajib bagi setiap Muslim.
+  </p>
+
+  <p>
+    <strong>Sumber:</strong><br>
+    Sunan Ibnu Majah, no. 224.
+  </p>
 </section>
 
-<section id="bukhari" class="notice">
+<section id="shahih-bukhari" class="notice">
   <h2>Shahih Al-Bukhari</h2>
+
   <p>Koleksi hadis akan ditambahkan secara bertahap dengan menyertakan nomor hadis dan rujukan yang jelas.</p>
 </section>
 
 <section id="penelitian" class="notice">
   <h2>Penelitian Sanad dan Perawi</h2>
+
   <p>Setiap perawi akan ditampilkan berdasarkan sumber biografi yang dapat diperiksa, termasuk kitab rijal hadis dan keterangan ulama yang relevan.</p>
+
+  <p>Indeks nama perawi A–Z dan pop-up biografi akan dikembangkan pada tahap berikutnya.</p>
 </section>
 
 <section id="tentang" class="notice">
   <h2>Tentang Belajar-Sunnah</h2>
+
   <p>Website ini dikembangkan sebagai sarana belajar, dokumentasi, dan penelitian hadis. Tujuannya adalah memudahkan pembaca memeriksa sumber, bukan sekadar membaca kutipan tanpa rujukan.</p>
 </section>
 
