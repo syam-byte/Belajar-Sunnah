@@ -211,13 +211,41 @@ nav {
   }
 }
 
-/* Tekstur serat kertas halus untuk background Belajar-Sunnah */
+
+/* Tekstur kertas krem dengan serat halus */
 body {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E") !important;
-  background-size: 180px 180px !important;
-  background-repeat: repeat !important;
+  background-color: #f5f1e7 !important;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(110, 90, 60, 0.045) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(110, 90, 60, 0.025) 0px,
+      transparent 1px,
+      transparent 5px
+    ),
+    radial-gradient(
+      ellipse at 20% 25%,
+      rgba(160, 135, 95, 0.09),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 80% 75%,
+      rgba(160, 135, 95, 0.07),
+      transparent 60%
+    ) !important;
+  background-size:
+    5px 5px,
+    7px 7px,
+    240px 200px,
+    280px 240px !important;
   background-attachment: fixed;
 }
+
 </style>
   
 </head>
