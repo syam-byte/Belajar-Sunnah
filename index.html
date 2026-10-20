@@ -234,6 +234,46 @@ body {
   background-size: 100% 100%, 100% 100%, 100% 100% !important;
   background-attachment: fixed;
 }
+
+
+/* ===== HALAMAN TERPISAH BELAJAR-SUNNAH ===== */
+
+.page-view {
+  display: none;
+  animation: pageFade 0.2s ease;
+}
+
+.page-view.active {
+  display: block;
+}
+
+nav a.active {
+  background: #fffdf7;
+  color: #244b46;
+  box-shadow: inset 0 -2px #78a9a6;
+}
+
+.page-view > .card,
+.page-view > .notice {
+  background-color: rgba(255, 253, 247, 0.88);
+  border-color: #d8d0c0;
+}
+
+.page-view h2,
+.page-view h3 {
+  color: #416f69;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   
 </style>
   
