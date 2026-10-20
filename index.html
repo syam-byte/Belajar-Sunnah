@@ -211,16 +211,30 @@ nav {
   }
 }
 
-/* Tekstur kertas krem yang lebih terlihat */
+/* Tekstur kertas alami tanpa pola kotak */
 body {
   background-color: #f5f1e7 !important;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.22'/%3E%3C/svg%3E") !important;
-  background-size: 300px 300px !important;
-  background-repeat: repeat !important;
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(125, 105, 75, 0.07),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse at 85% 65%,
+      rgba(125, 105, 75, 0.06),
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      3deg,
+      rgba(125, 105, 75, 0.025) 0px,
+      transparent 1px,
+      transparent 9px
+    ) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100% !important;
   background-attachment: fixed;
 }
-
+  
 </style>
   
 </head>
