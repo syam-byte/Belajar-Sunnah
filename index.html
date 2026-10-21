@@ -275,74 +275,87 @@ nav a.active {
   }
 }
 
-/* TAB NAVIGASI BELAJAR-SUNNAH */
+/* TAB BELAJAR-SUNNAH */
+
 .bs-tabs {
-  max-width: 900px;
-  margin: 18px auto;
-  padding: 0 15px;
+  margin: 24px 0;
+  color: #353c37;
+  font-family: inherit;
 }
 
 .bs-tab-menu {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   overflow-x: auto;
-  padding: 8px;
-  background: #DED4C1;
+  padding: 6px;
+  background: #e9e2d3;
   border: 1px solid #d5cbb9;
-  border-radius: 6px;
+  border-radius: 12px;
+  scrollbar-width: thin;
 }
 
 .bs-tab {
-  flex: 0 0 auto;
-  padding: 10px 15px;
-  border: 1px solid transparent;
-  border-radius: 5px;
+  flex: 1 0 auto;
+  padding: 12px 15px;
+  border: 0;
+  border-radius: 8px;
   background: transparent;
-  color: #245580;
+  color: #46554e;
+  font: inherit;
   font-size: 14px;
-  font-weight: bold;
   cursor: pointer;
+  transition: background .2s, color .2s;
+}
+
+.bs-tab:hover {
+  background: #d9e5dd;
 }
 
 .bs-tab.active {
-  background: #fffdf7;
-  border-color: #d5cbb9;
-  color: #173b5b;
+  background: #528c83;
+  color: #fffdf7;
+  font-weight: 600;
+  box-shadow: 0 2px 5px #00000012;
+}
+
+.bs-tab:focus-visible {
+  outline: 2px solid #315d56;
+  outline-offset: 2px;
 }
 
 .bs-tab-panel {
   margin-top: 12px;
   padding: 20px;
-  background: rgba(255, 253, 247, 0.88);
-  border: 1px solid #ded4c1;
-  border-radius: 6px;
+  background: #fffdf7;
+  border: 1px solid #e1d7c5;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #463a2410;
+  line-height: 1.8;
+}
+
+.bs-tab-panel h2 {
+  margin-top: 0;
+  color: #315d56;
+  font-size: 21px;
+}
+
+.bs-tab-panel p {
+  margin-bottom: 10px;
 }
 
 .bs-tab-panel[hidden] {
-  display: none;
+  display: none !important;
 }
 
-@media (max-width: 600px) {
-  .bs-tabs {
-    padding: 0 10px;
-  }
-
-  .bs-tab-menu {
-    justify-content: flex-start;
+@media (max-width: 480px) {
+  .bs-tab {
+    padding: 11px 13px;
+    font-size: 13px;
   }
 
   .bs-tab-panel {
-    padding: 16px;
+    padding: 15px;
   }
-}
-
-main > .bs-tab-panel {
-  max-width: 900px;
-  margin: 0 auto 22px;
-}
-
-main > .bs-tab-panel[hidden] {
-  display: none !important;
 }
 
 </style>
@@ -355,6 +368,7 @@ main > .bs-tab-panel[hidden] {
   <h1>Belajar-Sunnah</h1>
   <p>Perpustakaan Hadis Berbahasa Indonesia</p>
 </header>
+
 
 <!-- TAB NAVIGASI BELAJAR-SUNNAH -->
 <section class="bs-tabs">
@@ -392,7 +406,34 @@ main > .bs-tab-panel[hidden] {
 
   </div>
 
+  <div class="bs-tab-panel"
+    id="bs-beranda" role="tabpanel"
+    aria-labelledby="tab-beranda">
+    <h2>Selamat Datang</h2>
+    <p>Perpustakaan Hadis Berbahasa Indonesia.</p>
+    <p>Pelajari hadis, sanad, dan biografi perawi.</p>
+  </div>
+
+  <div class="bs-tab-panel" id="bs-hadis"
+    role="tabpanel" aria-labelledby="tab-hadis" hidden>
+    <h2>Koleksi Hadis</h2>
+    <p>Shahih Al-Bukhari dan koleksi kitab hadis lainnya.</p>
+  </div>
+
+  <div class="bs-tab-panel" id="bs-sanad"
+    role="tabpanel" aria-labelledby="tab-sanad" hidden>
+    <h2>Sanad Hadis</h2>
+    <p>Pelajari urutan perawi dan jalur periwayatan hadis.</p>
+  </div>
+
+  <div class="bs-tab-panel" id="bs-perawi"
+    role="tabpanel" aria-labelledby="tab-perawi" hidden>
+    <h2>Biografi Perawi</h2>
+    <p>Nama lengkap, guru, murid, dan penilaian ulama hadis.</p>
+  </div>
+
 </section>
+
 
 
 <main>
@@ -515,6 +556,50 @@ document.querySelectorAll('.bs-tab').forEach(function(tab) {
   });
 });
 </script>
+
+document.querySelectorAll(".bs-tabs").forEach((container) => {
+  const tabs = [...container.querySelectorAll(".bs-tab")];
+
+  function activateTab(tab, moveFocus = false) {
+    tabs.forEach((item) => {
+      const selected = item === tab;
+      item.classList.toggle("active", selected);
+      item.setAttribute("aria-selected", String(selected));
+      item.tabIndex = selected ? 0 : -1;
+
+      const panel = container.querySelector(
+        "#" + item.getAttribute("aria-controls")
+      );
+
+      if (panel) panel.hidden = !selected;
+    });
+
+    if (moveFocus) tab.focus();
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activateTab(tab));
+
+    tab.addEventListener("keydown", (event) => {
+      let next = index;
+
+      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = tabs.length - 1;
+      else return;
+
+      event.preventDefault();
+      activateTab(tabs[next], true);
+    });
+  });
+
+  const initialTab = tabs.find(
+    tab => tab.getAttribute("aria-selected") === "true"
+  ) || tabs[0];
+
+  if (initialTab) activateTab(initialTab);
+});
 
 </body>
 </html>
