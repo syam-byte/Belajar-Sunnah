@@ -1,270 +1,352 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Belajar-Sunnah, perpustakaan hadis berbahasa Indonesia.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#f5f1e7">
 
 <title>Belajar-Sunnah</title>
 
 <style>
+/* =====================================
+   BELAJAR-SUNNAH
+   Kertas krem + hijau kebiruan
+   ===================================== */
+
+:root {
+  --paper: #f5f1e7;
+  --paper-light: #fffdf7;
+  --paper-dark: #e7e2d6;
+  --teal: #78a9a6;
+  --teal-dark: #528c83;
+  --teal-deep: #315d56;
+  --text: #353c37;
+  --muted: #64736d;
+  --border: #ded5c4;
+  --gold: #8c7653;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 75px;
+  scroll-padding-top: 100px;
 }
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #f4f4f4;
-  color: #333333;
+  color: var(--text);
   line-height: 1.7;
-}
 
-/* HEADER */
-header {
-  background: #E9E2D3;
-  padding: 25px 15px;
-  text-align: center;
-  border-bottom: 1px solid #dddddd;
-}
-
-header h1 {
-  margin: 0;
-  color: #245580;
-  font-size: 29px;
-  letter-spacing: 0.3px;
-}
-
-header p {
-  margin: 5px 0 0;
-  color: #777777;
-  font-size: 14px;
-}
-
-/* NAVIGASI */
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: #DED4C1;
-  border-bottom: 1px solid #d5d5d5;
-  padding: 8px 10px;
-  text-align: center;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-nav a {
-  display: inline-block;
-  margin: 2px 5px;
-  padding: 6px 10px;
-  color: #245580;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 4px;
-}
-
-nav a:hover,
-nav a:focus {
-  background: #ffffff;
-  color: #173b5b;
-}
-
-/* KONTEN */
-main {
-  width: 100%;
-  max-width: 900px;
-  margin: 25px auto;
-  padding: 0 15px;
-}
-
-section {
-  margin-bottom: 22px;
-  scroll-margin-top: 80px;
-}
-
-/* PANEL PUTIH */
-.card,
-.notice {
-  background: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  padding: 20px;
-  margin-top: 14px;
-  overflow-wrap: break-word;
-}
-
-.card {
-  display: block;
-  color: #333333;
-  text-decoration: none;
-  border-left: 4px solid #a9c9df;
-  transition: border-color 0.2s ease;
-}
-
-a.card:hover {
-  border-left-color: #245580;
-  background: #fdfdfd;
-}
-
-.card h2,
-.card h3 {
-  margin-top: 0;
-}
-
-/* JUDUL */
-h2,
-h3 {
-  color: #245580;
-  line-height: 1.4;
-}
-
-h2 {
-  font-size: 22px;
-  margin-top: 0;
-}
-
-h3 {
-  font-size: 18px;
-}
-
-p {
-  margin: 10px 0;
-}
-
-/* PANEL INFORMASI */
-.notice {
-  border-left: 4px solid #d0d0d0;
-}
-
-.notice h2 {
-  border-bottom: 1px solid #e9e2d3;
-  padding-bottom: 10px;
-}
-
-/* TEKS ARAB */
-[dir="rtl"] {
-  font-family: "Traditional Arabic", "Noto Naskh Arabic",
-               "Times New Roman", serif;
-  color: #222222;
-  overflow-wrap: normal;
-}
-
-/* TAUTAN */
-a {
-  color: #245580;
-}
-
-/* FOOTER */
-footer {
-  background: #e9e2d3;
-  border-top: 1px solid #d5d5d5;
-  padding: 20px 15px;
-  text-align: center;
-  color: #666666;
-  font-size: 13px;
-}
-
-footer p {
-  margin: 4px 0;
-}
-
-/* TAMPILAN HP */
-@media (max-width: 600px) {
-  header {
-    padding: 20px 12px;
-  }
-
-  header h1 {
-    font-size: 25px;
-  }
-
-  main {
-    margin: 18px auto;
-    padding: 0 10px;
-  }
-
-  .card,
-  .notice {
-    padding: 16px;
-    border-radius: 4px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  h3 {
-    font-size: 17px;
-  }
-  
-nav {
-    
-  text-align: left;
-  }
-}
-
-/* Tekstur kertas alami tanpa pola kotak */
-body {
-  background-color: #f5f1e7 !important;
+  /* Tekstur kertas halus */
+  background-color: var(--paper);
   background-image:
     radial-gradient(
       ellipse at 15% 20%,
-      rgba(125, 105, 75, 0.07),
+      rgba(125, 105, 75, .07),
       transparent 70%
     ),
     radial-gradient(
       ellipse at 85% 65%,
-      rgba(125, 105, 75, 0.06),
+      rgba(125, 105, 75, .06),
       transparent 70%
     ),
     repeating-linear-gradient(
       3deg,
-      rgba(125, 105, 75, 0.025) 0px,
+      rgba(125, 105, 75, .025) 0px,
       transparent 1px,
       transparent 9px
-    ) !important;
-  background-size: 100% 100%, 100% 100%, 100% 100% !important;
+    );
   background-attachment: fixed;
 }
 
+/* HEADER DAN IDENTITAS */
 
-/* ===== HALAMAN TERPISAH BELAJAR-SUNNAH ===== */
-
-.page-view {
-  display: none;
-  animation: pageFade 0.2s ease;
+.bs-header {
+  padding: 24px 16px;
+  background: rgba(245, 241, 231, .88);
+  border-bottom: 1px solid var(--border);
 }
 
-.page-view.active {
-  display: block;
+.bs-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-nav a.active {
-  background: #fffdf7;
-  color: #244b46;
-  box-shadow: inset 0 -2px #78a9a6;
+.bs-logo {
+  position: relative;
+  flex: 0 0 76px;
+  width: 76px;
+  height: 94px;
+  overflow: hidden;
+  border: 1px solid #d8cbb4;
+  border-radius: 19px;
+  background:
+    radial-gradient(
+      ellipse at 30% 20%,
+      rgba(255,255,255,.95),
+      transparent 55%
+    ),
+    repeating-linear-gradient(
+      105deg,
+      rgba(160,140,110,.04) 0px,
+      rgba(255,255,255,.12) 2px,
+      transparent 5px
+    ),
+    #f4eddf;
+  box-shadow: inset 0 0 12px rgba(135,112,78,.08);
 }
 
-.page-view > .card,
-.page-view > .notice {
-  background-color: rgba(255, 253, 247, 0.88);
-  border-color: #d8d0c0;
+/* Ornamen bingkai kitab */
+.bs-logo::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid #b9a47f;
+  border-radius: 13px;
 }
 
-.page-view h2,
-.page-view h3 {
+/* Bentuk halaman kitab */
+.bs-logo::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 19px;
+  bottom: 19px;
+  border: 1px solid #a38d68;
+  border-radius: 3px 8px 3px 8px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 7px,
+      rgba(140,118,83,.45) 8px,
+      transparent 9px
+    );
+  box-shadow: 0 0 0 3px rgba(255,253,247,.45);
+}
+
+.bs-brand-copy {
+  min-width: 0;
+}
+
+.bs-brand h1 {
+  margin: 0;
+  color: var(--teal-deep);
+  font-size: clamp(23px, 5vw, 34px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -.7px;
+  overflow-wrap: anywhere;
+}
+
+.bs-brand p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* NAVIGASI UTAMA */
+
+.bs-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 8px 10px;
+  background: rgba(231, 226, 214, .97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.bs-tab-menu {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5px;
+  background: rgba(222, 212, 193, .7);
+  border: 1px solid #d5cbb9;
+  border-radius: 16px;
+}
+
+.bs-tab {
+  min-width: 0;
+  padding: 12px 5px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: #46554e;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  transition:
+    background .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+.bs-tab:hover {
+  background: rgba(255,255,255,.55);
+}
+
+.bs-tab.active {
+  color: #fffdf7;
+  background: var(--teal-dark);
+  box-shadow: 0 2px 5px rgba(40,80,72,.13);
+}
+
+.bs-tab:focus-visible {
+  outline: 2px solid var(--teal-deep);
+  outline-offset: 2px;
+}
+
+/* KONTEN UTAMA */
+
+.bs-main {
+  width: 100%;
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 15px;
+}
+
+.bs-panel {
+  min-width: 0;
+  padding: 24px;
+  margin-bottom: 20px;
+  background: rgba(255,253,247,.91);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 3px 12px rgba(70,58,36,.045);
+  overflow-wrap: break-word;
+  animation: bsFade .2s ease;
+}
+
+.bs-panel[hidden] {
+  display: none !important;
+}
+
+.bs-panel h2 {
+  margin: 0 0 15px;
+  padding-bottom: 10px;
+  color: var(--teal-deep);
+  font-size: 24px;
+  line-height: 1.4;
+  border-bottom: 1px solid #e9e2d3;
+}
+
+.bs-panel h3 {
+  margin: 22px 0 12px;
   color: #416f69;
+  font-size: 19px;
+  line-height: 1.5;
 }
 
-@keyframes pageFade {
+.bs-panel p {
+  margin: 12px 0;
+}
+
+.bs-eyebrow {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+}
+
+.bs-card {
+  margin: 16px 0;
+  padding: 18px;
+  background: rgba(245,241,231,.75);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--teal);
+  border-radius: 12px;
+}
+
+.bs-card h3 {
+  margin-top: 0;
+}
+
+.bs-divider {
+  height: 1px;
+  margin: 24px 0;
+  border: 0;
+  background: var(--border);
+}
+
+/* TEKS ARAB */
+
+.bs-arabic {
+  margin: 20px 0;
+  padding: 20px 12px;
+  color: #252a26;
+  background: #f8f4ea;
+  border: 1px solid #e5dccb;
+  border-radius: 12px;
+  font-family:
+    "Noto Naskh Arabic",
+    "Traditional Arabic",
+    "Times New Roman",
+    serif;
+  font-size: 28px;
+  line-height: 2.1;
+  text-align: right;
+  overflow-wrap: normal;
+}
+
+.bs-reference {
+  padding: 12px 15px;
+  background: #eee8da;
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.bs-panel a {
+  color: var(--teal-deep);
+  overflow-wrap: anywhere;
+}
+
+.bs-panel a:hover {
+  color: #244b46;
+}
+
+.bs-panel strong {
+  color: #344b42;
+}
+
+/* FOOTER */
+
+.bs-footer {
+  padding: 22px 15px;
+  color: var(--muted);
+  background: rgba(231,226,214,.85);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+}
+
+.bs-footer p {
+  margin: 4px 0;
+}
+
+/* ANIMASI */
+
+@keyframes bsFade {
   from {
     opacity: 0;
     transform: translateY(4px);
@@ -275,219 +357,236 @@ nav a.active {
   }
 }
 
-/* TAB BELAJAR-SUNNAH */
+/* TAMPILAN HP */
 
-.bs-tabs {
-  margin: 24px 0;
-  color: #353c37;
-  font-family: inherit;
-}
+@media (max-width: 600px) {
+  .bs-header {
+    padding: 18px 12px;
+  }
 
-.bs-tab-menu {
-  display: flex;
-  gap: 5px;
-  overflow-x: auto;
-  padding: 6px;
-  background: #e9e2d3;
-  border: 1px solid #d5cbb9;
-  border-radius: 12px;
-  scrollbar-width: thin;
-}
+  .bs-brand {
+    gap: 12px;
+  }
 
-.bs-tab {
-  flex: 1 0 auto;
-  padding: 12px 15px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: #46554e;
-  font: inherit;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background .2s, color .2s;
-}
+  .bs-logo {
+    flex-basis: 62px;
+    width: 62px;
+    height: 80px;
+    border-radius: 15px;
+  }
 
-.bs-tab:hover {
-  background: #d9e5dd;
-}
+  .bs-logo::before {
+    inset: 7px;
+  }
 
-.bs-tab.active {
-  background: #528c83;
-  color: #fffdf7;
-  font-weight: 600;
-  box-shadow: 0 2px 5px #00000012;
-}
+  .bs-logo::after {
+    left: 15px;
+    right: 15px;
+    top: 15px;
+    bottom: 15px;
+  }
 
-.bs-tab:focus-visible {
-  outline: 2px solid #315d56;
-  outline-offset: 2px;
-}
+  .bs-brand h1 {
+    font-size: clamp(19px, 5.2vw, 27px);
+    letter-spacing: -.4px;
+  }
 
-.bs-tab-panel {
-  margin-top: 12px;
-  padding: 20px;
-  background: #fffdf7;
-  border: 1px solid #e1d7c5;
-  border-radius: 12px;
-  box-shadow: 0 3px 12px #463a2410;
-  line-height: 1.8;
-}
+  .bs-brand p {
+    font-size: 12px;
+  }
 
-.bs-tab-panel h2 {
-  margin-top: 0;
-  color: #315d56;
-  font-size: 21px;
-}
+  .bs-nav {
+    padding: 7px 6px;
+  }
 
-.bs-tab-panel p {
-  margin-bottom: 10px;
-}
+  .bs-tab-menu {
+    gap: 3px;
+    padding: 4px;
+    border-radius: 13px;
+  }
 
-.bs-tab-panel[hidden] {
-  display: none !important;
-}
-
-@media (max-width: 480px) {
   .bs-tab {
-    padding: 11px 13px;
-    font-size: 13px;
+    padding: 11px 3px;
+    font-size: 12px;
+    border-radius: 9px;
   }
 
-  .bs-tab-panel {
-    padding: 15px;
+  .bs-main {
+    margin: 18px auto;
+    padding: 0 10px;
+  }
+
+  .bs-panel {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .bs-panel h2 {
+    font-size: 21px;
+  }
+
+  .bs-panel h3 {
+    font-size: 17px;
+  }
+
+  .bs-card {
+    padding: 14px;
+  }
+
+  .bs-arabic {
+    padding: 15px 9px;
+    font-size: 25px;
   }
 }
 
+/* PENGURANGAN ANIMASI SESUAI PREFERENSI */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
 </style>
-  
 </head>
 
 <body>
 
-<header>
-  <h1>Belajar-Sunnah</h1>
-  <p>Perpustakaan Hadis Berbahasa Indonesia</p>
+<!-- HEADER: LOGO DAN NAMA WEBSITE -->
+<header class="bs-header">
+  <div class="bs-brand">
+    <div class="bs-logo"
+         role="img"
+         aria-label="Ornamen lembaran kitab berwarna krem"></div>
+
+    <div class="bs-brand-copy">
+      <h1>Belajar-Sunnah</h1>
+      <p>Perpustakaan Hadis Berbahasa Indonesia</p>
+    </div>
+  </div>
 </header>
 
-
-<!-- TAB NAVIGASI BELAJAR-SUNNAH -->
-<section class="bs-tabs">
-
+<!-- SATU NAVIGASI UNTUK EMPAT PANEL -->
+<nav class="bs-nav" aria-label="Navigasi perpustakaan">
   <div class="bs-tab-menu" role="tablist"
-       aria-label="Navigasi perpustakaan hadis">
+       aria-label="Bagian Belajar-Sunnah">
 
     <button class="bs-tab active"
-      role="tab" aria-selected="true"
-      aria-controls="bs-beranda"
-      id="tab-beranda" type="button">
+      id="tab-beranda"
+      type="button"
+      role="tab"
+      aria-selected="true"
+      aria-controls="panel-beranda"
+      tabindex="0">
       Beranda
     </button>
 
     <button class="bs-tab"
-      role="tab" aria-selected="false"
-      aria-controls="bs-hadis"
-      id="tab-hadis" type="button">
+      id="tab-hadis"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-hadis"
+      tabindex="-1">
       Koleksi Hadis
     </button>
 
     <button class="bs-tab"
-      role="tab" aria-selected="false"
-      aria-controls="bs-sanad"
-      id="tab-sanad" type="button">
+      id="tab-sanad"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-sanad"
+      tabindex="-1">
       Sanad
     </button>
 
     <button class="bs-tab"
-      role="tab" aria-selected="false"
-      aria-controls="bs-perawi"
-      id="tab-perawi" type="button">
+      id="tab-perawi"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-perawi"
+      tabindex="-1">
       Biografi Perawi
     </button>
 
   </div>
+</nav>
 
-  <div class="bs-tab-panel"
-    id="bs-beranda" role="tabpanel"
-    aria-labelledby="tab-beranda">
-    <h2>Selamat Datang</h2>
-    <p>Perpustakaan Hadis Berbahasa Indonesia.</p>
-    <p>Pelajari hadis, sanad, dan biografi perawi.</p>
-  </div>
-
-  <div class="bs-tab-panel" id="bs-hadis"
-    role="tabpanel" aria-labelledby="tab-hadis" hidden>
-    <h2>Koleksi Hadis</h2>
-    <p>Shahih Al-Bukhari dan koleksi kitab hadis lainnya.</p>
-  </div>
-
-  <div class="bs-tab-panel" id="bs-sanad"
-    role="tabpanel" aria-labelledby="tab-sanad" hidden>
-    <h2>Sanad Hadis</h2>
-    <p>Pelajari urutan perawi dan jalur periwayatan hadis.</p>
-  </div>
-
-  <div class="bs-tab-panel" id="bs-perawi"
-    role="tabpanel" aria-labelledby="tab-perawi" hidden>
-    <h2>Biografi Perawi</h2>
-    <p>Nama lengkap, guru, murid, dan penilaian ulama hadis.</p>
-  </div>
-
-</section>
-
-
-
-<main>
+<main class="bs-main">
 
   <!-- TAB 1: BERANDA -->
-  <section class="bs-tab-panel"
-    id="bs-beranda"
+  <section class="bs-panel"
+    id="panel-beranda"
     role="tabpanel"
-    aria-labelledby="tab-beranda">
+    aria-labelledby="tab-beranda"
+    tabindex="0">
 
-    <h2>Selamat Datang</h2>
+    <p class="bs-eyebrow">Selamat datang</p>
+
+    <h2>Perpustakaan Hadis</h2>
 
     <p>Belajar-Sunnah adalah proyek perpustakaan hadis berbahasa Indonesia untuk membantu pembaca mempelajari hadis, menelusuri sumber periwayatan, dan mengenali para perawi.</p>
 
     <p>Setiap hadis perlu diperiksa berdasarkan sumber, sanad, matan, dan keterangan ilmiah yang dapat dipertanggungjawabkan.</p>
 
-    <h3>Tentang Belajar-Sunnah</h3>
+    <div class="bs-card">
+      <h3>Tentang Belajar-Sunnah</h3>
 
-    <p>Website ini dikembangkan sebagai sarana belajar, dokumentasi, dan penelitian hadis. Tujuannya adalah memudahkan pembaca memeriksa sumber, bukan sekadar membaca kutipan tanpa rujukan.</p>
+      <p>Website ini dikembangkan sebagai sarana belajar, dokumentasi, dan penelitian hadis. Tujuannya adalah memudahkan pembaca memeriksa sumber, bukan sekadar membaca kutipan tanpa rujukan.</p>
+    </div>
+
+    <p class="bs-reference">
+      Gunakan menu di atas untuk membuka koleksi hadis,
+      penelitian sanad, dan biografi perawi.
+    </p>
 
   </section>
 
-
   <!-- TAB 2: KOLEKSI HADIS -->
-  <section class="bs-tab-panel"
-    id="bs-hadis"
+  <section class="bs-panel"
+    id="panel-hadis"
     role="tabpanel"
     aria-labelledby="tab-hadis"
+    tabindex="0"
     hidden>
+
+    <p class="bs-eyebrow">Koleksi dan sumber riwayat</p>
 
     <h2>Koleksi Hadis</h2>
 
-    <h3>Hadis: Menuntut Ilmu</h3>
+    <div class="bs-card">
+      <h3>Hadis: Menuntut Ilmu</h3>
 
-    <p><strong>Dari Anas bin Malik radhiyallahu ‘anhu, bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong></p>
+      <p><strong>Dari Anas bin Malik radhiyallahu ‘anhu, bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong></p>
 
-    <p dir="rtl" lang="ar"
-      style="font-size:26px;line-height:2;text-align:right;">
-      طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ
-    </p>
+      <p class="bs-arabic" dir="rtl" lang="ar">
+        طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ
+      </p>
 
-    <p><strong>Latin:</strong><br>
-      Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.
-    </p>
+      <p>
+        <strong>Latin:</strong><br>
+        Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.
+      </p>
 
-    <p><strong>Artinya:</strong><br>
-      Menuntut ilmu wajib bagi setiap Muslim.
-    </p>
+      <p>
+        <strong>Artinya:</strong><br>
+        Menuntut ilmu wajib bagi setiap Muslim.
+      </p>
 
-    <p><strong>Sumber:</strong><br>
-      Sunan Ibnu Majah, no. 224.
-    </p>
+      <div class="bs-reference">
+        <strong>Sumber:</strong><br>
+        Sunan Ibnu Majah, no. 224.
+      </div>
+    </div>
 
-    <hr>
+    <hr class="bs-divider">
 
     <h3>Shahih Al-Bukhari</h3>
 
@@ -495,13 +594,15 @@ nav a.active {
 
   </section>
 
-
   <!-- TAB 3: SANAD -->
-  <section class="bs-tab-panel"
-    id="bs-sanad"
+  <section class="bs-panel"
+    id="panel-sanad"
     role="tabpanel"
     aria-labelledby="tab-sanad"
+    tabindex="0"
     hidden>
+
+    <p class="bs-eyebrow">Rantai periwayatan</p>
 
     <h2>Penelitian Sanad</h2>
 
@@ -511,13 +612,15 @@ nav a.active {
 
   </section>
 
-
   <!-- TAB 4: BIOGRAFI PERAWI -->
-  <section class="bs-tab-panel"
-    id="bs-perawi"
+  <section class="bs-panel"
+    id="panel-perawi"
     role="tabpanel"
     aria-labelledby="tab-perawi"
+    tabindex="0"
     hidden>
+
+    <p class="bs-eyebrow">Ilmu rijalul hadis</p>
 
     <h2>Biografi Perawi</h2>
 
@@ -529,77 +632,96 @@ nav a.active {
 
 </main>
 
-<footer>
+<footer class="bs-footer">
   <p>Belajar-Sunnah · Perpustakaan Hadis Berbahasa Indonesia</p>
   <p>Belajar, meneliti, dan memeriksa sumber dengan cermat.</p>
 </footer>
 
-
+<!-- SATU SCRIPT NAVIGASI -->
 <script>
-document.querySelectorAll('.bs-tab').forEach(function(tab) {
-  tab.addEventListener('click', function() {
-    document.querySelectorAll('.bs-tab').forEach(function(item) {
-      item.classList.remove('active');
-      item.setAttribute('aria-selected', 'false');
-    });
+(function () {
+  const nav = document.querySelector(".bs-nav");
+  if (!nav) return;
 
-    document.querySelectorAll('.bs-tab-panel').forEach(function(panel) {
-      panel.hidden = true;
-    });
+  const tabs = Array.from(
+    nav.querySelectorAll('[role="tab"]')
+  );
 
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected', 'true');
-
-    document.getElementById(
-      tab.getAttribute('aria-controls')
-    ).hidden = false;
+  const panels = tabs.map(function (tab) {
+    return document.getElementById(
+      tab.getAttribute("aria-controls")
+    );
   });
-});
-</script>
 
-document.querySelectorAll(".bs-tabs").forEach((container) => {
-  const tabs = [...container.querySelectorAll(".bs-tab")];
-
-  function activateTab(tab, moveFocus = false) {
-    tabs.forEach((item) => {
+  function activateTab(tab, moveFocus) {
+    tabs.forEach(function (item) {
       const selected = item === tab;
+
       item.classList.toggle("active", selected);
-      item.setAttribute("aria-selected", String(selected));
-      item.tabIndex = selected ? 0 : -1;
-
-      const panel = container.querySelector(
-        "#" + item.getAttribute("aria-controls")
+      item.setAttribute(
+        "aria-selected",
+        String(selected)
       );
-
-      if (panel) panel.hidden = !selected;
+      item.tabIndex = selected ? 0 : -1;
     });
 
-    if (moveFocus) tab.focus();
+    panels.forEach(function (panel) {
+      if (panel) {
+        panel.hidden =
+          panel.id !== tab.getAttribute("aria-controls");
+      }
+    });
+
+    if (moveFocus) {
+      tab.focus();
+    }
   }
 
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => activateTab(tab));
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener("click", function () {
+      activateTab(tab, false);
+    });
 
-    tab.addEventListener("keydown", (event) => {
-      let next = index;
+    tab.addEventListener("keydown", function (event) {
+      let nextIndex = index;
 
-      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
-      else if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
-      else if (event.key === "Home") next = 0;
-      else if (event.key === "End") next = tabs.length - 1;
-      else return;
+      switch (event.key) {
+        case "ArrowRight":
+          nextIndex = (index + 1) % tabs.length;
+          break;
+
+        case "ArrowLeft":
+          nextIndex =
+            (index - 1 + tabs.length) % tabs.length;
+          break;
+
+        case "Home":
+          nextIndex = 0;
+          break;
+
+        case "End":
+          nextIndex = tabs.length - 1;
+          break;
+
+        default:
+          return;
+      }
 
       event.preventDefault();
-      activateTab(tabs[next], true);
+      activateTab(tabs[nextIndex], true);
     });
   });
 
-  const initialTab = tabs.find(
-    tab => tab.getAttribute("aria-selected") === "true"
-  ) || tabs[0];
+  const initialTab =
+    tabs.find(function (tab) {
+      return tab.getAttribute("aria-selected") === "true";
+    }) || tabs[0];
 
-  if (initialTab) activateTab(initialTab);
-});
+  if (initialTab) {
+    activateTab(initialTab, false);
+  }
+})();
+</script>
 
 </body>
 </html>
