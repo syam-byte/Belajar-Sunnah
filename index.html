@@ -760,8 +760,7 @@ body {
 
   function bersihArab(nilai) {
     const teks = String(nilai == null ? "" : nilai)
-      .replace(/\[\s*\/?\s*(?:prematn|matn|postmatn)\s*\]/gi, "")
-      .replace(/\[\s*\/?\s*narrator\b[^\]]*\]/gi, "");
+      .replace(/\[\s*\/?\s*[a-z][^\]]*\]/gi, "");
     return bersih(teks);
   }
 
