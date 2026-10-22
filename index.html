@@ -758,6 +758,43 @@ body {
     );
   }
 
+  function renderSanad(nilai) {
+    if (Array.isArray(nilai)) {
+      const urut = nilai.slice().sort(function (a, b) {
+        return (Number(a.position) || 0) - (Number(b.position) || 0);
+      });
+
+      return '<ol style="padding-left:24px;display:grid;gap:10px">' +
+        urut.map(function (item) {
+          const nama = item &&
+            (item.inline_name || item.tooltip || item.name || item.narrator);
+          const posisi = item && Number.isFinite(Number(item.position))
+            ? Number(item.position) + 1 : null;
+          const role = item && item.role;
+          const label = role === "first" ? "Perawi awal"
+            : role === "last" ? "Perawi akhir"
+            : role === "chain" ? "Perawi dalam sanad" : "";
+
+          return '<li style="padding:8px 10px;border-bottom:1px solid #e7dfd2">' +
+            (nama
+              ? '<div dir="rtl" lang="ar" class="bs-arabic">' + bersih(nama) + '</div>'
+              : '<div>Nama perawi tidak tersedia.</div>') +
+            ((label || posisi !== null)
+              ? '<small>' + bersih(label) +
+                (posisi !== null ? (label ? ' · ' : '') + 'Urutan ' + posisi : '') +
+                '</small>' : '') +
+            '</li>';
+        }).join("") + '</ol>';
+    }
+
+    if (nilai === null || nilai === undefined || nilai === "") {
+      return "Data sanad tidak tersedia.";
+    }
+
+    return '<pre style="white-space:pre-wrap;overflow-wrap:anywhere">' +
+      bersih(nilai) + '</pre>';
+  }
+
   function tampilkan() {
     const totalHalaman = Math.max(
       1, Math.ceil(cocok.length / perHalaman)
@@ -790,7 +827,7 @@ body {
           ${perawi ? `<p><strong>Perawi:</strong> ${bersih(perawi)}</p>` : ""}
           ${arab ? `<div class="bs-arabic" dir="rtl" lang="ar">${bersih(arab)}</div>` : "<p>Teks Arab tidak tersedia.</p>"}
           ${teks ? `<p><strong>Teks Inggris:</strong><br>${bersih(teks)}</p>` : ""}
-          ${sanad ? `<details><summary><strong>Lihat data sanad</strong></summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${bersih(sanad)}</pre></details>` : ""}
+          ${sanad ? `<details><summary><strong>Lihat data sanad</strong></summary>${renderSanad(sanad)}</details>` : ""}
           <p><strong>Terjemahan Indonesia:</strong><br>${bersih(h.translation_id) || "Belum tersedia dalam file JSON."}</p>
           <div class="bs-reference">
             <strong>Rujukan:</strong><br>${rujukan}
