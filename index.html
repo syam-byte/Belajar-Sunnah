@@ -838,6 +838,20 @@ body {
           <div class="bs-reference">
             <strong>Rujukan:</strong><br>${rujukan}
           </div>
+          <div style="margin-top:16px;text-align:right">
+            <button type="button" class="bs-copy-hadith"
+              data-copy-index="${semua.indexOf(h)}"
+              style="padding:9px 14px;border:1px solid #888;border-radius:8px;background:transparent;cursor:pointer">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2"
+                style="vertical-align:middle;margin-right:5px">
+                <rect x="8" y="8" width="13" height="13" rx="2"></rect>
+                <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path>
+              </svg>
+              Salin semua
+            </button>
+            <span class="bs-copy-status" aria-live="polite"></span>
+          </div>
         </article>
       `;
     }).join("");
@@ -890,6 +904,49 @@ body {
     halaman = 0;
     tampilkan();
   }
+
+  daftar.addEventListener("click", async function (event) {
+    const tombol = event.target.closest(".bs-copy-hadith");
+    if (!tombol) return;
+
+    const h = semua[Number(tombol.dataset.copyIndex)];
+    if (!h) return;
+
+    const arab = String(h.arabic || "")
+      .replace(/\[\s*\/?\s*[a-z][^\]]*\]/gi, "");
+
+    const teks = [
+      "Hadis nomor: " + (h.hadith_number || h.number || "—"),
+      h.narrator ? "Perawi: " + h.narrator : "",
+      arab ? "Teks Arab:\n" + arab : "",
+      h.english_title ? "Judul: " + h.english_title : "",
+      h.english_text ? "Teks Inggris:\n" + h.english_text : "",
+      h.chain ? "Sanad:\n" + h.chain : "",
+      h.translation_id ? "Terjemahan Indonesia:\n" + h.translation_id : "",
+      h.reference ? "Rujukan: " + h.reference : ""
+    ].filter(Boolean).join("\n\n");
+
+    const pesan = tombol.parentElement.querySelector(".bs-copy-status");
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(teks);
+      } else {
+        const area = document.createElement("textarea");
+        area.value = teks;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        const berhasil = document.execCommand("copy");
+        area.remove();
+        if (!berhasil) throw new Error("Penyalinan gagal");
+      }
+      pesan.textContent = "Teks berhasil disalin!";
+    } catch (e) {
+      pesan.textContent = "Gagal menyalin teks.";
+    }
+  });
 
   pencarian.addEventListener("input", cari);
 
