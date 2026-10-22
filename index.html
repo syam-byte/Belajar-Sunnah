@@ -858,15 +858,34 @@ body {
   }
 
   function cari() {
-    const kata = pencarian.value.trim().toLocaleLowerCase();
+    const kataAsli = pencarian.value.trim();
+    const kata = kataAsli.toLocaleLowerCase();
 
-    cocok = semua.filter(function (h) {
-      return [
-        h.collection, h.number, h.hadith_number, h.narrator,
-        h.arabic, h.chain, h.english_text, h.english_title,
-        h.english_grade, h.arabic_grade, h.reference, h.translation_id
-      ].map(aman).join(" ").toLocaleLowerCase().includes(kata);
-    });
+    if (!kata) {
+      cocok = semua.slice();
+    } else if (/^\d+$/.test(kata)) {
+      const tepat = semua.filter(function (h) {
+        return [h.hadith_number, h.number].some(function (n) {
+          return String(n == null ? "" : n).trim() === kata;
+        });
+      });
+
+      cocok = tepat.length ? tepat : semua.filter(function (h) {
+        return [
+          h.collection, h.number, h.hadith_number, h.narrator,
+          h.arabic, h.chain, h.english_text, h.english_title,
+          h.english_grade, h.arabic_grade, h.reference, h.translation_id
+        ].map(aman).join(" ").toLocaleLowerCase().includes(kata);
+      });
+    } else {
+      cocok = semua.filter(function (h) {
+        return [
+          h.collection, h.number, h.hadith_number, h.narrator,
+          h.arabic, h.chain, h.english_text, h.english_title,
+          h.english_grade, h.arabic_grade, h.reference, h.translation_id
+        ].map(aman).join(" ").toLocaleLowerCase().includes(kata);
+      });
+    }
 
     halaman = 0;
     tampilkan();
