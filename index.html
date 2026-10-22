@@ -758,6 +758,13 @@ body {
     );
   }
 
+  function bersihArab(nilai) {
+    const teks = String(nilai == null ? "" : nilai)
+      .replace(/\[\s*\/?\s*(?:prematn|matn|postmatn)\s*\]/gi, "")
+      .replace(/\[\s*\/?\s*narrator\b[^\]]*\]/gi, "");
+    return bersih(teks);
+  }
+
   function renderSanad(nilai) {
     if (Array.isArray(nilai)) {
       const urut = nilai.slice().sort(function (a, b) {
@@ -825,7 +832,7 @@ body {
           <h3>Hadis nomor ${bersih(nomor)}</h3>
           ${judul ? `<p><strong>Judul:</strong> ${bersih(judul)}</p>` : ""}
           ${perawi ? `<p><strong>Perawi:</strong> ${bersih(perawi)}</p>` : ""}
-          ${arab ? `<div class="bs-arabic" dir="rtl" lang="ar">${bersih(arab)}</div>` : "<p>Teks Arab tidak tersedia.</p>"}
+          ${arab ? `<div class="bs-arabic" dir="rtl" lang="ar">${bersihArab(arab)}</div>` : "<p>Teks Arab tidak tersedia.</p>"}
           ${teks ? `<p><strong>Teks Inggris:</strong><br>${bersih(teks)}</p>` : ""}
           ${sanad ? `<details><summary><strong>Lihat data sanad</strong></summary>${renderSanad(sanad)}</details>` : ""}
           <p><strong>Terjemahan Indonesia:</strong><br>${bersih(h.translation_id) || "Belum tersedia dalam file JSON."}</p>
