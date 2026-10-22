@@ -561,37 +561,9 @@ body {
 
     <h2>Koleksi Hadis</h2>
 
-    <div class="bs-card">
-      <h3>Hadis: Menuntut Ilmu</h3>
 
-      <p><strong>Dari Anas bin Malik radhiyallahu ‘anhu, bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong></p>
-
-      <p class="bs-arabic" dir="rtl" lang="ar">
-        طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ
-      </p>
-
-      <p>
-        <strong>Latin:</strong><br>
-        Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.
-      </p>
-
-      <p>
-        <strong>Artinya:</strong><br>
-        Menuntut ilmu wajib bagi setiap Muslim.
-      </p>
-
-      <div class="bs-reference">
-        <strong>Sumber:</strong><br>
-        Sunan Ibnu Majah, no. 224.
-      </div>
-    </div>
-
-    <hr class="bs-divider">
 
     <h3>Shahih Al-Bukhari</h3>
-
-    
-<h3>Shahih Al-Bukhari</h3>
 
 <p>Perpustakaan hadis dengan teks Arab dan indonesia, sanad, perawi, dan rujukan sumber.</p>
 
@@ -819,7 +791,7 @@ body {
           ${arab ? `<div class="bs-arabic" dir="rtl" lang="ar">${bersih(arab)}</div>` : "<p>Teks Arab tidak tersedia.</p>"}
           ${teks ? `<p><strong>Teks Inggris:</strong><br>${bersih(teks)}</p>` : ""}
           ${sanad ? `<details><summary><strong>Lihat data sanad</strong></summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${bersih(sanad)}</pre></details>` : ""}
-          <p><strong>Terjemahan Indonesia:</strong><br>Belum ditambahkan.</p>
+          <p><strong>Terjemahan Indonesia:</strong><br>${bersih(h.translation_id) || "Belum tersedia dalam file JSON."}</p>
           <div class="bs-reference">
             <strong>Rujukan:</strong><br>${rujukan}
           </div>
@@ -847,14 +819,9 @@ body {
 
     cocok = semua.filter(function (h) {
       return [
-        h.number,
-        h.hadith_number,
-        h.narrator,
-        h.arabic,
-        h.chain,
-        h.english_text,
-        h.english_title,
-        h.reference
+        h.collection, h.number, h.hadith_number, h.narrator,
+        h.arabic, h.chain, h.english_text, h.english_title,
+        h.english_grade, h.arabic_grade, h.reference, h.translation_id
       ].map(aman).join(" ").toLocaleLowerCase().includes(kata);
     });
 
