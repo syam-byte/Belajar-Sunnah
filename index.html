@@ -662,7 +662,56 @@ body {
   }
 }
 
+
+/* Label utama terinspirasi tipografi sunnah.com */
+.bs-welcome-label {
+  margin: 0 0 24px;
+  color: #83a5a3;
+}
+.bs-welcome-main {
+  font-family: 'Sunnah Akzidenz', Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+.bs-welcome-meaning {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 4px;
+  color: #55534e;
+}
+@media (max-width: 480px) {
+  .bs-welcome-main { font-size: 28px; }
+  .bs-welcome-meaning { font-size: 22px; }
+}
+
+
+/* Tampilan terinspirasi gaya Sunnah.com */
+body { background:#f4f1e9; color:#343a38; line-height:1.7; }
+.bs-header { background:#83a5a3; color:#fff; }
+.bs-header p { color:#f7fbfa; }
+.bs-nav { background:#fffdf8; border-bottom:1px solid #e2dfd6; }
+.bs-main { max-width:1100px; margin-left:auto; margin-right:auto; }
+.bs-panel { background:#fffdf8; border:1px solid #e6e1d7; border-radius:10px; box-shadow:0 3px 12px rgba(50,55,48,.035); }
+.bs-card { background:#fffdf8; border:1px solid #e4e0d7; border-radius:9px; box-shadow:0 2px 7px rgba(50,55,48,.035); }
+.bs-card:hover { border-color:#9bb9b5; }
+input, select, textarea { background:#fff; border:1px solid #d9d8cf; border-radius:7px; }
+input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.25); border-color:#83a5a3; }
+.bs-welcome-label { color:#688f8c; }
+.bs-welcome-meaning { color:#5b5c56; }
+@media(max-width:600px) {
+  .bs-main { padding-left:12px; padding-right:12px; }
+  .bs-panel { padding:16px; }
+  .bs-welcome-main { font-size:25px; }
+  .bs-welcome-meaning { font-size:18px; }
+}
+
 </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -738,7 +787,10 @@ body {
     aria-labelledby="tab-beranda"
     tabindex="0">
 
-    <p class="bs-eyebrow">Selamat datang</p>
+    <div class="bs-welcome-label">
+      <div class="bs-welcome-main">Thalabul 'ilmi faridhatun 'ala kulli muslim</div>
+      <div class="bs-welcome-meaning">Menuntut ilmu adalah kewajiban bagi setiap Muslim.</div>
+    </div>
 
     <h2>Perpustakaan Hadis</h2>
 
@@ -1223,19 +1275,29 @@ body {
     }
   });
 
-  fetch(sumber)
+  Promise.all([
+    fetch(sumber),
+    fetch("./umar-berpegang-teguh-pada-al-quran.json")
+  ])
     .then(function (respons) {
-      if (!respons.ok) {
-        throw new Error("HTTP " + respons.status);
-      }
-      return respons.json();
+      respons.forEach(function (r) {
+        if (!r.ok) {
+          throw new Error("HTTP " + r.status);
+        }
+      });
+      return Promise.all(respons.map(function (r) {
+        return r.json();
+      }));
     })
-    .then(function (data) {
-      if (!Array.isArray(data)) {
+    .then(function (daftarData) {
+      const dataUtama = daftarData[0];
+      const dataTambahan = daftarData[1];
+
+      if (!Array.isArray(dataUtama) || !Array.isArray(dataTambahan)) {
         throw new Error("Format JSON bukan daftar hadis");
       }
 
-      semua = data;
+      semua = dataUtama.concat(dataTambahan);
       cari();
     })
     .catch(function (kesalahan) {
