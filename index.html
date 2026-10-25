@@ -708,6 +708,67 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
   .bs-welcome-meaning { font-size:18px; }
 }
 
+/* Kartu koleksi di halaman utama */
+#bs-collections-home {
+  max-width: 900px;
+  margin: 30px auto 10px;
+}
+
+#bs-collections-home h2 {
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2dfd6;
+  color: #343a38;
+  font-size: 24px;
+  text-align: center;
+}
+
+.bs-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.bs-collection-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 20px;
+  text-align: left;
+  color: #343a38;
+  background: #fffdf8;
+  border: 1px solid #e4e0d7;
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.bs-collection-item:hover {
+  border-color: #83a5a3;
+  background: #fff;
+}
+
+.bs-collection-en {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.bs-collection-ar {
+  align-self: stretch;
+  font-family: 'KFGQPC Uthman Taha Naskh', serif;
+  font-size: 25px;
+  line-height: 1.8;
+  text-align: right;
+}
+
+@media (max-width: 520px) {
+  .bs-collections-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -805,8 +866,21 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
     </div>
 
     <p class="bs-reference">
-      Gunakan menu di atas untuk membuka koleksi hadis,
-      penelitian sanad, dan biografi perawi.
+      
+<section id="bs-collections-home" aria-labelledby="bs-collections-title">
+  <h2 id="bs-collections-title">Koleksi Hadis</h2>
+  <div class="bs-collections-grid" id="bs-collections-list">
+    <button class="bs-collection-item" type="button" data-open-collection>
+      <span class="bs-collection-en">Sahih al-Bukhari</span>
+      <span class="bs-collection-ar" dir="rtl" lang="ar">صحيح البخاري</span>
+    </button>
+    <button class="bs-collection-item" type="button" data-open-collection>
+      <span class="bs-collection-en">Sahih Muslim</span>
+      <span class="bs-collection-ar" dir="rtl" lang="ar">صحيح مسلم</span>
+    </button>
+  </div>
+</section>
+
     </p>
 
   </section>
@@ -893,6 +967,23 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
   <p>Belajar-Sunnah · Perpustakaan Hadis Berbahasa Indonesia</p>
   <p>Belajar, meneliti, dan memeriksa sumber dengan cermat.</p>
 </footer>
+
+<script>
+document.querySelectorAll("[data-open-collection]").forEach(function (item) {
+  item.addEventListener("click", function () {
+    const tab = document.getElementById("tab-hadis");
+    const panel = document.getElementById("panel-hadis");
+
+    if (tab && panel) {
+      tab.click();
+      panel.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  });
+});
+</script>
 
 <!-- SATU SCRIPT NAVIGASI -->
 <script>
