@@ -17,7 +17,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Belajar-Sunnah, perpustakaan hadis berbahasa Indonesia.">
-<meta name="theme-color" content="#83adad">
+<meta name="theme-color" content="#E5E7EB">
 <title>Belajar Sunnah</title>
 
 <style>
@@ -38,13 +38,13 @@
 }
 
 :root {
-  --teal: #83adad;
-  --teal-dark: #547d7d;
-  --paper: #f4f0e7;
-  --panel: #fffdf8;
-  --text: #292f2f;
-  --muted: #697171;
-  --border: #ddd8ce;
+  --teal: #E5E7EB;
+  --teal-dark: #374151;
+  --paper: #D1D5DB;
+  --panel: #E5E7EB;
+  --text: #374151;
+  --muted: #D1D5DB;
+  --border: #0000;
 }
 
 * {
@@ -82,8 +82,8 @@ body {
 }
 
 .bs-logo {
-  width: 64px;
-  height: 64px;
+  width: 84px;
+  height: 84px;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
@@ -142,7 +142,7 @@ body {
 
 .bs-brand-copy .bs-brand-tagline {
   margin: 5px 0 0;
-  color: #f7fbfa;
+  color: #E2E8F0;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -359,6 +359,22 @@ footer {
     scroll-behavior: auto;
   }
 }
+/* Header abu-abu gelap */
+.bs-header {
+  background: #374151;
+  color: #E5E7EB;
+}
+
+/* Latar halaman abu-abu muda */
+body {
+  background-color: #E5E7EB;
+  color: #1F2937;
+}
+
+/* Kartu hadis tetap putih agar nyaman dibaca */
+.bs-card {
+  background-color: #E5E7EB;
+}
 </style>
 </head>
 
@@ -380,13 +396,45 @@ footer {
 </header>
 
 <main>
-  <section id="beranda" class="panel">
-    <h2>Selamat Datang</h2>
-    <p>Pelajari hadis Rasulullah ﷺ berdasarkan sumber dan riwayatnya.</p>
-    <button onclick="buka('koleksi')">
-      Sahih al-Bukhari&nbsp;&nbsp; صحيح البخاري
-    </button>
-  </section>
+  
+<section id="beranda" class="panel">
+  <h2>Selamat Datang</h2>
+  <p>Pelajari hadis Rasulullah ﷺ berdasarkan sumber dan riwayatnya.</p>
+
+  
+<table style="width: 100%; border-collapse: collapse;">
+  <tbody>
+    <tr>
+      <td
+        style="padding: 12px 10px; text-align: left; cursor: pointer;"
+        onclick="buka('koleksi')"
+      >
+        Sahih al-Bukhari
+        <span style="float: right; direction: rtl;">صحيح البخاري</span>
+      </td>
+    </tr>
+    <tr>
+      <td
+        style="padding: 12px 10px; text-align: left; cursor: pointer;"
+        onclick="buka('muslim')"
+      >
+        Sahih Muslim
+        <span style="float: right; direction: rtl;">صحيح مسلم</span>
+      </td>
+    </tr>
+    <tr>
+      <td
+        style="padding: 12px 10px; text-align: left; cursor: pointer;"
+        onclick="buka('abu-dawud')"
+      >
+        Sunan Abi Dawud
+        <span style="float: right; direction: rtl;">سنن أبي داود</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
 
   <section id="koleksi" class="panel hidden">
     <h2>Koleksi Hadis Sahih al-Bukhari</h2>
