@@ -1,4 +1,15 @@
-HTML
+<nav class="bs-main-nav" aria-label="Navigasi utama">
+  <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
+  <span aria-hidden="true">|</span>
+  <a href="#koleksi" onclick="buka('koleksi');return false;">Sunnah</a>
+  <span aria-hidden="true">|</span>
+  <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>
+  <span aria-hidden="true">|</span>
+  <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>
+  <span aria-hidden="true">|</span>
+  <a href="https://www.muslimpro.com/prayer-times/"
+     target="_blank" rel="noopener noreferrer">Prayer Times</a>
+</nav>
 
 <!DOCTYPE html>
 <html lang="id">
@@ -71,14 +82,11 @@ body {
 }
 
 .bs-logo {
-  flex: 0 0 76px;
-  width: 76px;
-  height: 94px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #d8cbb4;
-  border-radius: 15px;
-  background: #f4eddf;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
 }
 
 .bs-logo::before {
@@ -370,19 +378,6 @@ footer {
 
   </div>
 </header>
-
-<nav class="bs-main-nav" aria-label="Navigasi utama">
-  <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
-  <span aria-hidden="true">|</span>
-  <a href="#koleksi" onclick="buka('koleksi');return false;">Sunnah</a>
-  <span aria-hidden="true">|</span>
-  <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>
-  <span aria-hidden="true">|</span>
-  <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>
-  <span aria-hidden="true">|</span>
-  <a href="https://www.muslimpro.com/prayer-times/"
-     target="_blank" rel="noopener noreferrer">Prayer Times</a>
-</nav>
 
 <main>
   <section id="beranda" class="panel">
