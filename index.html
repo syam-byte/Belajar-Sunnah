@@ -1142,10 +1142,37 @@ document.querySelectorAll("[data-open-collection]").forEach(function (item) {
       return tab.getAttribute("aria-selected") === "true";
     }) || tabs[0];
 
+  
   if (initialTab) {
     activateTab(initialTab, false);
   }
+
+  const mainNav = document.querySelector(".bs-main-nav");
+
+  if (mainNav) {
+    mainNav.addEventListener("click", function (event) {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const tabMap = {
+        "#panel-hadis": "tab-hadis",
+        "#Sunnah": "tab-hadis",
+        "#panel-sanad": "tab-sanad",
+        "#panel-perawi": "tab-perawi"
+      };
+
+      const tabId = tabMap[link.getAttribute("href")];
+      if (!tabId) return;
+
+      const tab = document.getElementById(tabId);
+      if (tab) {
+        event.preventDefault();
+        activateTab(tab, false);
+      }
+    });
+  }
 })();
+
 </script>
 
 <script>
