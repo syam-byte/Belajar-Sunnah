@@ -810,232 +810,101 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 }
 
 
-@charset "utf-8";
-/* CSS Document */
+/* Ukuran teks identitas Belajar-Sunnah */
 
-/* Pengantar koleksi */
-.collection_intro_short {
-    padding-left: 20px;
-    padding-bottom: 30px;
-    width: 80%;
-    text-align: justify;
-    font-family: Verdana, sans-serif;
+.bs-brand-copy .bs-welcome-main {
+  font-size: 42px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.bs-brand-copy .bs-welcome-meaning {
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+
+.bs-brand-copy .bs-brand-tagline {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 6px 0 0;
+}
+
+/* Ukuran teks di ponsel */
+@media (max-width: 600px) {
+  .bs-brand-copy .bs-welcome-main {
+    font-size: 32px;
+  }
+
+  .bs-brand-copy .bs-welcome-meaning {
+    font-size: 18px;
+  }
+
+  .bs-brand-copy .bs-brand-tagline {
     font-size: 12px;
+  }
 }
 
-.collection_intro_short a {
-    text-decoration: none;
-    color: #634d22;
-}
-
-.collection_intro_short a:hover {
-    text-decoration: underline;
-}
-
-.collection_intro_short a:visited {
-    color: #634614;
-    text-decoration: none;
-}
-
-/* Judul kitab */
-.book_title a {
-    text-decoration: none;
-}
-
-/* Latar belakang daftar pertama */
-.list_first .list_first_bg {
-    /* background-color: #B29774; */
-    background-color: #BEB29E;
-    opacity: 0.3;
-    position: absolute;
-    left: 0;
-    top: 0;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    border: 0;
-}
-
-.list_first {
-    margin: 2px;
-    padding-bottom: 2px;
-    font-size: 12px;
-    position: relative;
-    color: #08081a;
-    font-weight: bold;
-    overflow: auto;
-}
-
-a:visited .list_first {
-    color: #5e5e4c;
-}
-
-a:hover .list_first {
-    color: #29640c;
-}
-
-/* Daftar kedua */
-.list_second {
-    padding: 2px;
-    font-weight: bold;
-    overflow: auto;
-    font-size: 12px;
-    color: #08081a;
-    text-decoration: none;
-}
-
-a:visited .list_second {
-    color: #5e5e4c;
-}
-
-a:hover .list_second {
-    color: #29640c;
-}
-
-/* Nama kitab bahasa Inggris */
-a .english_book_name {
-    text-decoration: none;
-    display: inline;
-    float: left;
-    padding-left: 4px;
-    padding-top: 2px;
-    margin-top: auto;
-    font-size: 13px;
-    max-width: 70%;
-    z-index: 6;
-}
-
-a .list_first .english_book_name {
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 6;
-}
-
-/* Nama kitab Arab */
-a .list_first .arabic_book_name {
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 6;
-}
-
-a .arabic_book_name {
-    display: inline;
-    float: right;
-    font-size: 17px;
-    direction: rtl;
-    text-align: right;
-    padding-right: 4px;
-    width: auto;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-}
-
-/* Kolom kiri */
-.left_content {
-    width: 45%;
-    float: left;
-    /*
-    background-image: url(../images/vline.jpg);
-    background-repeat: repeat-y;
-    background-position: right top;
-    */
-    padding-right: 5%;
-}
-
-/* Kolom kanan */
-.right_content {
-    float: right;
-    width: 45%;
-    padding-left: -2px;
-}
-
-/* Judul kitab */
+/* Judul kitab dengan efek mengambang */
 .bookheading {
-    width: 72%;
-    margin-right: 20px;
-    margin-left: 55px;
-    text-align: center;
-    clear: both;
-    overflow: auto;
-    padding-bottom: 0;
-    padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: fit-content;
+  max-width: 96%;
+  margin: 24px auto;
+  padding: 12px 20px;
+  background: #fffdf8;
+  border: 1px solid #e8dece;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 8px rgba(70, 52, 28, 0.08),
+    0 10px 24px rgba(70, 52, 28, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bookheading:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 7px 14px rgba(70, 52, 28, 0.12),
+    0 14px 28px rgba(70, 52, 28, 0.09);
 }
 
 .englishbookheading {
-    float: left;
-    width: 49%;
-    font-size: 26px;
-    border: 0;
-    vertical-align: text-top;
+  float: none;
+  flex: 0 1 auto;
+  width: auto;
+  margin: 0;
+  font-size: 24px;
+  text-align: right;
 }
 
 .arabicbookheading {
-    float: right;
-    width: 49%;
-    font-size: 26px;
-    border: 0;
-    vertical-align: text-top;
+  float: none;
+  flex: 0 1 auto;
+  width: auto;
+  margin: 0;
+  font-size: 26px;
+  direction: rtl;
+  text-align: left;
 }
 
-/* Judul bab */
-.chapter {
-    width: 75%;
-    background-color: #BFAD97;
-    padding-left: 20px;
-    padding-right: 20px;
-}
+@media (max-width: 600px) {
+  .bookheading {
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
 
-.englishchapter {
-    float: left;
-    max-width: 43%;
-    font-size: 18px;
-    border: 0;
-}
+  .englishbookheading {
+    font-size: 17px;
+  }
 
-.echapno {
-    float: left;
-    padding-right: 5px;
-    font-size: 20px;
-    border: 0;
+  .arabicbookheading {
+    font-size: 21px;
+  }
 }
-
-.arabicchapter {
-    float: right;
-    max-width: 42%;
-    font-size: 24px;
-    border: 0;
-}
-
-.achapno {
-    float: right;
-    padding-left: 8px;
-    font-size: 20px;
-    border: 0;
-}
-
-/* Pengantar bab bahasa Arab */
-.achapintro {
-    padding-left: 5%;
-    padding-right: 7%;
-    padding-bottom: 10px;
-    padding-top: 15px;
-    font-size: 22px;
-    width: 70%;
-    text-align: justify;
-}
-
-/* Pengantar bab bahasa Inggris */
-.echapintro {
-    padding-left: 5%;
-    padding-right: 7%;
-    padding-bottom: 10px;
-    padding-top: 15px;
-    width: 70%;
-    text-align: justify;
-}
-
 
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1053,26 +922,68 @@ a .arabic_book_name {
          aria-label="Ornamen lembaran kitab berwarna krem"></div>
 
     <div class="bs-brand-copy">
-      <h1>بلاجر سنة</h1>
-      <p>Belajar Sunnah</p>
-      <p>Belajar Sunnah</p>
+  <h1 class="bs-welcome-main">بلاجر سنة</h1>
+  <p class="bs-welcome-meaning">Belajar Sunnah</p>
+  <p class="bs-brand-tagline">Tundukkan ego kepada dalil sunnah bukan kepada perasaan</p>
     </div>
   </div>
 </header>
 
 <!-- SATU NAVIGASI UNTUK EMPAT PANEL -->
+<nav class="bs-nav" aria-label="Navigasi perpustakaan">
+  <div class="bs-tab-menu" role="tablist"
+       aria-label="Bagian Belajar-Sunnah">
 
-<nav class="bs-main-nav" aria-label="Navigasi utama">
-  <a href="belajar.html">Belajar</a>
-  <span aria-hidden="true">|</span>
+    <button class="bs-tab active"
+      id="tab-beranda"
+      type="button"
+      role="tab"
+      aria-selected="true"
+      aria-controls="panel-beranda"
+      tabindex="0">
+      Beranda
+    </button>
 
-  <a href="index.html">Beranda</a>
-  <span aria-hidden="true">|</span>
+    <button class="bs-tab"
+      id="tab-hadis"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-hadis"
+      tabindex="-1">
+      Hadis
+    </button>
 
-  <a href="prayer-times.html">Prayer Times</a>
-  <span aria-hidden="true">|</span>
+    <button class="bs-tab"
+      id="tab-sanad"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-sanad"
+      tabindex="-1">
+      Sanad
+    </button>
+
+    <button class="bs-tab"
+      id="tab-perawi"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-perawi"
+      tabindex="-1">
+      Perawi
+    </button>
+
+    <a class="bs-tab"
+      id="tab-prayer-times"
+      href="https://www.muslimpro.com/prayer-times/"
+      target="_blank"
+      rel="noopener noreferrer">
+      Prayer Times
+    </a>
+
+  </div>
 </nav>
-
 
 <main class="bs-main">
 
