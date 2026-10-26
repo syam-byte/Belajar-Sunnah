@@ -53,62 +53,76 @@ footer{text-align:center;padding:24px;color:#697171}
   color: #dce8e8;
 }
 
+
 .logo {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 0 auto 4px;
-  font-size: 40px;
-  line-height: 1.4;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100%;
+  margin: 0;
+  padding-left: 24px;
+  text-align: left;
 }
 
 .logo img {
-  display: block;
-  width: 76px;
-  height: 76px;
+  width: 130px;
+  height: 130px;
   object-fit: contain;
   flex-shrink: 0;
 }
 
 .logo span {
   font-family: Arab, serif;
-  font-size: 28px;
+  font-size: 52px;
   line-height: 1.4;
 }
 
-header h1 {
-  margin: 4px;
-  font-size: 27px;
-  font-family: Arab, serif;
-}
-
 @media (max-width: 600px) {
-  header {
-    padding: 18px 12px;
+  .logo {
+    gap: 14px;
+    padding-left: 12px;
   }
 
+  .logo img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo span {
+    font-size: 40px;
+  }
+}
+
+
 @font-face {
-  font-family: "Wallington Pro";
-  src: url("fonts/Wallington-Pro.ttf") format("truetype");
+  font-family: "Lionking";
+  src: url("./fonts/Lionking.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+header h1 {
+  font-family: "Lionking", sans-serif !important;
+  font-size: 32px;
+  margin: 4px;
+}
+
+@font-face {
+  font-family: "WallingtonPro";
+  src: url("./fonts/Wallington-Pro.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 header p {
-  font-family: "Wallington Pro", sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-  .logo img {
-    width: 64px;
-    height: 64px;
-  }
-
-  .logo span {
-    font-size: 34px;
-  }
+  font-family: "WallingtonPro", cursive !important;
+  font-size: 22px;
+  line-height: 1.8;
+  margin: 14px auto 0;
+  max-width: 700px;
+  text-align: center;
 }
 
 #beranda {
