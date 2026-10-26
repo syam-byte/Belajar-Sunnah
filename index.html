@@ -7,16 +7,7 @@
 @font-face{font-family:Arab;src:url('fonts/KFGQPCUthmanTahaNaskh.woff2')}  
 @font-face{font-family:Akzidenz;src:url('fonts/akzidenz-grotesk-roman.woff2')}  
 *{box-sizing:border-box}  
-body {
-  margin: 0;
-  background-color: #e8ddc9;
-  background-image: url("./Sunnah.9.jpg");
-  background-repeat: repeat;
-  background-size: 500px auto;
-  background-attachment: fixed;
-  color: #292f2f;
-  font-family: Akzidenz, Arial, sans-serif;
-}  
+
 header{background:#83adad;color:white;padding:24px 16px;text-align:center}  
 .logo{font-size:40px}  
 header h1{margin:4px;font-size:27px}  
@@ -105,17 +96,33 @@ footer{text-align:center;padding:24px;color:#697171}
 
 
 @font-face {
-  font-family: "Birds of Paradise";
-  src: url("./fonts/Birds of Paradise.ttf") format("truetype");
+  font-family: "Lionking";
+  src: url("./fonts/Lionking.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 header h1 {
-  font-family: "Birds of Paradise", sans-serif !important;
-  font-size: 22px;
+  font-family: "Lionking", sans-serif !important;
+  font-size: 32px;
   margin: 4px;
+}
+
+@font-face {
+  font-family: "WallingtonPro";
+  src: url("./fonts/Wallington-Pro.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+header p {
+  font-family: "WallingtonPro", cursive !important;
+  font-size: 22px;
+  line-height: 1.8;
+  margin: 14px auto 0;
+  max-width: 700px;
+  text-align: center;
 }
 
 #beranda {
@@ -127,12 +134,25 @@ header h1 {
   margin: 20px auto;
   text-align: center;
 }
+
+.logo h1 {
+  font-family: "Lionking", sans-serif;
+  font-size: 32px;
+  margin: 0;
+  color: white;
+}
   
 </style>  
 </head>  
 <body>  
 
 <header>
+<div class="logo">
+  <img src="BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
+  <span lang="ar" dir="rtl">بلاجر سنة</span>
+  <h1>Belajar Sunnah</h1>
+</div>
+
 <nav class="bs-main-nav">
   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
   <span aria-hidden="true">|</span>
@@ -144,11 +164,6 @@ header h1 {
   <span aria-hidden="true">|</span>
   <a href="https://www.muslimpro.com/prayer-times/" target="_blank" rel="noopener noreferrer">Prayer Times</a>
 </nav>
-<div class="logo">
-  <img src="BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
-  <span lang="ar" dir="rtl">بلاجر سنة</span>
-  <h1>Belajar Sunnah</h1>
-</div>
 </header>
 <main>  
 <section id="beranda" class="panel">  
