@@ -542,8 +542,8 @@ body {
 
 .bs-panel {
   background: #fffdf8;
-  border: 1px solid #e2d8c7;
-  border-radius: 3px;
+  border: none
+  border-radius: 0
   box-shadow: none;
 }
 
@@ -746,19 +746,19 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 }
 
 .bs-collection-item:hover {
-  border-color: #83a5a3;
+  border-color: #94A3B8;
   background: #fff;
 }
 
 .bs-collection-en {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 14px;
 }
 
 .bs-collection-ar {
   align-self: stretch;
   font-family: 'KFGQPC Uthman Taha Naskh', serif;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 1.8;
   text-align: right;
 }
@@ -768,6 +768,274 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
     grid-template-columns: 1fr;
   }
 }
+
+.bs-welcome-main {
+  font-family: Georgia, "Akzidenz", serif;
+}
+
+.bs-welcome-meaning {
+  font-family: Georgia, Plus Jakarta Sans;
+}
+
+.bs-brand-tagline {
+  font-family: "Times New Roman", serif;
+  font-size: 13px;
+  font-style: italic;
+}
+
+
+.bs-main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 16px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+}
+
+.bs-main-nav a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.bs-main-nav a:hover {
+  text-decoration: underline;
+}
+
+.bs-main-nav span {
+  opacity: 0.5;
+}
+
+
+@charset "utf-8";
+/* CSS Document */
+
+/* Pengantar koleksi */
+.collection_intro_short {
+    padding-left: 20px;
+    padding-bottom: 30px;
+    width: 80%;
+    text-align: justify;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+}
+
+.collection_intro_short a {
+    text-decoration: none;
+    color: #634d22;
+}
+
+.collection_intro_short a:hover {
+    text-decoration: underline;
+}
+
+.collection_intro_short a:visited {
+    color: #634614;
+    text-decoration: none;
+}
+
+/* Judul kitab */
+.book_title a {
+    text-decoration: none;
+}
+
+/* Latar belakang daftar pertama */
+.list_first .list_first_bg {
+    /* background-color: #B29774; */
+    background-color: #BEB29E;
+    opacity: 0.3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    border: 0;
+}
+
+.list_first {
+    margin: 2px;
+    padding-bottom: 2px;
+    font-size: 12px;
+    position: relative;
+    color: #08081a;
+    font-weight: bold;
+    overflow: auto;
+}
+
+a:visited .list_first {
+    color: #5e5e4c;
+}
+
+a:hover .list_first {
+    color: #29640c;
+}
+
+/* Daftar kedua */
+.list_second {
+    padding: 2px;
+    font-weight: bold;
+    overflow: auto;
+    font-size: 12px;
+    color: #08081a;
+    text-decoration: none;
+}
+
+a:visited .list_second {
+    color: #5e5e4c;
+}
+
+a:hover .list_second {
+    color: #29640c;
+}
+
+/* Nama kitab bahasa Inggris */
+a .english_book_name {
+    text-decoration: none;
+    display: inline;
+    float: left;
+    padding-left: 4px;
+    padding-top: 2px;
+    margin-top: auto;
+    font-size: 13px;
+    max-width: 70%;
+    z-index: 6;
+}
+
+a .list_first .english_book_name {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 6;
+}
+
+/* Nama kitab Arab */
+a .list_first .arabic_book_name {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 6;
+}
+
+a .arabic_book_name {
+    display: inline;
+    float: right;
+    font-size: 17px;
+    direction: rtl;
+    text-align: right;
+    padding-right: 4px;
+    width: auto;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+/* Kolom kiri */
+.left_content {
+    width: 45%;
+    float: left;
+    /*
+    background-image: url(../images/vline.jpg);
+    background-repeat: repeat-y;
+    background-position: right top;
+    */
+    padding-right: 5%;
+}
+
+/* Kolom kanan */
+.right_content {
+    float: right;
+    width: 45%;
+    padding-left: -2px;
+}
+
+/* Judul kitab */
+.bookheading {
+    width: 72%;
+    margin-right: 20px;
+    margin-left: 55px;
+    text-align: center;
+    clear: both;
+    overflow: auto;
+    padding-bottom: 0;
+    padding-top: 20px;
+}
+
+.englishbookheading {
+    float: left;
+    width: 49%;
+    font-size: 26px;
+    border: 0;
+    vertical-align: text-top;
+}
+
+.arabicbookheading {
+    float: right;
+    width: 49%;
+    font-size: 26px;
+    border: 0;
+    vertical-align: text-top;
+}
+
+/* Judul bab */
+.chapter {
+    width: 75%;
+    background-color: #BFAD97;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.englishchapter {
+    float: left;
+    max-width: 43%;
+    font-size: 18px;
+    border: 0;
+}
+
+.echapno {
+    float: left;
+    padding-right: 5px;
+    font-size: 20px;
+    border: 0;
+}
+
+.arabicchapter {
+    float: right;
+    max-width: 42%;
+    font-size: 24px;
+    border: 0;
+}
+
+.achapno {
+    float: right;
+    padding-left: 8px;
+    font-size: 20px;
+    border: 0;
+}
+
+/* Pengantar bab bahasa Arab */
+.achapintro {
+    padding-left: 5%;
+    padding-right: 7%;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    font-size: 22px;
+    width: 70%;
+    text-align: justify;
+}
+
+/* Pengantar bab bahasa Inggris */
+.echapintro {
+    padding-left: 5%;
+    padding-right: 7%;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    width: 70%;
+    text-align: justify;
+}
+
 
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -785,60 +1053,26 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
          aria-label="Ornamen lembaran kitab berwarna krem"></div>
 
     <div class="bs-brand-copy">
-      <h1>Belajar-Sunnah</h1>
-      <p>Perpustakaan Hadis Berbahasa Indonesia</p>
+      <h1>بلاجر سنة</h1>
+      <p>Belajar Sunnah</p>
+      <p>Belajar Sunnah</p>
     </div>
   </div>
 </header>
 
 <!-- SATU NAVIGASI UNTUK EMPAT PANEL -->
-<nav class="bs-nav" aria-label="Navigasi perpustakaan">
-  <div class="bs-tab-menu" role="tablist"
-       aria-label="Bagian Belajar-Sunnah">
 
-    <button class="bs-tab active"
-      id="tab-beranda"
-      type="button"
-      role="tab"
-      aria-selected="true"
-      aria-controls="panel-beranda"
-      tabindex="0">
-      Beranda
-    </button>
+<nav class="bs-main-nav" aria-label="Navigasi utama">
+  <a href="belajar.html">Belajar</a>
+  <span aria-hidden="true">|</span>
 
-    <button class="bs-tab"
-      id="tab-hadis"
-      hidden
-      type="button"
-      role="tab"
-      aria-selected="false"
-      aria-controls="panel-hadis"
-      tabindex="-1">
-      Koleksi Hadis
-    </button>
+  <a href="index.html">Beranda</a>
+  <span aria-hidden="true">|</span>
 
-    <button class="bs-tab"
-      id="tab-sanad"
-      type="button"
-      role="tab"
-      aria-selected="false"
-      aria-controls="panel-sanad"
-      tabindex="-1">
-      Sanad
-    </button>
-
-    <button class="bs-tab"
-      id="tab-perawi"
-      type="button"
-      role="tab"
-      aria-selected="false"
-      aria-controls="panel-perawi"
-      tabindex="-1">
-      Biografi Perawi
-    </button>
-
-  </div>
+  <a href="prayer-times.html">Prayer Times</a>
+  <span aria-hidden="true">|</span>
 </nav>
+
 
 <main class="bs-main">
 
@@ -899,7 +1133,7 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
   <input
     id="cari-bukhari"
     type="search"
-    placeholder="Cari nomor, perawi, atau teks hadis..."
+    placeholder="Cari pahala ..."
     style="width:100%;padding:12px;margin-top:8px;border:1px solid #ded5c4;border-radius:9px;font:inherit;"
   >
   <p id="status-bukhari" aria-live="polite">Memuat data hadis...</p>
@@ -1388,233 +1622,6 @@ document.querySelectorAll("[data-open-collection]").forEach(function (item) {
         ". Periksa nama file JSON dan pastikan sudah diunggah ke GitHub.";
     });
 })();
-   
-@charset "utf-8";
-/* CSS Document */
-
-/* Pengantar koleksi */
-.collection_intro_short {
-    padding-left: 20px;
-    padding-bottom: 30px;
-    width: 80%;
-    text-align: justify;
-    font-family: Verdana, sans-serif;
-    font-size: 12px;
-}
-
-.collection_intro_short a {
-    text-decoration: none;
-    color: #634d22;
-}
-
-.collection_intro_short a:hover {
-    text-decoration: underline;
-}
-
-.collection_intro_short a:visited {
-    color: #634614;
-    text-decoration: none;
-}
-
-/* Judul kitab */
-.book_title a {
-    text-decoration: none;
-}
-
-/* Latar belakang daftar pertama */
-.list_first .list_first_bg {
-    /* background-color: #B29774; */
-    background-color: #BEB29E;
-    opacity: 0.3;
-    position: absolute;
-    left: 0;
-    top: 0;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    border: 0;
-}
-
-.list_first {
-    margin: 2px;
-    padding-bottom: 2px;
-    font-size: 12px;
-    position: relative;
-    color: #08081a;
-    font-weight: bold;
-    overflow: auto;
-}
-
-a:visited .list_first {
-    color: #5e5e4c;
-}
-
-a:hover .list_first {
-    color: #29640c;
-}
-
-/* Daftar kedua */
-.list_second {
-    padding: 2px;
-    font-weight: bold;
-    overflow: auto;
-    font-size: 12px;
-    color: #08081a;
-    text-decoration: none;
-}
-
-a:visited .list_second {
-    color: #5e5e4c;
-}
-
-a:hover .list_second {
-    color: #29640c;
-}
-
-/* Nama kitab bahasa Inggris */
-a .english_book_name {
-    text-decoration: none;
-    display: inline;
-    float: left;
-    padding-left: 4px;
-    padding-top: 2px;
-    margin-top: auto;
-    font-size: 13px;
-    max-width: 70%;
-    z-index: 6;
-}
-
-a .list_first .english_book_name {
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 6;
-}
-
-/* Nama kitab Arab */
-a .list_first .arabic_book_name {
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 6;
-}
-
-a .arabic_book_name {
-    display: inline;
-    float: right;
-    font-size: 17px;
-    direction: rtl;
-    text-align: right;
-    padding-right: 4px;
-    width: auto;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-}
-
-/* Kolom kiri */
-.left_content {
-    width: 45%;
-    float: left;
-    /*
-    background-image: url(../images/vline.jpg);
-    background-repeat: repeat-y;
-    background-position: right top;
-    */
-    padding-right: 5%;
-}
-
-/* Kolom kanan */
-.right_content {
-    float: right;
-    width: 45%;
-    padding-left: -2px;
-}
-
-/* Judul kitab */
-.bookheading {
-    width: 72%;
-    margin-right: 20px;
-    margin-left: 55px;
-    text-align: center;
-    clear: both;
-    overflow: auto;
-    padding-bottom: 0;
-    padding-top: 20px;
-}
-
-.englishbookheading {
-    float: left;
-    width: 49%;
-    font-size: 26px;
-    border: 0;
-    vertical-align: text-top;
-}
-
-.arabicbookheading {
-    float: right;
-    width: 49%;
-    font-size: 26px;
-    border: 0;
-    vertical-align: text-top;
-}
-
-/* Judul bab */
-.chapter {
-    width: 75%;
-    background-color: #BFAD97;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.englishchapter {
-    float: left;
-    max-width: 43%;
-    font-size: 18px;
-    border: 0;
-}
-
-.echapno {
-    float: left;
-    padding-right: 5px;
-    font-size: 20px;
-    border: 0;
-}
-
-.arabicchapter {
-    float: right;
-    max-width: 42%;
-    font-size: 24px;
-    border: 0;
-}
-
-.achapno {
-    float: right;
-    padding-left: 8px;
-    font-size: 20px;
-    border: 0;
-}
-
-/* Pengantar bab bahasa Arab */
-.achapintro {
-    padding-left: 5%;
-    padding-right: 7%;
-    padding-bottom: 10px;
-    padding-top: 15px;
-    font-size: 22px;
-    width: 70%;
-    text-align: justify;
-}
-
-/* Pengantar bab bahasa Inggris */
-.echapintro {
-    padding-left: 5%;
-    padding-right: 7%;
-    padding-bottom: 10px;
-    padding-top: 15px;
-    width: 70%;
-    text-align: justify;
-}
-
 </script>
 
 </body>
