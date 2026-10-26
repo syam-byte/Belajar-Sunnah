@@ -846,6 +846,7 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 }
 
 /* Judul kitab dengan efek mengambang */
+
 .bookheading {
   display: flex;
   align-items: center;
@@ -853,22 +854,9 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
   gap: 12px;
   width: fit-content;
   max-width: 96%;
-  margin: 24px auto;
-  padding: 12px 20px;
-  background: #fffdf8;
-  border: 1px solid #e8dece;
-  border-radius: 12px;
-  box-shadow:
-    0 4px 8px rgba(70, 52, 28, 0.08),
-    0 10px 24px rgba(70, 52, 28, 0.07);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.bookheading:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 7px 14px rgba(70, 52, 28, 0.12),
-    0 14px 28px rgba(70, 52, 28, 0.09);
+  margin: 20px auto;
+  padding: 0;
+  text-align: center;
 }
 
 .englishbookheading {
@@ -893,8 +881,6 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 @media (max-width: 600px) {
   .bookheading {
     gap: 8px;
-    padding: 10px 12px;
-    border-radius: 10px;
   }
 
   .englishbookheading {
@@ -930,59 +916,16 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 </header>
 
 <!-- SATU NAVIGASI UNTUK EMPAT PANEL -->
-<nav class="bs-nav" aria-label="Navigasi perpustakaan">
-  <div class="bs-tab-menu" role="tablist"
-       aria-label="Bagian Belajar-Sunnah">
-
-    <button class="bs-tab active"
-      id="tab-beranda"
-      type="button"
-      role="tab"
-      aria-selected="true"
-      aria-controls="panel-beranda"
-      tabindex="0">
-      Beranda
-    </button>
-
-    <button class="bs-tab"
-      id="tab-hadis"
-      type="button"
-      role="tab"
-      aria-selected="false"
-      aria-controls="panel-hadis"
-      tabindex="-1">
-      Hadis
-    </button>
-
-    <button class="bs-tab"
-      id="tab-sanad"
-      type="button"
-      role="tab"
-      aria-selected="false"
-      aria-controls="panel-sanad"
-      tabindex="-1">
-      Sanad
-    </button>
-
-    <button class="bs-tab"
-      id="tab-perawi"
-      type="button"
-      role="tab"
-      aria-selected="false"
-      aria-controls="panel-perawi"
-      tabindex="-1">
-      Perawi
-    </button>
-
-    <a class="bs-tab"
-      id="tab-prayer-times"
-      href="https://www.muslimpro.com/prayer-times/"
-      target="_blank"
-      rel="noopener noreferrer">
-      Prayer Times
-    </a>
-
-  </div>
+<nav class="bs-main-nav" aria-label="Navigasi utama">
+  <a href="index.html">Belajar</a>
+  <span aria-hidden="true">|</span>
+  <a href="#panel-hadis">Sunnah</a>
+  <span aria-hidden="true">|</span>
+  <a href="#panel-sanad">Thalabul</a>
+  <span aria-hidden="true">|</span>
+  <a href="#panel-perawi">Ilmi</a>
+  <span aria-hidden="true">|</span>
+  <a href="https://www.muslimpro.com/prayer-times/">Prayer Times</a>
 </nav>
 
 <main class="bs-main">
@@ -1003,18 +946,16 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 
     <p class="bs-reference">
       
-<section id="bs-collections-home" aria-labelledby="bs-collections-title">
-  <h2 id="bs-collections-title">Koleksi Hadis</h2>
-  <div class="bs-collections-grid" id="bs-collections-list">
-    <button class="bs-collection-item" type="button" data-open-collection>
-      <span class="bs-collection-en">Sahih al-Bukhari</span>
-      <span class="bs-collection-ar" dir="rtl" lang="ar">صحيح البخاري</span>
-    </button>
-    <button class="bs-collection-item" type="button" data-open-collection>
-      <span class="bs-collection-en">Sahih Muslim</span>
-      <span class="bs-collection-ar" dir="rtl" lang="ar">صحيح مسلم</span>
-    </button>
-  </div>
+<section id="bs-collections-home" aria-labelledby="bs-collections-title">  
+  <h2 id="bs-collections-title">Muttafaqun 'alaih&nbsp;&nbsp; مُتَّفَقٌ عَلَيْهِ</h2>  
+  <div class="bs-collections-grid" id="bs-collections-list">  
+    <button class="bs-collection-item" type="button" data-open-collection>  
+      <span class="bs-collection-en">Sahih al-Bukhari&nbsp;&nbsp; صحيح البخاري</span>  
+    </button>  
+    <button class="bs-collection-item" type="button" data-open-collection>  
+      <span class="bs-collection-en">Sahih Muslim&nbsp;&nbsp; صحيح مسلم</span>  
+    </button>  
+  </div>  
 </section>
 
     </p>
