@@ -547,30 +547,30 @@ body {
   box-shadow: none;
 }
 
-#panel-hadis > h3 {
+#Sunnah > h3 {
   margin-top: 28px;
   padding-bottom: 10px;
   border-bottom: 1px solid #d8c7a6;
   color: #292929;
 }
 
-#panel-hadis > p:not(.bs-eyebrow) {
+#Sunnah > p:not(.bs-eyebrow) {
   color: #5c554a;
   line-height: 1.7;
 }
 
-#panel-hadis #cari-bukhari {
+#Sunnah #cari-bukhari {
   box-sizing: border-box;
   background: #fff;
 }
 
-#panel-hadis #status-bukhari {
+#Sunnah #status-bukhari {
   margin-bottom: 0;
   color: #666;
   font-size: 14px;
 }
 
-#panel-hadis #daftar-bukhari .bs-card {
+#Sunnah #daftar-bukhari .bs-card {
   margin-bottom: 18px;
   padding: 18px 10px;
   background: #fffdf8;
@@ -580,7 +580,7 @@ body {
   box-shadow: none;
 }
 
-#panel-hadis #daftar-bukhari .bs-card h3 {
+#Sunnah #daftar-bukhari .bs-card h3 {
   margin-top: 0;
   padding-bottom: 0;
   border-bottom: 0;
@@ -588,17 +588,17 @@ body {
   font-weight: 600;
 }
 
-#panel-hadis #daftar-bukhari .bs-card p {
+#Sunnah #daftar-bukhari .bs-card p {
   font-size: 16px;
   line-height: 1.7;
 }
 
-#panel-hadis #daftar-bukhari .bs-card p.bs-translation {
+#Sunnah #daftar-bukhari .bs-card p.bs-translation {
   font-size: 20px;
   line-height: 1.7;
 }
 
-#panel-hadis #daftar-bukhari .bs-arabic {
+#Sunnah #daftar-bukhari .bs-arabic {
   padding: 20px 12px;
   background: #f8f5ed;
   color: #171717;
@@ -609,21 +609,21 @@ body {
   text-align: right;
 }
 
-#panel-hadis #daftar-bukhari details {
+#Sunnah #daftar-bukhari details {
   margin: 12px 0;
 }
 
-#panel-hadis #daftar-bukhari summary {
+#Sunnah #daftar-bukhari summary {
   cursor: pointer;
   color: #80612f;
 }
 
-#panel-hadis #daftar-bukhari .bs-reference {
+#Sunnah #daftar-bukhari .bs-reference {
   background: #f1ede4;
   border-radius: 3px;
 }
 
-#panel-hadis #daftar-bukhari .bs-card a {
+#Sunnah #daftar-bukhari .bs-card a {
   color: #80612f;
 }
 
@@ -636,21 +636,21 @@ body {
     padding: 16px;
   }
 
-  #panel-hadis #daftar-bukhari .bs-card {
+  #Sunnah #daftar-bukhari .bs-card {
     padding: 14px 4px;
   }
 
-  #panel-hadis #daftar-bukhari .bs-card p {
+  #Sunnah #daftar-bukhari .bs-card p {
     font-size: 14px;
     line-height: 1.7;
   }
 
-  #panel-hadis #daftar-bukhari .bs-card p.bs-translation {
+  #Sunnah #daftar-bukhari .bs-card p.bs-translation {
     font-size: 18px;
     line-height: 1.7;
   }
 
-  #panel-hadis #daftar-bukhari .bs-arabic {
+  #Sunnah #daftar-bukhari .bs-arabic {
     padding: 14px 5px;
     font-size: 20px;
   }
@@ -919,11 +919,11 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 <nav class="bs-main-nav" aria-label="Navigasi utama">
   <a href="index.html">Belajar</a>
   <span aria-hidden="true">|</span>
-  <a href="#panel-hadis">Sunnah</a>
+  <a href="#Sunnah">Sunnah</a>
   <span aria-hidden="true">|</span>
-  <a href="#panel-sanad">Thalabul</a>
+  <a href="#Thalabul">Thalabul</a>
   <span aria-hidden="true">|</span>
-  <a href="#panel-perawi">Ilmi</a>
+  <a href="#ilmi">Ilmi</a>
   <span aria-hidden="true">|</span>
   <a href="https://www.muslimpro.com/prayer-times/">Prayer Times</a>
 </nav>
@@ -964,7 +964,7 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 
   <!-- TAB 2: KOLEKSI HADIS -->
   <section class="bs-panel"
-    id="panel-hadis"
+    id="Sunnah"
     role="tabpanel"
     aria-labelledby="tab-hadis"
     tabindex="0"
@@ -1004,7 +1004,7 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 
   <!-- TAB 3: SANAD -->
   <section class="bs-panel"
-    id="panel-sanad"
+    id="Thalabul"
     role="tabpanel"
     aria-labelledby="tab-sanad"
     tabindex="0"
@@ -1022,7 +1022,7 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 
   <!-- TAB 4: BIOGRAFI PERAWI -->
   <section class="bs-panel"
-    id="panel-perawi"
+    id="ilmi"
     role="tabpanel"
     aria-labelledby="tab-perawi"
     tabindex="0"
@@ -1049,7 +1049,7 @@ input:focus, select:focus, textarea:focus { outline:2px solid rgba(105,151,146,.
 document.querySelectorAll("[data-open-collection]").forEach(function (item) {
   item.addEventListener("click", function () {
     const tab = document.getElementById("tab-hadis");
-    const panel = document.getElementById("panel-hadis");
+    const panel = document.getElementById("Sunnah");
 
     if (tab && panel) {
       tab.click();
