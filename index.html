@@ -366,19 +366,6 @@ body {
   box-sizing: border-box;
   font-size: 14px;
 }
-
-button:focus,
-button:active,
-a:focus,
-a:active,
-input:focus {
-  outline-color: transparent;
-  -webkit-tap-highlight-color: transparent;
-}
-
-* {
-  -webkit-tap-highlight-color: transparent;
-}
 </style>
 </head>
 
@@ -402,42 +389,57 @@ input:focus {
 <main>
   
 
-<!-- Beranda -->
+<!-- Pencarian Beranda -->
 <section id="beranda" class="panel">
   <p>Pencarian hadis</p>
 
-  <div style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; padding: 2px 10px; line-height: 1.2;">
-  <span style="flex: 1; text-align: left; font-size: 18px;">
-    Sahih al-Bukhari
-  </span>
-  <span dir="rtl" style="flex: 1; text-align: right; font-size: 22px; white-space: nowrap; font-family: KFGQPC; line-height: 1.2;">
-    صحيح البخاري
-  </span>
-</div>
+  <div style="position: relative; width: 100%; margin: 0 auto 12px; box-sizing: border-box;">
+    <input
+      id="cari-beranda"
+      type="search"
+      placeholder="Cari hadis..."
+      oninput="cariDari('cari-beranda')"
+      style="display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 8px 36px 8px 10px; font-size: 14px;"
+    >
+    <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; line-height: 1;">
+      🔍
+    </span>
+  </div>
 
-<div style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; padding: 2px 10px; line-height: 1.2;">
-  <span style="flex: 1; text-align: left; font-size: 18px;">
-    Sahih Muslim
-  </span>
-  <span dir="rtl" style="flex: 1; text-align: right; font-size: 22px; white-space: nowrap; font-family: KFGQPC; line-height: 1.2;">
-    صحيح مسلم
-  </span>
-</div>
+  <h2 style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-left: auto; margin-right: auto; border-bottom: 1px solid #ddd; padding-bottom: 8px; text-align: center; font-size: 20px; font-weight: 500;">
+    <span>Yang Ketiga</span>
+    <span dir="rtl">الكتب الثلاثة</span>
+  </h2>
 
-<div style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; width: 100%; box-sizing: border-box; padding: 2px 10px; line-height: 1.2;">
-  <span style="flex: 1; text-align: left; font-size: 18px;">
-    Sunan Abi Dawud
-  </span>
-  <span dir="rtl" style="flex: 1; text-align: right; font-size: 22px; white-space: nowrap; font-family: KFGQPC; line-height: 1.2;">
-    سنن أبي داود
-  </span>
-</div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 18px;">
+    <tbody>
+      <tr>
+        <td style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;" onclick="buka('koleksi')">
+          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; width: 100%; text-align: center; font-size: 18px; font-weight: 500;">
+            <span>Sahih al-Bukhari</span>
+            <span dir="rtl">صحيح البخاري</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;" onclick="buka('muslim')">
+          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; width: 100%; text-align: center; font-size: 18px; font-weight: 500;">
+            <span>Sahih Muslim</span>
+            <span dir="rtl">صحيح مسلم</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;" onclick="buka('abu-dawud')">
+          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; width: 100%; text-align: center; font-size: 18px; font-weight: 500;">
+            <span>Sunan Abi Dawud</span>
+            <span dir="rtl">سنن أبي داود</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>
-</span>
 
 
   <section id="koleksi" class="panel hidden">
@@ -534,12 +536,9 @@ async function muat() {
   }
 }
 
-
-function cariHadis(idInput = "cari-beranda") {
-  const input = document.getElementById(idInput);
-  if (!input) return;
-
-  const kata = input.value.trim().toLocaleLowerCase();
+function cariHadis() {
+  const kata = document.getElementById("cari")
+    .value.trim().toLocaleLowerCase();
 
   if (!kata) {
     cocok = semua.slice();
@@ -573,10 +572,8 @@ function cariHadis(idInput = "cari-beranda") {
   }
 
   hal = 0;
-  buka("koleksi");
   tampilkan();
 }
-
 
 function tampilkan() {
   const hasil = document.getElementById("hasil");
