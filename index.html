@@ -394,19 +394,27 @@ body {
   <p>Pencarian hadis</p>
 
   <div style="position: relative; width: 100%; margin: 0 auto 12px; box-sizing: border-box;">
-    <input
-      id="cari-beranda"
-      type="search"
-      placeholder="Cari hadis..."
-      onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
-      style="display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 8px 36px 8px 10px; font-size: 14px;"
+  <input
+    id="cari-beranda"
+    type="search"
+    placeholder="Ketik nomor atau kata hadis..."
+    onkeydown="if(event.key === 'Enter'){cariHadis('cari-beranda')}"
+    style="display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 8px 44px 8px 10px; font-size: 14px;"
+  >
+
+  <button
+    type="button"
+    onclick="cariHadis('cari-beranda')"
+    aria-label="Cari hadis"
+    style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; margin: 0; padding: 4px; border: none; background: transparent; cursor: pointer;"
+  >
+    <img
+      src="search.9.png"
+      alt=""
+      style="width: 28px; height: 28px; object-fit: contain; display: block;"
     >
-    <span style="position: absolute; right: 10px; top: 50%; transform: tr anslateY(-50%); pointer-events: none; line-height: 1;">
-      <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; line-height: 1;">
-  <img src="images/search.png" alt="" style="width: 32px; height: 32px; object-fit: contain; display: block;">
-     </span>
-    </span>
-  </div>
+  </button>
+</div>
 
   <h2 style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-left: auto; margin-right: auto; border-bottom: 1px solid #ddd; padding-bottom: 8px; text-align: center; font-size: 20px; font-weight: 500;">
     <span>Yang Ketiga</span>
@@ -425,7 +433,7 @@ body {
           <span style="flex: 1; text-align: right; font-size: 18px;">
             Sahih al-Bukhari
           </span>
-          <span dir="rtl" style="flex: 1; text-align: left; font-size: 30px; white-space: nowrap;">
+          <span dir="rtl" style="flex: 1; text-align: left; font-size: 22px; white-space: nowrap; font-family: KFGQPC.ttf;">">
             صحيح البخاري
           </span>
         </div>
@@ -441,7 +449,7 @@ body {
           <span style="flex: 1; text-align: right; font-size: 18px;">
             Sahih Muslim
           </span>
-          <span dir="rtl" style="flex: 1; text-align: left; font-size: 30px; white-space: nowrap;">
+          <span dir="rtl" style="flex: 1; text-align: left; font-size: 22px; white-space: nowrap; font-family: KFGQPC.ttf;">">
             صحيح مسلم
           </span>
         </div>
@@ -457,7 +465,7 @@ body {
           <span style="flex: 1; text-align: right; font-size: 18px;">
             Sunan Abi Dawud
           </span>
-          <span dir="rtl" style="flex: 1; text-align: left; font-size: 30px; white-space: nowrap;">
+          <span dir="rtl" style="flex: 1; text-align: left; font-size: 22px; white-space: nowrap; font-family: KFGQPC.ttf;">">
             سنن أبي داود
           </span>
         </div>
@@ -466,6 +474,7 @@ body {
   </tbody>
 </table>
 </section>
+</span>
 
 
   <section id="koleksi" class="panel hidden">
