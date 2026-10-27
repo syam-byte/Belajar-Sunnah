@@ -398,12 +398,12 @@ body {
       id="cari-beranda"
       type="search"
       placeholder="Cari hadis..."
-      oninput="cariDari('cari-beranda')"
+      onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
       style="display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 8px 36px 8px 10px; font-size: 14px;"
     >
     <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; line-height: 1;">
       <img
-  src="search.png"
+  src="search.9.png"
   alt="Cari"
   style="width: 20px; height: 20px; display: block; object-fit: contain;"
 >
@@ -418,8 +418,8 @@ body {
   <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 18px;">
     <tbody>
       <tr>
-        <td style="padding: 10px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #ECECEC; cursor: pointer; text-align: center;" onclick="buka('koleksi')">
-          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 10px; width: 100%; text-align: center; font-size: 18px; font-weight: 500; font-family: KFGQPC.ttf; line-height: 1.0;">
+        <td style="padding: 11px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #ECECEC; cursor: pointer; text-align: center;" onclick="buka('koleksi')">
+          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 11px; width: 100%; text-align: center; font-size: 18px; font-weight: 500; font-family: KFGQPC.ttf; line-height: 1.0;">
             <span>Sahih al-Bukhari</span>
             <span dir="rtl">صحيح البخاري</span>
           </div>
