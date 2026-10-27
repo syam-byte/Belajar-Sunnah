@@ -394,27 +394,25 @@ body {
   <p>Pencarian hadis</p>
 
   <div style="position: relative; width: 100%; margin: 0 auto 12px; box-sizing: border-box;">
-    <input
-      id="cari-beranda"
-      type="search"
-      placeholder="Cari hadis..."
-      onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
-      style="display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 8px 36px 8px 10px; font-size: 14px;"
-    >
-    <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; line-height: 1;">
-    <button
-  type="button"
-  onclick="cariHadis('cari-beranda')"
-  aria-label="Cari hadis"
-  style="position:absolute; right:8px; top:50%; transform:translateY(-50%); border:0; background:transparent; padding:4px; cursor:pointer;"
->
-      <img
-  src="search.9.png"
-  alt="Cari"
-  style="width: 20px; height: 20px; display: block; object-fit: contain;"
->   </button>
-    </span>
-  </div>
+
+  <input
+    id="cari-beranda"
+    type="search"
+    placeholder="Cari hadis..."
+    onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
+    style="display:block; width:100%; box-sizing:border-box; margin:0; padding:8px 40px 8px 10px; font-size:14px;"
+  >
+
+  <button
+    type="button"
+    onclick="cariHadis('cari-beranda')"
+    aria-label="Cari hadis"
+    style="position:absolute; right:6px; top:50%; transform:translateY(-50%); display:flex; align-items:center; justify-content:center; width:30px; height:30px; padding:0; border:0; background:transparent; cursor:pointer;"
+  >
+    <img src="search.9.png" alt="" style="display:block; width:20px; height:20px; object-fit:contain;">
+  </button>
+
+</div>
 
   <h2 style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-left: auto; margin-right: auto; border-bottom: 3px solid #ddd; padding-bottom: 8px; text-align: center; font-size: 26px; font-weight: 500;">
     <span>Yang Ketiga</span>
@@ -424,7 +422,7 @@ body {
   <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 18px;">
     <tbody>
       <tr>
-        <td style="padding: 11px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #ECECEC; cursor: pointer; text-align: center;" onclick="buka('koleksi')">
+        <td style="padding: 11px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #E3E6F3; cursor: pointer; text-align: center;" onclick="buka('koleksi')">
           <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 11px; width: 100%; text-align: center; font-size: 18px; font-weight: 500; font-family: KFGQPC.ttf; line-height: 1.0;">
             <span>Sahih al-Bukhari</span>
             <span dir="rtl">صحيح البخاري</span>
@@ -432,7 +430,7 @@ body {
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #ECECEC; cursor: pointer; text-align: center;" onclick="buka('muslim')">
+        <td style="padding: 10px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #E3E6F3; cursor: pointer; text-align: center;" onclick="buka('muslim')">
           <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 10px; width: 100%; text-align: center; font-size: 18px; font-weight: 500; font-family: KFGQPC.ttf; line-height: 1.0;">
             <span>Sahih Muslim</span>
             <span dir="rtl">صحيح مسلم</span>
@@ -440,7 +438,7 @@ body {
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #ECECEC; cursor: pointer; text-align: center;" onclick="buka('abu-dawud')">
+        <td style="padding: 10px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: #E3E6F3; cursor: pointer; text-align: center;" onclick="buka('abu-dawud')">
           <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 10px; width: 100%; text-align: center; font-size: 18px; font-weight: 500; font-family: KFGQPC.ttf; line-height: 1.0;">
             <span>Sunan Abi Dawud</span>
             <span dir="rtl">سنن أبي داود</span>
