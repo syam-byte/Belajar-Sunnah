@@ -540,9 +540,12 @@ async function muat() {
   }
 }
 
-function cariHadis() {
-  const kata = document.getElementById("cari")
-    .value.trim().toLocaleLowerCase();
+
+function cariHadis(idInput = "cari-beranda") {
+  const input = document.getElementById(idInput);
+  if (!input) return;
+
+  const kata = input.value.trim().toLocaleLowerCase();
 
   if (!kata) {
     cocok = semua.slice();
@@ -576,8 +579,10 @@ function cariHadis() {
   }
 
   hal = 0;
+  buka("koleksi");
   tampilkan();
 }
+
 
 function tampilkan() {
   const hasil = document.getElementById("hasil");
