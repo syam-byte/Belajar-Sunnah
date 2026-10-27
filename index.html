@@ -83,7 +83,7 @@ body {
 
 .bs-logo {
   width: 84px;
-  height: 84px;
+  height: auto
   object-fit: contain;
   flex-shrink: 0;
   display: block;
@@ -397,16 +397,30 @@ body {
 
 <main>
   
+  <!-- Panel pencarian -->
+  <div style="position: relative; width: 70%;">
+    <input
+      id="cari"
+      type="search"
+      placeholder="search..."
+      style="width: 100%; box-sizing: border-box; padding: 5px 32px 5px 8px; font-size: 14px;"
+    >
+    <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 14px;">
+      <icon name="search" />
+    </span>
+  </div>
 <section id="beranda" class="panel">
-  <h2>Selamat Datang</h2>
-  <p>Pelajari hadis Rasulullah ﷺ berdasarkan sumber dan riwayatnya.</p>
+  <p>Pelajari hadis Rasulullah ﷺ berdasarkan sumber</p>
+  <h2 style="border-bottom: 1px solid #ddd; padding-bottom: 8px;">
+  Yang Ketiga
+  <span style="direction: rtl;">الكتب الثلاثة</span>
+</h2>
 
-  
-<table style="width: 100%; border-collapse: collapse;">
+<table style="width: 100%; border-collapse: collapse; font-size: 22px;">
   <tbody>
     <tr>
       <td
-        style="padding: 12px 10px; text-align: left; cursor: pointer;"
+        style="border: 1px solid #ddd; padding: 6px 8px; cursor: pointer;"
         onclick="buka('koleksi')"
       >
         Sahih al-Bukhari
@@ -415,7 +429,7 @@ body {
     </tr>
     <tr>
       <td
-        style="padding: 12px 10px; text-align: left; cursor: pointer;"
+        style="border: 1px solid #ddd; padding: 6px 8px; cursor: pointer;"
         onclick="buka('muslim')"
       >
         Sahih Muslim
@@ -424,7 +438,7 @@ body {
     </tr>
     <tr>
       <td
-        style="padding: 12px 10px; text-align: left; cursor: pointer;"
+        style="border: 1px solid #ddd; padding: 6px 8px; cursor: pointer;"
         onclick="buka('abu-dawud')"
       >
         Sunan Abi Dawud
@@ -435,16 +449,19 @@ body {
 </table>
 </section>
 
-
+<div style="position: relative; width: 55%;">
+  <input
+    id="cari"
+    type="search"
+    placeholder="Cardis..."
+    style="width: 100%; box-sizing: border-box; padding: 5px 32px 5px 8px; font-size: 14px;"
+  >
+  <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 14px;">
+    🔍
+  </span>
+</div>
   <section id="koleksi" class="panel hidden">
     <h2>Koleksi Hadis Sahih al-Bukhari</h2>
-    <p class="muted">Masukkan nomor hadis atau kata yang ingin dicari.</p>
-
-    <input id="cari" type="search"
-           placeholder="Contoh: 23 atau akhirat">
-
-    <button onclick="cariHadis()">Cari Hadis</button>
-    <button onclick="muat()">Tampilkan Semua</button>
 
     <p id="status" class="muted" aria-live="polite"></p>
     <div id="hasil"></div>
