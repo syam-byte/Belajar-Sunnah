@@ -296,30 +296,16 @@ footer {
 
 /* TAMPILAN HP */
 @media (max-width: 600px) {
-  .bs-header {
-    padding: 16px 8px;
+  .bs-logo {
+    width: 84px;
+    height: auto;
+    flex-basis: 84px;
   }
+}
 
   .bs-brand {
     gap: 10px;
     padding: 0;
-  }
-
-  .bs-logo {
-    flex-basis: 60px;
-    width: 60px;
-    height: 78px;
-  }
-
-  .bs-logo::before {
-    inset: 6px;
-  }
-
-  .bs-logo::after {
-    left: 14px;
-    right: 14px;
-    top: 14px;
-    bottom: 14px;
   }
 
   .bs-brand-copy .bs-welcome-main {
@@ -397,18 +383,17 @@ body {
 
 <main>
   
-  <!-- Panel pencarian -->
-  <div style="position: relative; width: 70%;">
-    <input
-      id="cari"
-      type="search"
-      placeholder="search..."
-      style="width: 100%; box-sizing: border-box; padding: 5px 32px 5px 8px; font-size: 14px;"
-    >
-    <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 14px;">
-      <icon name="search" />
-    </span>
-  </div>
+  <!-- Pencarian Beranda -->
+<div style="position: relative; width: 100%; margin-bottom: 12px;">
+  <input
+    id="cari-beranda"
+    type="search"
+    placeholder="Cari hadis..."
+    oninput="cariDari('cari-beranda')"
+    style="width: 100%; box-sizing: border-box; padding: 8px 32px 8px 10px; font-size: 14px;"
+  >
+  <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;">🔍</span>
+</div>
 <section id="beranda" class="panel">
   <p>Pelajari hadis Rasulullah ﷺ berdasarkan sumber</p>
   <h2 style="border-bottom: 1px solid #ddd; padding-bottom: 8px;">
@@ -416,49 +401,65 @@ body {
   <span style="direction: rtl;">الكتب الثلاثة</span>
 </h2>
 
-<table style="width: 100%; border-collapse: collapse; font-size: 22px;">
+<table style="width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 18px;">
   <tbody>
     <tr>
       <td
-        style="border: 1px solid #ddd; padding: 6px 8px; cursor: pointer;"
+        style="padding: 10px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer;"
         onclick="buka('koleksi')"
       >
-        Sahih al-Bukhari
-        <span style="float: right; direction: rtl;">صحيح البخاري</span>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 18px; font-weight: 500; text-align: center;">
+          <span>Sahih al-Bukhari</span>
+          <span style="direction: rtl;">صحيح البخاري</span>
+        </div>
       </td>
     </tr>
     <tr>
       <td
-        style="border: 1px solid #ddd; padding: 6px 8px; cursor: pointer;"
+        style="padding: 10px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer;"
         onclick="buka('muslim')"
       >
-        Sahih Muslim
-        <span style="float: right; direction: rtl;">صحيح مسلم</span>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 18px; font-weight: 500; text-align: center;">
+          <span>Sahih Muslim</span>
+          <span style="direction: rtl;">صحيح مسلم</span>
+        </div>
       </td>
     </tr>
     <tr>
       <td
-        style="border: 1px solid #ddd; padding: 6px 8px; cursor: pointer;"
+        style="padding: 10px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer;"
         onclick="buka('abu-dawud')"
       >
-        Sunan Abi Dawud
-        <span style="float: right; direction: rtl;">سنن أبي داود</span>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 18px; font-weight: 500; text-align: center;">
+          <span>Sunan Abi Dawud</span>
+          <span style="direction: rtl;">سنن أبي داود</span>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
 </section>
 
-<div style="position: relative; width: 55%;">
+<!-- Pencarian Koleksi Hadis -->
+<div style="position: relative; width: 50%; margin-bottom: 12px;">
   <input
-    id="cari"
+    id="cari-koleksi"
     type="search"
-    placeholder="Cardis..."
-    style="width: 100%; box-sizing: border-box; padding: 5px 32px 5px 8px; font-size: 14px;"
+    placeholder="Cari hadis..."
+    oninput="cariDari('cari-koleksi')"
+    style="width: 100%; box-sizing: border-box; padding: 8px 32px 8px 10px; font-size: 14px;"
   >
-  <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 14px;">
-    🔍
-  </span>
+  <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;"><svg xmlns="http://www.w3.org/2000/svg"
+     width="26" height="26"
+     viewBox="0 0 24 24"
+     fill="none"
+     stroke="#374151"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+  <circle cx="11" cy="11" r="7"/>
+  <path d="m20 20-4-4"/>
+</svg></span>
 </div>
   <section id="koleksi" class="panel hidden">
     <h2>Koleksi Hadis Sahih al-Bukhari</h2>
