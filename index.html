@@ -389,7 +389,7 @@ body {
 <main>
   
 
-<!-- Pencarian Beranda -->
+<!-- Beranda -->
 <section id="beranda" class="panel">
   <p>Pencarian hadis</p>
 
@@ -398,11 +398,11 @@ body {
       id="cari-beranda"
       type="search"
       placeholder="Cari hadis..."
-      oninput="cariDari('cari-beranda')"
+      onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
       style="display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 8px 36px 8px 10px; font-size: 14px;"
     >
-    <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; line-height: 1;">
-      🔍
+    <span style="position: absolute; right: 10px; top: 50%; transform: tr anslateY(-50%); pointer-events: none; line-height: 1;">
+      <img src="images/search.png" alt="" style="width: 20px; height: 20px; object-fit: contain;">
     </span>
   </div>
 
@@ -411,34 +411,61 @@ body {
     <span dir="rtl">الكتب الثلاثة</span>
   </h2>
 
-  <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 18px;">
-    <tbody>
-      <tr>
-        <td style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;" onclick="buka('koleksi')">
-          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; width: 100%; text-align: center; font-size: 18px; font-weight: 500;">
-            <span>Sahih al-Bukhari</span>
-            <span dir="rtl">صحيح البخاري</span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;" onclick="buka('muslim')">
-          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; width: 100%; text-align: center; font-size: 18px; font-weight: 500;">
-            <span>Sahih Muslim</span>
-            <span dir="rtl">صحيح مسلم</span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;" onclick="buka('abu-dawud')">
-          <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; width: 100%; text-align: center; font-size: 18px; font-weight: 500;">
-            <span>Sunan Abi Dawud</span>
-            <span dir="rtl">سنن أبي داود</span>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  
+<table style="width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 18px;">
+  <tbody>
+    <!-- Sahih al-Bukhari -->
+    <tr>
+      <td
+        style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;"
+        onclick="buka('koleksi')"
+      >
+        <div style="text-align: center;">
+          <span style="display: block; font-size: 18px; font-weight: 500;">
+            Sahih al-Bukhari
+          </span>
+          <span dir="rtl" style="display: block; font-size: 22px; margin-top: 10px;">
+            صحيح البخاري
+          </span>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Sahih Muslim -->
+    <tr>
+      <td
+        style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;"
+        onclick="buka('muslim')"
+      >
+        <div style="text-align: center;">
+          <span style="display: block; font-size: 18px; font-weight: 500;">
+            Sahih Muslim
+          </span>
+          <span dir="rtl" style="display: block; font-size: 22px; margin-top: 10px;">
+            صحيح مسلم
+          </span>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Sunan Abi Dawud -->
+    <tr>
+      <td
+        style="padding: 12px 8px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer; text-align: center;"
+        onclick="buka('abu-dawud')"
+      >
+        <div style="text-align: center;">
+          <span style="display: block; font-size: 18px; font-weight: 500;">
+            Sunan Abi Dawud
+          </span>
+          <span dir="rtl" style="display: block; font-size: 22px; margin-top: 10px;">
+            سنن أبي داود
+          </span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </section>
 
 
@@ -536,9 +563,12 @@ async function muat() {
   }
 }
 
-function cariHadis() {
-  const kata = document.getElementById("cari")
-    .value.trim().toLocaleLowerCase();
+
+function cariHadis(idInput = "cari-beranda") {
+  const input = document.getElementById(idInput);
+  if (!input) return;
+
+  const kata = input.value.trim().toLocaleLowerCase();
 
   if (!kata) {
     cocok = semua.slice();
@@ -572,8 +602,10 @@ function cariHadis() {
   }
 
   hal = 0;
+  buka("koleksi");
   tampilkan();
 }
+
 
 function tampilkan() {
   const hasil = document.getElementById("hasil");
