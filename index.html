@@ -683,37 +683,67 @@ muat();
       <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;font-size:24px;cursor:pointer;">×</button>
     </div>
 
-    <form id="formSaran">
-      <p>Jenis kesalahan:</p>
+    
+<form id="formSaran">
+  <p style="margin:0 0 6px;">Jenis kesalahan:</p>
 
-      <label><input type="radio" name="jenisKesalahan" value="Terjemahan tidak sesuai" required> Terjemahan tidak sesuai</label><br><br>
-      <label><input type="radio" name="jenisKesalahan" value="Kesalahan ejaan"> Kesalahan ejaan</label><br><br>
-      <label><input type="radio" name="jenisKesalahan" value="Teks tidak lengkap"> Teks tidak lengkap</label><br><br>
-      <label><input type="radio" name="jenisKesalahan" value="Kesalahan terjemahan"> Kesalahan terjemahan</label><br><br>
-      <label><input type="radio" name="jenisKesalahan" value="Lainnya"> Lainnya (harap sebutkan)</label>
+  <div style="display:flex;flex-direction:column;gap:2px;">
+    <label style="display:flex;align-items:center;gap:8px;margin:0;">
+      <input type="radio" name="jenisKesalahan" value="Terjemahan tidak sesuai" required style="width:auto;margin:0;">
+      Terjemahan tidak sesuai
+    </label>
+    <label style="display:flex;align-items:center;gap:8px;margin:0;">
+      <input type="radio" name="jenisKesalahan" value="Kesalahan ejaan" style="width:auto;margin:0;">
+      Kesalahan ejaan
+    </label>
+    <label style="display:flex;align-items:center;gap:8px;margin:0;">
+      <input type="radio" name="jenisKesalahan" value="Teks tidak lengkap" style="width:auto;margin:0;">
+      Teks tidak lengkap
+    </label>
+    <label style="display:flex;align-items:center;gap:8px;margin:0;">
+      <input type="radio" name="jenisKesalahan" value="Kesalahan terjemahan" style="width:auto;margin:0;">
+      Kesalahan terjemahan
+    </label>
+    <label style="display:flex;align-items:center;gap:8px;margin:0;">
+      <input type="radio" name="jenisKesalahan" value="Lainnya" style="width:auto;margin:0;">
+      Lainnya (harap sebutkan)
+    </label>
+  </div>
 
-      <textarea id="jenisLainnya" rows="2" placeholder="Sebutkan jenis kesalahan lainnya..." style="display:none;width:100%;box-sizing:border-box;margin-top:10px;padding:10px;"></textarea>
+  <input
+    type="text"
+    id="jenisLainnya"
+    placeholder="Sebutkan jenis kesalahan lainnya..."
+    style="display:none;width:100%;box-sizing:border-box;margin:8px 0;padding:10px;"
+  >
 
-      <p>Detail kesalahan / saran perbaikan:</p>
-      <textarea id="detailSaran" rows="4" required placeholder="Tuliskan detail kesalahannya di sini..." style="width:100%;box-sizing:border-box;padding:10px;"></textarea>
-      
-<p>Email:</p>
-<input
-  type="email"
-  id="emailSaran"
-  required
-  placeholder="Alamat email Anda"
-  style="width:100%;box-sizing:border-box;padding:10px;margin-bottom:12px;"
->
+  <p style="margin:12px 0 4px;">Detail kesalahan / saran perbaikan:</p>
+  <textarea
+    id="detailSaran"
+    rows="4"
+    required
+    placeholder="Tuliskan detail kesalahan atau saran perbaikan..."
+    style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
+  ></textarea>
 
-      <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:16px;">
-        <button type="button" onclick="tutupSaran()">Batal</button>
-        <button type="submit">Kirim laporan</button>
-      </div>
-    </form>
+  <p style="margin:12px 0 4px;">Email:</p>
+  <input
+    type="email"
+    id="emailSaran"
+    required
+    placeholder="Alamat email Anda"
+    style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
+  >
+
+  <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:16px;">
+    <button type="button" onclick="tutupSaran()">Batal</button>
+    <button type="submit">Kirim Laporan</button>
+  </div>
+</form>
 
   </div>
 </div>
 
 </body>
 </html>
+
