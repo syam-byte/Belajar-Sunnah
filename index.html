@@ -361,19 +361,7 @@ body {
 .bs-card {
   background-color: #E5E7EB;
 }
-#cari-beranda {
-  display: block;
-  flex: 1 1 0;
-  min-width: 0;
-  width: 0;
-  box-sizing: border-box;
-  font-size: 14px;
-  -webkit-appearance: none;
-  appearance: none;
-  border: 1px solid #c8ceca;
-  border-radius: 6px;
-  outline: none;
-}
+
 </style>
 </head>
 
@@ -400,20 +388,21 @@ body {
 <section id="beranda" class="panel">
   <p>Pencarian hadis</p>
 
-  <div style="display:flex; align-items:center; gap:6px; width:92%; margin:0 auto 12px; box-sizing:border-box; padding:0;">
-
+  <div style="position:relative; width:92%; margin:0 auto 12px; box-sizing:border-box;">
     <input
       id="cari-beranda"
       type="search"
       placeholder="Cari hadis..."
       onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
-      style="flex:1; min-width:0; box-sizing:border-box; margin:0; padding:8px 10px; font-size:14px;">
+      style="display:block; width:100%; box-sizing:border-box; margin:0; padding:8px 42px 8px 10px; font-size:14px; -webkit-appearance:none; appearance:none;"
+    >
 
     <button
       type="button"
       onclick="cariHadis('cari-beranda')"
       aria-label="Cari hadis"
-      style="flex-shrink:0; display:flex; align-items:center; justify-content:center; border:0; background:transparent; padding:4px; margin:0; cursor:pointer;">
+      style="position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; justify-content:center; width:36px; height:36px; margin:0; padding:4px; border:0; background:transparent; cursor:pointer;"
+    >
       <img src="search.9.png" alt="" style="display:block; width:22px; height:22px; object-fit:contain;">
     </button>
   </div>
