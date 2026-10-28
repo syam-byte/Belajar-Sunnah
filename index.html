@@ -9,6 +9,12 @@
 
 <style>
 @font-face {
+  font-family: 'Markazi Text';
+  src: url('./fonts/MarkaziText-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
   font-family: Arab;
   src: url("fonts/Birds of Paradise.ttf") format("truetype");
   font-display: swap;
@@ -566,23 +572,23 @@ function tampilkan() {
           <span>${amanHTML(hadis.reference) || "Belum tersedia"}</span>
         </div>
 
-        <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;font-family:">
+        <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;font-family:'Markazi Text',serif;">
           <button type="button"
             onclick="bukaSaran(this)"
-            style="border:none;background:transparent;color:#3b82f6 ;padding:4px 0;cursor:pointer;">
-            Saran<span style="margin-left:-3px;font-size:12px;"></span>
+            style="border:none;background:transparent;color:#03D97B ;padding:4px 0;cursor:pointer;">
+            Saran<span style="margin-left:-3px;font-size:8px;"></span>
           </button>
           <span>|</span>
           <button type="button"
             onclick="berbagiHadis(this)"
-            style="border:none;background:transparent;color:#374151;padding:4px 0;cursor:pointer;">
+            style="border:none;background:transparent;color:#03D97B;padding:4px 0;cursor:pointer;">
             Share<span style="margin-left:-3px;font-size:12px;"></span>
           </button>
           <span>|</span>
           <button type="button"
   onclick="salinHadis(this)"
-  style="border:none;background:transparent;color:#374151;padding:4px 0;cursor:pointer;white-space:nowrap;">
-  Salin<span style="margin-left:-3px;font-size:12px;">▼</span>
+  style="border:none;background:transparent;color:#03D97B;padding:4px 0;cursor:pointer;white-space:nowrap;">
+  Salin<span style="margin-left:-4px;font-size:12px;">▼</span>
          </button>
         </div>
       </article>
@@ -758,4 +764,3 @@ muat();
 
 </body>
 </html>
-
