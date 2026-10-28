@@ -566,10 +566,10 @@ function tampilkan() {
           <span>${amanHTML(hadis.reference) || "Belum tersedia"}</span>
         </div>
 
-        <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;">
+        <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;font-family:">
           <button type="button"
             onclick="bukaSaran(this)"
-            style="border:none;background:transparent;padding:4px 0;cursor:pointer;">
+            style="border:none;background:transparent;color:#3b82f6 padding:4px 0;cursor:pointer;">
             Saran
           </button>
           <span>|</span>
@@ -580,10 +580,10 @@ function tampilkan() {
           </button>
           <span>|</span>
           <button type="button"
-            onclick="salinHadis(this)"
-            style="border:none;background:transparent;padding:4px 0;cursor:pointer;">
-            Salin ▾
-          </button>
+  onclick="salinHadis(this)"
+  style="border:none;background:transparent;color:#374151;padding:4px 0;cursor:pointer;white-space:nowrap;">
+  Salin<span style="margin-left:1px;">▾</span>
+         </button>
         </div>
       </article>
     `;
@@ -641,6 +641,42 @@ document.addEventListener("change", function (event) {
   }
 });
 
+function berbagiHadis(tombol) {
+  const artikel = tombol.closest(".hadith");
+
+  if (!artikel) return;
+
+  const teks = artikel.innerText;
+
+  if (navigator.share) {
+    navigator.share({
+      title: "Belajar-Sunnah",
+      text: teks
+    }).catch(function (error) {
+      if (error.name !== "AbortError") {
+        alert("Hadis belum berhasil dibagikan.");
+      }
+    });
+  } else {
+    window.prompt("Salin teks hadis untuk dibagikan:", teks);
+  }
+}
+
+
+async function salinHadis(tombol) {
+  const artikel = tombol.closest(".hadith");
+
+  if (!artikel) return;
+
+  const teks = artikel.innerText;
+
+  try {
+    await navigator.clipboard.writeText(teks);
+    alert("Teks hadis berhasil disalin.");
+  } catch (error) {
+    window.prompt("Salin teks hadis berikut:", teks);
+  }
+}
 
 muat();
 </script>
