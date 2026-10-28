@@ -532,6 +532,7 @@ function cariHadis(idInput = "cari-beranda") {
   tampilkan();
 }
 
+
 function tampilkan() {
   const hasil = document.getElementById("hasil");
   const status = document.getElementById("status");
@@ -543,78 +544,47 @@ function tampilkan() {
     " entri dari " + semua.length + " entri hadis.";
 
   hasil.innerHTML = bagian.map(function (hadis, indeks) {
-    const nomor = hadis.hadith_number || hadis.number || mulai + indeks + 1;
+    const nomor =
+      hadis.hadith_number || hadis.number || mulai + indeks + 1;
+
+    const nomorAman = amanHTML(nomor);
+    const terjemahan = amanHTML(hadis.translation_id);
+    const arab = hadis.arabic
+      ? bersihArab(hadis.arabic)
+      : "Teks Arab belum tersedia";
 
     return `
-<article class="hadith">    
-    <div class="number">Hadis Nomor ${amanHTML(nomor)}</div>    <div>${amanHTML(hadis.translation_id) || "."}</div>    
-
-<div class="arabic" lang="ar" dir="rtl">${    
-  hadis.arabic    
-    ? bersihArab(hadis.arabic)    
-    : "Teks Arab belum tersedia"    
-}</div>    
-
-<div style="display: flex; align-items: center; gap: 8px;">    
-  <span>Rujukan</span>    
-  <span>${amanHTML(hadis.reference) || "Belum tersedia"}</span>    
-</div>
-
-  </article>
       <article class="hadith">
-        <div class="number">Hadis Nomor ${amanHTML(nomor)}</div>
+        <div class="number">Hadis Nomor ${nomorAman}</div>
 
-        <div class="label">Perawi</div>
-        <div>${amanHTML(hadis.narrator) || "Belum tersedia"}</div>
+        <div>${terjemahan || "."}</div>
 
-        <div class="arabic" lang="ar" dir="rtl">${
-          hadis.arabic
-            ? bersihArab(hadis.arabic)
-            : "Teks Arab belum tersedia"
-        }</div>   
-             
-        <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="arabic" lang="ar" dir="rtl">${arab}</div>
+
+        <div style="display:flex;align-items:center;gap:8px;">
           <span>Rujukan</span>
-          <span>Sahih al-Bukhari ${amanHTML(hadis.hadith_number || hadis.number || nomor)}</span>
+          <span>${amanHTML(hadis.reference) || "Belum tersedia"}</span>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span>Rujukan dalam kitab</span>
-          <span>Book 1, Hadith ${amanHTML(hadis.hadith_number || hadis.number || nomor)}</span>
+        <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;">
+          <button type="button"
+            onclick="bukaSaran(this)"
+            style="border:none;background:transparent;padding:4px 0;cursor:pointer;">
+            Saran
+          </button>
+          <span>|</span>
+          <button type="button"
+            onclick="berbagiHadis(this)"
+            style="border:none;background:transparent;padding:4px 0;cursor:pointer;">
+            Share
+          </button>
+          <span>|</span>
+          <button type="button"
+            onclick="salinHadis(this)"
+            style="border:none;background:transparent;padding:4px 0;cursor:pointer;">
+            Salin ▾
+          </button>
         </div>
-        
-        
-<div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px; margin-top: 12px; font-size: 14px;">
-  <button type="button" onclick="bukaSaran(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Saran</button>
-  <span>|</span>
-  <button type="button" onclick="berbagiHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Share</button>
-  <span>|</span>
-  <button type="button" onclick="salinHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Salin ▾</button>
-</div>
-
-        
-
-<div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px; margin-top: 12px; font-size: 9px;">
-  <button type="button" onclick="bukaSaran(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Saran</button>
-  <span>|</span>
-  <button type="button" onclick="berbagiHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Share</button>
-  <span>|</span>
-  <button type="button" onclick="salinHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Salin ▾</button>
-</div>
-        
-        <div>${amanHTML(hadis.translation_id) ||
-          "."}</div>
-
-        <div class="label"></div>
-        <div>${amanHTML(hadis.english_text) || "Not available in JSON."}</div>
-
-        
-        <div>${amanHTML(hadis.translation_id) ||
-          "."}</div>
-
-
-        <div class="label">Sumber</div>
-        <div>${amanHTML(hadis.reference) || "Belum tersedia"}</div>
       </article>
     `;
   }).join("") || "<p>Hadis tidak ditemukan.</p>";
