@@ -362,7 +362,10 @@ body {
   background-color: #E5E7EB;
 }
 #cari-beranda {
-  width: 100%;
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  width: 0;
   box-sizing: border-box;
   font-size: 14px;
   -webkit-appearance: none;
@@ -405,7 +408,6 @@ body {
       placeholder="Cari hadis..."
       onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
       style="flex:1; min-width:0; box-sizing:border-box; margin:0; padding:8px 10px; font-size:14px;"
-    >
 
     <button
       type="button"
