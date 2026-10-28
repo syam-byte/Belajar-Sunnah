@@ -1,129 +1,727 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Belajar Sunnah</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Belajar-Sunnah, perpustakaan hadis berbahasa Indonesia.">
+<meta name="theme-color" content="#f5f1e7">
+
+<title>Belajar-Sunnah</title>
+
 <style>
-@font-face{font-family:Arab;src:url('fonts/KFGQPCUthmanTahaNaskh.woff2')}
-@font-face{font-family:Akzidenz;src:url('fonts/akzidenz-grotesk-roman.woff2')}
-*{box-sizing:border-box}
-body{margin:0;background:#f4f0e7;color:#292f2f;font-family:Akzidenz,Arial,sans-serif}
-header{background:#83adad;color:white;padding:24px 16px;text-align:center}
-.logo{font-size:40px}
-header h1{margin:4px;font-size:27px}
-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;background:#fffdf8;padding:12px}
-button{cursor:pointer;border:0;border-radius:6px;padding:10px 15px;background:#83adad;color:white;font-size:15px}
-main{max-width:900px;margin:24px auto;padding:0 14px}
-.panel{background:#fffdf8;padding:20px;border-radius:10px;margin-bottom:16px}
-h2{margin-top:0}
-input{width:100%;padding:13px;border:1px solid #c8ceca;border-radius:6px;font-size:16px;margin-bottom:10px}
-.hadith{border-top:1px solid #ddd8ce;padding:20px 0}
-.number{color:#547d7d;font-weight:bold}
-.arabic{font-family:Arab,serif;font-size:28px;line-height:2;text-align:right;direction:rtl;margin:20px 0}
-.label{font-weight:bold;margin-top:16px}
-.muted{color:#697171;font-size:14px}
-.hidden{display:none}
-footer{text-align:center;padding:24px;color:#697171}
+/* =====================================
+   BELAJAR-SUNNAH
+   Kertas krem + hijau kebiruan
+   ===================================== */
+
+:root {
+  --paper: #f5f1e7;
+  --paper-light: #fffdf7;
+  --paper-dark: #e7e2d6;
+  --teal: #78a9a6;
+  --teal-dark: #528c83;
+  --teal-deep: #315d56;
+  --text: #353c37;
+  --muted: #64736d;
+  --border: #ded5c4;
+  --gold: #8c7653;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+
+  /* Tekstur kertas halus */
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(
+      ellipse at 15% 20%,
+      rgba(125, 105, 75, .07),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse at 85% 65%,
+      rgba(125, 105, 75, .06),
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      3deg,
+      rgba(125, 105, 75, .025) 0px,
+      transparent 1px,
+      transparent 9px
+    );
+  background-attachment: fixed;
+}
+
+/* HEADER DAN IDENTITAS */
+
+.bs-header {
+  padding: 24px 16px;
+  background: rgba(245, 241, 231, .88);
+  border-bottom: 1px solid var(--border);
+}
+
+.bs-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bs-logo {
+  position: relative;
+  flex: 0 0 76px;
+  width: 76px;
+  height: 94px;
+  overflow: hidden;
+  border: 1px solid #d8cbb4;
+  border-radius: 19px;
+  background:
+    radial-gradient(
+      ellipse at 30% 20%,
+      rgba(255,255,255,.95),
+      transparent 55%
+    ),
+    repeating-linear-gradient(
+      105deg,
+      rgba(160,140,110,.04) 0px,
+      rgba(255,255,255,.12) 2px,
+      transparent 5px
+    ),
+    #f4eddf;
+  box-shadow: inset 0 0 12px rgba(135,112,78,.08);
+}
+
+/* Ornamen bingkai kitab */
+.bs-logo::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid #b9a47f;
+  border-radius: 13px;
+}
+
+/* Bentuk halaman kitab */
+.bs-logo::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 19px;
+  bottom: 19px;
+  border: 1px solid #a38d68;
+  border-radius: 3px 8px 3px 8px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 7px,
+      rgba(140,118,83,.45) 8px,
+      transparent 9px
+    );
+  box-shadow: 0 0 0 3px rgba(255,253,247,.45);
+}
+
+.bs-brand-copy {
+  min-width: 0;
+}
+
+.bs-brand h1 {
+  margin: 0;
+  color: var(--teal-deep);
+  font-size: clamp(23px, 5vw, 34px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -.7px;
+  overflow-wrap: anywhere;
+}
+
+.bs-brand p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* NAVIGASI UTAMA */
+
+.bs-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 8px 10px;
+  background: rgba(231, 226, 214, .97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.bs-tab-menu {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5px;
+  background: rgba(222, 212, 193, .7);
+  border: 1px solid #d5cbb9;
+  border-radius: 16px;
+}
+
+.bs-tab {
+  min-width: 0;
+  padding: 12px 5px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: #46554e;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  transition:
+    background .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+.bs-tab:hover {
+  background: rgba(255,255,255,.55);
+}
+
+.bs-tab.active {
+  color: #fffdf7;
+  background: var(--teal-dark);
+  box-shadow: 0 2px 5px rgba(40,80,72,.13);
+}
+
+.bs-tab:focus-visible {
+  outline: 2px solid var(--teal-deep);
+  outline-offset: 2px;
+}
+
+/* KONTEN UTAMA */
+
+.bs-main {
+  width: 100%;
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 15px;
+}
+
+.bs-panel {
+  min-width: 0;
+  padding: 24px;
+  margin-bottom: 20px;
+  background: rgba(255,253,247,.91);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 3px 12px rgba(70,58,36,.045);
+  overflow-wrap: break-word;
+  animation: bsFade .2s ease;
+}
+
+.bs-panel[hidden] {
+  display: none !important;
+}
+
+.bs-panel h2 {
+  margin: 0 0 15px;
+  padding-bottom: 10px;
+  color: var(--teal-deep);
+  font-size: 24px;
+  line-height: 1.4;
+  border-bottom: 1px solid #e9e2d3;
+}
+
+.bs-panel h3 {
+  margin: 22px 0 12px;
+  color: #416f69;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.bs-panel p {
+  margin: 12px 0;
+}
+
+.bs-eyebrow {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+}
+
+.bs-card {
+  margin: 16px 0;
+  padding: 18px;
+  background: rgba(245,241,231,.75);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--teal);
+  border-radius: 12px;
+}
+
+.bs-card h3 {
+  margin-top: 0;
+}
+
+.bs-divider {
+  height: 1px;
+  margin: 24px 0;
+  border: 0;
+  background: var(--border);
+}
+
+/* TEKS ARAB */
+
+.bs-arabic {
+  margin: 20px 0;
+  padding: 20px 12px;
+  color: #252a26;
+  background: #f8f4ea;
+  border: 1px solid #e5dccb;
+  border-radius: 12px;
+  font-family:
+    "Noto Naskh Arabic",
+    "Traditional Arabic",
+    "Times New Roman",
+    serif;
+  font-size: 28px;
+  line-height: 2.1;
+  text-align: right;
+  overflow-wrap: normal;
+}
+
+.bs-reference {
+  padding: 12px 15px;
+  background: #eee8da;
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.bs-panel a {
+  color: var(--teal-deep);
+  overflow-wrap: anywhere;
+}
+
+.bs-panel a:hover {
+  color: #244b46;
+}
+
+.bs-panel strong {
+  color: #344b42;
+}
+
+/* FOOTER */
+
+.bs-footer {
+  padding: 22px 15px;
+  color: var(--muted);
+  background: rgba(231,226,214,.85);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+}
+
+.bs-footer p {
+  margin: 4px 0;
+}
+
+/* ANIMASI */
+
+@keyframes bsFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TAMPILAN HP */
+
+@media (max-width: 600px) {
+  .bs-header {
+    padding: 18px 12px;
+  }
+
+  .bs-brand {
+    gap: 12px;
+  }
+
+  .bs-logo {
+    flex-basis: 62px;
+    width: 62px;
+    height: 80px;
+    border-radius: 15px;
+  }
+
+  .bs-logo::before {
+    inset: 7px;
+  }
+
+  .bs-logo::after {
+    left: 15px;
+    right: 15px;
+    top: 15px;
+    bottom: 15px;
+  }
+
+  .bs-brand h1 {
+    font-size: clamp(19px, 5.2vw, 27px);
+    letter-spacing: -.4px;
+  }
+
+  .bs-brand p {
+    font-size: 12px;
+  }
+
+  .bs-nav {
+    padding: 7px 6px;
+  }
+
+  .bs-tab-menu {
+    gap: 3px;
+    padding: 4px;
+    border-radius: 13px;
+  }
+
+  .bs-tab {
+    padding: 11px 3px;
+    font-size: 12px;
+    border-radius: 9px;
+  }
+
+  .bs-main {
+    margin: 18px auto;
+    padding: 0 10px;
+  }
+
+  .bs-panel {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .bs-panel h2 {
+    font-size: 21px;
+  }
+
+  .bs-panel h3 {
+    font-size: 17px;
+  }
+
+  .bs-card {
+    padding: 14px;
+  }
+
+  .bs-arabic {
+    padding: 15px 9px;
+    font-size: 25px;
+  }
+}
+
+/* PENGURANGAN ANIMASI SESUAI PREFERENSI */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
 </style>
 </head>
+
 <body>
-<header>
-<div class="logo">بلاجر سنة</div>
-<h1>Belajar Sunnah</h1>
-<p>Belajar hadis, sanad, dan ilmu para perawi</p>
+
+<!-- HEADER: LOGO DAN NAMA WEBSITE -->
+<header class="bs-header">
+  <div class="bs-brand">
+    <div class="bs-logo"
+         role="img"
+         aria-label="Ornamen lembaran kitab berwarna krem"></div>
+
+    <div class="bs-brand-copy">
+      <h1>Belajar-Sunnah</h1>
+      <p>Perpustakaan Hadis Berbahasa Indonesia</p>
+    </div>
+  </div>
 </header>
-<nav>
-<button onclick="buka('beranda')">Beranda</button>
-<button onclick="buka('koleksi')">Koleksi Hadis</button>
-<button onclick="buka('sanad')">Sanad</button>
-<button onclick="buka('perawi')">Perawi</button>
+
+<!-- SATU NAVIGASI UNTUK EMPAT PANEL -->
+<nav class="bs-nav" aria-label="Navigasi perpustakaan">
+  <div class="bs-tab-menu" role="tablist"
+       aria-label="Bagian Belajar-Sunnah">
+
+    <button class="bs-tab active"
+      id="tab-beranda"
+      type="button"
+      role="tab"
+      aria-selected="true"
+      aria-controls="panel-beranda"
+      tabindex="0">
+      Beranda
+    </button>
+
+    <button class="bs-tab"
+      id="tab-hadis"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-hadis"
+      tabindex="-1">
+      Koleksi Hadis
+    </button>
+
+    <button class="bs-tab"
+      id="tab-sanad"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-sanad"
+      tabindex="-1">
+      Sanad
+    </button>
+
+    <button class="bs-tab"
+      id="tab-perawi"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-perawi"
+      tabindex="-1">
+      Biografi Perawi
+    </button>
+
+  </div>
 </nav>
-<main>
-<section id="beranda" class="panel">
-<h2>Selamat Datang</h2>
-<p>Pelajari hadis Rasulullah ﷺ berdasarkan sumber dan riwayatnya.</p>
-<button onclick="buka('koleksi')">Buka Koleksi Hadis</button>
-</section>
-<section id="koleksi" class="panel hidden">
-<h2>Koleksi Hadis Sahih al-Bukhari</h2>
-<p class="muted">Masukkan nomor hadis atau kata yang ingin dicari.</p>
-<input id="cari" placeholder="Contoh: 23 atau akhirat">
-<button onclick="cariHadis()">Cari Hadis</button>
-<button onclick="muat()">Tampilkan Semua</button>
-<p id="status" class="muted"></p>
-<div id="hasil"></div>
-<div id="halaman"></div>
-</section>
-<section id="sanad" class="panel hidden">
-<h2>Sanad Hadis</h2>
-<p>Pilih hadis pada menu Koleksi Hadis untuk melihat data sanad yang tersedia.</p>
-</section>
-<section id="perawi" class="panel hidden">
-<h2>Perawi Hadis</h2>
-<p>Data perawi ditampilkan berdasarkan informasi yang tersedia dalam file hadis.</p>
-</section>
+
+<main class="bs-main">
+
+  <!-- TAB 1: BERANDA -->
+  <section class="bs-panel"
+    id="panel-beranda"
+    role="tabpanel"
+    aria-labelledby="tab-beranda"
+    tabindex="0">
+
+    <p class="bs-eyebrow">Selamat datang</p>
+
+    <h2>Perpustakaan Hadis</h2>
+
+    <p>Belajar-Sunnah adalah proyek perpustakaan hadis berbahasa Indonesia untuk membantu pembaca mempelajari hadis, menelusuri sumber periwayatan, dan mengenali para perawi.</p>
+
+    <p>Setiap hadis perlu diperiksa berdasarkan sumber, sanad, matan, dan keterangan ilmiah yang dapat dipertanggungjawabkan.</p>
+
+    <div class="bs-card">
+      <h3>Tentang Belajar-Sunnah</h3>
+
+      <p>Website ini dikembangkan sebagai sarana belajar, dokumentasi, dan penelitian hadis. Tujuannya adalah memudahkan pembaca memeriksa sumber, bukan sekadar membaca kutipan tanpa rujukan.</p>
+    </div>
+
+    <p class="bs-reference">
+      Gunakan menu di atas untuk membuka koleksi hadis,
+      penelitian sanad, dan biografi perawi.
+    </p>
+
+  </section>
+
+  <!-- TAB 2: KOLEKSI HADIS -->
+  <section class="bs-panel"
+    id="panel-hadis"
+    role="tabpanel"
+    aria-labelledby="tab-hadis"
+    tabindex="0"
+    hidden>
+
+    <p class="bs-eyebrow">Koleksi dan sumber riwayat</p>
+
+    <h2>Koleksi Hadis</h2>
+
+    <div class="bs-card">
+      <h3>Hadis: Menuntut Ilmu</h3>
+
+      <p><strong>Dari Anas bin Malik radhiyallahu ‘anhu, bahwa Rasulullah shallallahu ‘alaihi wa sallam bersabda:</strong></p>
+
+      <p class="bs-arabic" dir="rtl" lang="ar">
+        طَلَبُ الْعِلْمِ فَرِيضَةٌ عَلَى كُلِّ مُسْلِمٍ
+      </p>
+
+      <p>
+        <strong>Latin:</strong><br>
+        Ṭalabul-‘ilmi farīḍatun ‘alā kulli Muslim.
+      </p>
+
+      <p>
+        <strong>Artinya:</strong><br>
+        Menuntut ilmu wajib bagi setiap Muslim.
+      </p>
+
+      <div class="bs-reference">
+        <strong>Sumber:</strong><br>
+        Sunan Ibnu Majah, no. 224.
+      </div>
+    </div>
+
+    <hr class="bs-divider">
+
+    <h3>Shahih Al-Bukhari</h3>
+
+    <p>Koleksi hadis akan ditambahkan secara bertahap dengan menyertakan nomor hadis dan rujukan yang jelas.</p>
+
+  </section>
+
+  <!-- TAB 3: SANAD -->
+  <section class="bs-panel"
+    id="panel-sanad"
+    role="tabpanel"
+    aria-labelledby="tab-sanad"
+    tabindex="0"
+    hidden>
+
+    <p class="bs-eyebrow">Rantai periwayatan</p>
+
+    <h2>Penelitian Sanad</h2>
+
+    <p>Bagian ini digunakan untuk menelusuri urutan sanad, hubungan guru dan murid, serta sumber periwayatan setiap hadis.</p>
+
+    <p>Informasi sanad akan dilengkapi berdasarkan kitab hadis dan sumber biografi perawi yang dapat diperiksa.</p>
+
+  </section>
+
+  <!-- TAB 4: BIOGRAFI PERAWI -->
+  <section class="bs-panel"
+    id="panel-perawi"
+    role="tabpanel"
+    aria-labelledby="tab-perawi"
+    tabindex="0"
+    hidden>
+
+    <p class="bs-eyebrow">Ilmu rijalul hadis</p>
+
+    <h2>Biografi Perawi</h2>
+
+    <p>Bagian ini akan memuat nama lengkap perawi, kunyah, guru, murid, tahun hidup, dan penilaian ulama hadis jika tersedia dalam sumber rujukan.</p>
+
+    <p>Indeks nama perawi A–Z dan pop-up biografi akan dikembangkan pada tahap berikutnya.</p>
+
+  </section>
+
 </main>
-<footer>Belajar Sunnah · Koleksi dan pembelajaran hadis</footer>
+
+<footer class="bs-footer">
+  <p>Belajar-Sunnah · Perpustakaan Hadis Berbahasa Indonesia</p>
+  <p>Belajar, meneliti, dan memeriksa sumber dengan cermat.</p>
+</footer>
+
+<!-- SATU SCRIPT NAVIGASI -->
 <script>
-let semua=[],cocok=[],hal=0;
-const perHalaman=10;
-function buka(id){
-document.querySelectorAll('main section').forEach(x=>x.classList.add('hidden'));
-document.getElementById(id).classList.remove('hidden');
-}
-function bersih(v){
-if(v===null||v===undefined)return '';
-if(typeof v==='string')return v;
-if(Array.isArray(v))return v.map(bersih).filter(Boolean).join('، ');
-if(typeof v==='object')return v.inline_name||v.name||v.tooltip||'';
-return String(v);
-}
-async function muat(){
-const status=document.getElementById('status');
-status.textContent='Memuat data hadis…';
-try{
-const r=await fetch('./belajar-sunnah-bukhari.json');
-if(!r.ok)throw Error('HTTP '+r.status);
-const d=await r.json();
-semua=Array.isArray(d)?d:(Array.isArray(d.hadiths)?d.hadiths:[]);
-cocok=semua;hal=0;tampilkan();
-}catch(e){status.textContent='Gagal memuat JSON. Pastikan file belajar-sunnah-bukhari.json tersedia.';}
-}
-function cariHadis(){
-const q=document.getElementById('cari').value.trim().toLowerCase();
-if(!q){cocok=semua;hal=0;tampilkan();return;}
-if(/^\d+$/.test(q)){
-const idx=semua.findIndex(h=>String(h.hadith_number??h.number)===q);
-cocok=idx<0?[]:semua.slice(idx,idx+10);
-}else{
-const hasil=semua.filter(h=>
-['collection','number','hadith_number','narrator','arabic','chain','english_text','english_title','reference','translation_id']
-.some(k=>bersih(h[k]).toLowerCase().includes(q)));
-cocok=hasil.slice(0,10);
-}
-hal=0;tampilkan();
-}
-function tampilkan(){
-const hasil=document.getElementById('hasil'),status=document.getElementById('status');
-status.textContent='Ditemukan '+cocok.length+' entri dari '+semua.length+' entri hadis.';
-const mulai=hal*perHalaman;
-hasil.innerHTML=cocok.slice(mulai,mulai+perHalaman).map((h,i)=>`
-<article class="hadith">
-<div class="number">Hadis Nomor ${bersih(h.hadith_number||h.number||mulai+i+1)}</div>
-<div class="label">Perawi</div><div>${bersih(h.narrator)||'Belum tersedia'}</div>
-<div class="arabic">${bersih(h.arabic)||'Teks Arab belum tersedia'}</div>
-<div class="label">Sanad</div><div>${bersih(h.chain)||'Data sanad belum tersedia dalam format yang dapat ditampilkan.'}</div>
-<div class="label">English Translation</div><div>${bersih(h.english_text)||'Not available in JSON.'}</div>
-<div class="label">Artinya Indonesia</div><div>${bersih(h.translation_id)||'Belum tersedia dalam file JSON.'}</div>
-<div class="label">Sumber</div><div>${bersih(h.reference)||'Belum tersedia'}</div>
-</article>`).join('')||'<p>Hadis tidak ditemukan.</p>';
-const jumlah=Math.ceil(cocok.length/perHalaman);
-document.getElementById('halaman').innerHTML=jumlah>1?
-`<button onclick="pindah(-1)" ${hal===0?'disabled':''}>Sebelumnya</button> <span>Halaman ${hal+1}/${jumlah}</span> <button onclick="pindah(1)" ${hal>=jumlah-1?'disabled':''}>Berikutnya</button>`:'';
-}
-function pindah(n){hal+=n;tampilkan();window.scrollTo(0,0);}
-muat();
+(function () {
+  const nav = document.querySelector(".bs-nav");
+  if (!nav) return;
+
+  const tabs = Array.from(
+    nav.querySelectorAll('[role="tab"]')
+  );
+
+  const panels = tabs.map(function (tab) {
+    return document.getElementById(
+      tab.getAttribute("aria-controls")
+    );
+  });
+
+  function activateTab(tab, moveFocus) {
+    tabs.forEach(function (item) {
+      const selected = item === tab;
+
+      item.classList.toggle("active", selected);
+      item.setAttribute(
+        "aria-selected",
+        String(selected)
+      );
+      item.tabIndex = selected ? 0 : -1;
+    });
+
+    panels.forEach(function (panel) {
+      if (panel) {
+        panel.hidden =
+          panel.id !== tab.getAttribute("aria-controls");
+      }
+    });
+
+    if (moveFocus) {
+      tab.focus();
+    }
+  }
+
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener("click", function () {
+      activateTab(tab, false);
+    });
+
+    tab.addEventListener("keydown", function (event) {
+      let nextIndex = index;
+
+      switch (event.key) {
+        case "ArrowRight":
+          nextIndex = (index + 1) % tabs.length;
+          break;
+
+        case "ArrowLeft":
+          nextIndex =
+            (index - 1 + tabs.length) % tabs.length;
+          break;
+
+        case "Home":
+          nextIndex = 0;
+          break;
+
+        case "End":
+          nextIndex = tabs.length - 1;
+          break;
+
+        default:
+          return;
+      }
+
+      event.preventDefault();
+      activateTab(tabs[nextIndex], true);
+    });
+  });
+
+  const initialTab =
+    tabs.find(function (tab) {
+      return tab.getAttribute("aria-selected") === "true";
+    }) || tabs[0];
+
+  if (initialTab) {
+    activateTab(initialTab, false);
+  }
+})();
 </script>
+
 </body>
 </html>
