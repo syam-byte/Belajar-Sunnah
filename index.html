@@ -588,7 +588,13 @@ function tampilkan() {
           <button type="button"
   onclick="salinHadis(this)"
   style="border:none;background:transparent;color:#03D97B;padding:4px 0;cursor:pointer;white-space:nowrap;">
-  Salin<span style="margin-left:-4px;font-size:12px;">▼</span>
+  Salin<span style="margin-left:-4px;font-size:12px;"></span>
+         </button>
+         <button type="button"
+  onclick="bukaOpsiSalin(this)"
+  aria-label="Pilihan format salin"
+  style="border:none;background:transparent;color:#374151;padding:4px 2px;cursor:pointer;">
+  ▼
          </button>
         </div>
       </article>
@@ -684,6 +690,73 @@ async function salinHadis(tombol) {
   }
 }
 
+
+function terapkanOpsiSalin() {
+  if (!tombolSalinAktif) return;
+
+  const artikel = tombolSalinAktif.closest(".hadith");
+  if (!artikel) return;
+
+  const bagian = [];
+
+  if (document.getElementById("opsiIndonesia").checked) {
+    const teksIndonesia = artikel.querySelector(":scope > div:nth-child(2)");
+    if (teksIndonesia && teksIndonesia.innerText.trim()) {
+      bagian.push(teksIndonesia.innerText.trim());
+    }
+  }
+
+  if (document.getElementById("opsiArabic").checked) {
+    const arab = artikel.querySelector(".arabic");
+    if (arab && arab.innerText.trim()) {
+      bagian.push(arab.innerText.trim());
+    }
+  }
+
+  // Bio sanad belum tersedia, jadi sementara tidak menambahkan teks.
+  // URL juga sementara null sampai domain final siap.
+
+  const nomorTeks =
+    artikel.querySelector(".number")?.innerText.trim() || "";
+  const pilihanReferensi =
+    document.querySelector('input[name="opsiReferensi"]:checked')?.value;
+
+  if (pilihanReferensi === "ringkas") {
+    const referensi = artikel.querySelector(
+      'div[style*="align-items:center"] span:nth-child(2)'
+    );
+    if (referensi && referensi.innerText.trim()) {
+      bagian.push(referensi.innerText.trim());
+    } else if (nomorTeks) {
+      bagian.push(nomorTeks);
+    }
+  } else if (pilihanReferensi === "sitasi") {
+    const referensi = artikel.querySelector(
+      'div[style*="align-items:center"] span:nth-child(2)'
+    );
+    if (referensi && referensi.innerText.trim()) {
+      bagian.push("Sitasi: " + referensi.innerText.trim());
+    } else if (nomorTeks) {
+      bagian.push("Sitasi: " + nomorTeks);
+    }
+  }
+
+  const teksSalin = bagian.join("\n\n");
+
+  tutupOpsiSalin();
+
+  if (!teksSalin.trim()) {
+    alert("Pilih minimal satu teks yang tersedia untuk disalin.");
+    return;
+  }
+
+  navigator.clipboard.writeText(teksSalin).then(function () {
+    alert("Teks hadis berhasil disalin.");
+  }).catch(function () {
+    window.prompt("Salin teks hadis berikut:", teksSalin);
+  });
+}
+
 muat();
 </script>
 
@@ -762,5 +835,73 @@ muat();
   </div>
 </div>
 
+
+<div id="popupOpsiSalin"
+  style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.35);align-items:center;justify-content:center;padding:16px;">
+
+  <div style="width:100%;max-width:360px;background:#fff;border-radius:12px;padding:18px;box-sizing:border-box;color:#374151;font-family:inherit;">
+
+    <div style="font-size:17px;font-weight:600;margin-bottom:16px;">
+      Pilihan Salin Hadis
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+      <div>
+        <div style="font-weight:600;margin-bottom:10px;">Hadist Text</div>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+          <input type="checkbox" id="opsiIndonesia" checked style="width:16px;height:16px;accent-color:#2563eb;margin:0;">
+          Indonesia
+        </label>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+          <input type="checkbox" id="opsiArabic" checked style="width:16px;height:16px;accent-color:#2563eb;margin:0;">
+          Arabic
+        </label>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+          <input type="checkbox" id="opsiSanad" style="width:16px;height:16px;accent-color:#2563eb;margin:0;">
+          Sanad
+        </label>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+          <input type="checkbox" id="opsiURL" style="width:16px;height:16px;accent-color:#2563eb;margin:0;">
+          URL
+        </label>
+      </div>
+
+      <div>
+        <div style="font-weight:600;margin-bottom:10px;">Referensi</div>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+          <input type="radio" name="opsiReferensi" value="ringkas" checked style="width:16px;height:16px;accent-color:#2563eb;margin:0;">
+          Ringkas
+        </label>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+          <input type="radio" name="opsiReferensi" value="sitasi" style="width:16px;height:16px;accent-color:#2563eb;margin:0;">
+          Sitasi
+        </label>
+      </div>
+
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+      <button type="button" onclick="tutupOpsiSalin()"
+        style="border:1px solid #A7A6AF;background:transparent;color:#A7A6AF;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;">
+        Batal
+      </button>
+
+      <button type="button" onclick="terapkanOpsiSalin()"
+        style="border:1px solid #374151;background:#374151;color:#fff;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;">
+        Terapkan
+      </button>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
+
