@@ -469,10 +469,17 @@ async function muat() {
     const respons = await fetch("./belajar-sunnah-bukhari.json");
     if (!respons.ok) throw new Error("HTTP " + respons.status);
 
-    const data = await respons.json();
-    semua = Array.isArray(data)
-      ? data
-      : (Array.isArray(data.hadiths) ? data.hadiths : []);
+    
+const data = await respons.json();
+semua = Array.isArray(data)
+  ? data
+  : (Array.isArray(data.hadiths)
+      ? data.hadiths
+      : (data && typeof data === "object" &&
+          (data.number != null || data.hadith_number != null)
+          ? [data]
+          : []));
+
 
     cocok = semua.slice();
     hal = 0;
