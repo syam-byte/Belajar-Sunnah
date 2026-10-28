@@ -1,17 +1,4 @@
-<nav class="bs-main-nav" aria-label="Navigasi utama">
-  <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
-  <span aria-hidden="true">|</span>
-  <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>
-  <span aria-hidden="true">|</span>
-  <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>
-  <span aria-hidden="true">|</span>
-  <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>
-  <span aria-hidden="true">|</span>
-  <a href="https://www.muslimpro.com/prayer-times/"
-     target="_blank" rel="noopener noreferrer">Prayer Times</a>
-</nav>
-
-<!DOCTYPE html>
+content = r'''<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -23,7 +10,7 @@
 <style>
 @font-face {
   font-family: Arab;
-  src: url("fonts/Birds of Paradise.ttf") format("ttf");
+  src: url("fonts/Birds of Paradise.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
@@ -47,13 +34,9 @@
   --border: #0000;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -83,36 +66,10 @@ body {
 
 .bs-logo {
   width: 84px;
-  height: auto
+  height: auto;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
-}
-
-.bs-logo::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border: 1px solid #b9a47f;
-  border-radius: 10px;
-}
-
-.bs-logo::after {
-  content: "";
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  top: 18px;
-  bottom: 18px;
-  border: 1px solid #a38d68;
-  border-radius: 3px 8px;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 7px,
-    rgba(140,118,83,.45) 8px,
-    transparent 9px
-  );
 }
 
 .bs-brand-copy {
@@ -170,9 +127,7 @@ body {
   text-decoration: underline;
 }
 
-.bs-main-nav span {
-  color: #aaa397;
-}
+.bs-main-nav span { color: #aaa397; }
 
 /* KONTEN */
 main {
@@ -189,9 +144,7 @@ main {
   border-radius: 10px;
 }
 
-.hidden {
-  display: none !important;
-}
+.hidden { display: none !important; }
 
 h2 {
   margin-top: 0;
@@ -208,27 +161,21 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: var(--teal-dark);
-}
+button:hover { background: var(--teal-dark); }
 
 button:disabled {
   opacity: .5;
   cursor: not-allowed;
 }
 
-#beranda {
-  background: var(--panel);
-}
+#beranda { background: var(--panel); }
 
 #beranda button {
   display: block;
   margin: 20px auto;
 }
 
-#koleksi > button {
-  margin: 4px 4px 10px 0;
-}
+#koleksi > button { margin: 4px 4px 10px 0; }
 
 input {
   width: 100%;
@@ -301,24 +248,15 @@ footer {
     height: auto;
     flex-basis: 84px;
   }
-}
 
   .bs-brand {
     gap: 10px;
     padding: 0;
   }
 
-  .bs-brand-copy .bs-welcome-main {
-    font-size: 29px;
-  }
-
-  .bs-brand-copy .bs-welcome-meaning {
-    font-size: 18px;
-  }
-
-  .bs-brand-copy .bs-brand-tagline {
-    font-size: 11px;
-  }
+  .bs-brand-copy .bs-welcome-main { font-size: 29px; }
+  .bs-brand-copy .bs-welcome-meaning { font-size: 18px; }
+  .bs-brand-copy .bs-brand-tagline { font-size: 11px; }
 
   .bs-main-nav {
     gap: 8px;
@@ -331,37 +269,26 @@ footer {
     padding: 0 10px;
   }
 
-  .panel {
-    padding: 16px;
-  }
-
-  .arabic {
-    font-size: 24px;
-  }
+  .panel { padding: 16px; }
+  .arabic { font-size: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
 }
-/* Header abu-abu gelap */
+
+/* Warna header dan halaman */
 .bs-header {
   background: #374151;
   color: #E5E7EB;
 }
 
-/* Latar halaman abu-abu muda */
 body {
   background-color: #E5E7EB;
   color: #1F2937;
 }
 
-/* Kartu hadis tetap putih agar nyaman dibaca */
-.bs-card {
-  background-color: #E5E7EB;
-}
-
+.bs-card { background-color: #E5E7EB; }
 </style>
 </head>
 
@@ -369,7 +296,6 @@ body {
 
 <header class="bs-header">
   <div class="bs-brand">
-
     <img class="bs-logo"
          src="BelajarSunnah.9.png"
          alt="Logo Belajar Sunnah">
@@ -378,83 +304,91 @@ body {
       <h1 class="bs-welcome-main">بلاجر سنة</h1>
       <p class="bs-welcome-meaning">Belajar Sunnah</p>
     </div>
-
   </div>
 </header>
 
+<nav class="bs-main-nav" aria-label="Navigasi utama">
+  <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
+  <span aria-hidden="true">|</span>
+  <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>
+  <span aria-hidden="true">|</span>
+  <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>
+  <span aria-hidden="true">|</span>
+  <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>
+  <span aria-hidden="true">|</span>
+  <a href="https://www.muslimpro.com/prayer-times/"
+     target="_blank" rel="noopener noreferrer">Prayer Times</a>
+</nav>
+
 <main>
-  
-  <!-- Pencarian Beranda -->
-<section id="beranda" class="panel">
-  <p>Pencarian hadis</p>
+  <!-- BERANDA: pencarian dan tiga nama kitab -->
+  <section id="beranda" class="panel">
+    <p>Pencarian hadis</p>
 
-  <div style="position:relative; width:92%; margin:0 auto 12px; box-sizing:border-box;">
-    <input
-      id="cari-beranda"
-      type="search"
-      placeholder="Cari hadis..."
-      onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
-      style="display:block; width:100%; box-sizing:border-box; margin:0; padding:8px 42px 8px 10px; font-size:14px; -webkit-appearance:none; appearance:none;"
-    >
+    <div style="position:relative; width:92%; margin:0 auto 12px; box-sizing:border-box;">
+      <input
+        id="cari-beranda"
+        type="search"
+        placeholder="Cari hadis..."
+        onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
+        style="display:block; width:100%; box-sizing:border-box; margin:0; padding:8px 42px 8px 10px; font-size:14px; -webkit-appearance:none; appearance:none;"
+      >
 
-    <button
-      type="button"
-      onclick="cariHadis('cari-beranda')"
-      aria-label="Cari hadis"
-      style="position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; justify-content:center; width:36px; height:36px; margin:0; padding:4px; border:0; background:transparent; cursor:pointer;"
-    >
-      <img src="search.9.png" alt="" style="display:block; width:22px; height:22px; object-fit:contain;">
-    </button>
-  </div>
-</section>
+      <button
+        type="button"
+        onclick="cariHadis('cari-beranda')"
+        aria-label="Cari hadis"
+        style="position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; justify-content:center; width:36px; height:36px; margin:0; padding:4px; border:0; background:transparent; cursor:pointer;"
+      >
+        <img src="search.9.png" alt="" style="display:block; width:22px; height:22px; object-fit:contain;">
+      </button>
+    </div>
 
-  
-<h2 style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-left: auto; margin-right: auto; border-bottom: 3px solid #ddd; padding-bottom: 8px; text-align: center; font-size: 26px; font-weight: 500;">
-  <div style="display: flex; flex-direction: row-reverse; align-items: center; gap: 24px; width: 100%; font-size: 21px; font-weight: 500;">
-    <span dir="rtl" style="flex: 1; text-align: left;">الكتب الثلاثة</span>
-    <span style="flex: 1; text-align: right;">Yang Ketiga</span>
-  </div>
-</h2>
+    <h2 style="display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:8px 12px; margin-left:auto; margin-right:auto; border-bottom:3px solid #ddd; padding-bottom:8px; text-align:center; font-size:26px; font-weight:500;">
+      <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-size:21px; font-weight:500;">
+        <span dir="rtl" style="flex:1; text-align:left;">الكتب الثلاثة</span>
+        <span style="flex:1; text-align:right;">Yang Ketiga</span>
+      </div>
+    </h2>
 
-  <table style="width: 92%; margin: 0 auto; box-sizing: border-box; border-collapse: separate; border-spacing: 0 5px; font-size: 18px;">
-  <tbody>
-    <tr>
-      <td style="padding: 4px 16px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer;" onclick="buka('koleksi')">
-        <div style="display: flex; flex-direction: row-reverse; align-items: center; gap: 24px; width: 100%; font-weight: 500;">
-          <span dir="rtl" style="flex: 1; text-align: left; font-size: 21px">صحيح البخاري</span>
-          <span style="flex: 1; text-align: right;font-size: 18px">Sahih al-Bukhari</span>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td style="padding: 4px 16px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer;" onclick="buka('muslim')">
-        <div style="display: flex; flex-direction: row-reverse; align-items: center; gap: 24px; width: 100%; font-weight: 500;">
-          <span dir="rtl" style="flex: 1; text-align: left; font-size: 21px">صحيح مسلم</span>
-          <span style="flex: 1; text-align: right; font-size: 18px">Sahih Muslim</span>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td style="padding: 4px 16px; border: 1px solid #c8ceca; border-radius: 6px; background: white; cursor: pointer;" onclick="buka('abu-dawud')">
-        <div style="display: flex; flex-direction: row-reverse; align-items: center; gap: 24px; width: 100%; font-weight: 500;">
-          <span dir="rtl" style="flex: 1; text-align: left; font-size: 21px">سنن أبي داود</span>
-          <span style="flex: 1; text-align: right; font-size: 18px">Sunan Abi Dawud</span>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</section>
+    <table style="width:92%; margin:0 auto; box-sizing:border-box; border-collapse:separate; border-spacing:0 5px; font-size:18px;">
+      <tbody>
+        <tr>
+          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; cursor:pointer;" onclick="buka('koleksi')">
+            <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
+              <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">صحيح البخاري</span>
+              <span style="flex:1; text-align:right; font-size:18px;">Sahih al-Bukhari</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; cursor:pointer;" onclick="buka('muslim')">
+            <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
+              <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">صحيح مسلم</span>
+              <span style="flex:1; text-align:right; font-size:18px;">Sahih Muslim</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; cursor:pointer;" onclick="buka('abu-dawud')">
+            <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
+              <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">سنن أبي داود</span>
+              <span style="flex:1; text-align:right; font-size:18px;">Sunan Abi Dawud</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
+  <!-- HALAMAN SUNNAH BARU: terpisah dari koleksi Bukhari -->
+  <section id="sunnah" class="panel hidden">
+    <h2>Sunnah</h2>
+  </section>
 
+  <!-- KOLEKSI HADIS BUKHARI: jangan dihapus -->
   <section id="koleksi" class="panel hidden">
     <h2>Koleksi Hadis Sahih al-Bukhari</h2>
-    
-<section id="sunnah" class="panel hidden">
-  <h2>Sunnah</h2>
-</section>
-
-
     <p id="status" class="muted" aria-live="polite"></p>
     <div id="hasil"></div>
     <div id="halaman"></div>
@@ -468,6 +402,17 @@ body {
   <section id="perawi" class="panel hidden">
     <h2>Perawi Hadis</h2>
     <p>Data perawi ditampilkan berdasarkan informasi yang tersedia dalam file hadis.</p>
+  </section>
+
+  <!-- Placeholder supaya dua nama kitab lain tidak mengarah ke halaman yang tidak ada -->
+  <section id="muslim" class="panel hidden">
+    <h2>Sahih Muslim</h2>
+    <p>Koleksi hadis Sahih Muslim belum tersedia di halaman ini.</p>
+  </section>
+
+  <section id="abu-dawud" class="panel hidden">
+    <h2>Sunan Abi Dawud</h2>
+    <p>Koleksi hadis Sunan Abi Dawud belum tersedia di halaman ini.</p>
   </section>
 </main>
 
@@ -518,10 +463,7 @@ function amanHTML(nilai) {
 }
 
 function bersihArab(nilai) {
-  return amanHTML(nilai).replace(
-    /\[\s*\/?\s*[a-z][^\]]*\]/gi,
-    ""
-  );
+  return amanHTML(nilai).replace(/\[\s*\/?\s*[a-z][^\]]*\]/gi, "");
 }
 
 async function muat() {
@@ -545,7 +487,6 @@ async function muat() {
       "Gagal memuat JSON. Pastikan file belajar-sunnah-bukhari.json tersedia.";
   }
 }
-
 
 function cariHadis(idInput = "cari-beranda") {
   const input = document.getElementById(idInput);
@@ -588,7 +529,6 @@ function cariHadis(idInput = "cari-beranda") {
   buka("koleksi");
   tampilkan();
 }
-
 
 function tampilkan() {
   const hasil = document.getElementById("hasil");
