@@ -546,6 +546,21 @@ function tampilkan() {
     const nomor = hadis.hadith_number || hadis.number || mulai + indeks + 1;
 
     return `
+<article class="hadith">    
+    <div class="number">Hadis Nomor ${amanHTML(nomor)}</div>    <div>${amanHTML(hadis.translation_id) || "."}</div>    
+
+<div class="arabic" lang="ar" dir="rtl">${    
+  hadis.arabic    
+    ? bersihArab(hadis.arabic)    
+    : "Teks Arab belum tersedia"    
+}</div>    
+
+<div style="display: flex; align-items: center; gap: 8px;">    
+  <span>Rujukan</span>    
+  <span>${amanHTML(hadis.reference) || "Belum tersedia"}</span>    
+</div>
+
+  </article>
       <article class="hadith">
         <div class="number">Hadis Nomor ${amanHTML(nomor)}</div>
 
@@ -556,18 +571,47 @@ function tampilkan() {
           hadis.arabic
             ? bersihArab(hadis.arabic)
             : "Teks Arab belum tersedia"
-        }</div>
+        }</div>   
+             
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span>Rujukan</span>
+          <span>Sahih al-Bukhari ${amanHTML(hadis.hadith_number || hadis.number || nomor)}</span>
+        </div>
 
-        <div class="label">Sanad</div>
-        <div>${amanHTML(hadis.chain) ||
-          "Data sanad belum tersedia dalam format yang dapat ditampilkan."}</div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span>Rujukan dalam kitab</span>
+          <span>Book 1, Hadith ${amanHTML(hadis.hadith_number || hadis.number || nomor)}</span>
+        </div>
+        
+        
+<div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px; margin-top: 12px; font-size: 14px;">
+  <button type="button" onclick="bukaSaran(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Saran</button>
+  <span>|</span>
+  <button type="button" onclick="berbagiHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Share</button>
+  <span>|</span>
+  <button type="button" onclick="salinHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Salin ▾</button>
+</div>
 
-        <div class="label">English Translation</div>
+        
+
+<div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px; margin-top: 12px; font-size: 9px;">
+  <button type="button" onclick="bukaSaran(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Saran</button>
+  <span>|</span>
+  <button type="button" onclick="berbagiHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Share</button>
+  <span>|</span>
+  <button type="button" onclick="salinHadis(this)" style="border: none; background: transparent; padding: 4px 0; cursor: pointer;">Salin ▾</button>
+</div>
+        
+        <div>${amanHTML(hadis.translation_id) ||
+          "."}</div>
+
+        <div class="label"></div>
         <div>${amanHTML(hadis.english_text) || "Not available in JSON."}</div>
 
-        <div class="label">Artinya Indonesia</div>
+        
         <div>${amanHTML(hadis.translation_id) ||
-          "Belum tersedia dalam file JSON."}</div>
+          "."}</div>
+
 
         <div class="label">Sumber</div>
         <div>${amanHTML(hadis.reference) || "Belum tersedia"}</div>
@@ -600,8 +644,76 @@ function pindah(arah) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+
+function bukaSaran(tombol) {
+  const popup = document.getElementById("popupSaran");
+  const artikel = tombol.closest(".hadith");
+
+  popup.dataset.nomor = artikel
+    ? artikel.querySelector(".number")?.innerText || ""
+    : "";
+
+  popup.style.display = "flex";
+}
+
+function tutupSaran() {
+  document.getElementById("popupSaran").style.display = "none";
+}
+
+document.addEventListener("change", function (event) {
+  if (event.target.matches('input[name="jenisKesalahan"]')) {
+    const lainnya = document.getElementById("jenisLainnya");
+
+    lainnya.style.display =
+      event.target.value === "Lainnya" ? "block" : "none";
+
+    lainnya.required = event.target.value === "Lainnya";
+  }
+});
+
+
 muat();
 </script>
+
+<div id="popupSaran" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.5); align-items:center; justify-content:center; padding:16px; box-sizing:border-box;">
+  <div style="background:#fff; color:#222; width:100%; max-width:440px; max-height:90vh; overflow:auto; border-radius:12px; padding:20px; box-sizing:border-box;">
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="margin:0 0 16px;">Kesalahan</h3>
+      <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;font-size:24px;cursor:pointer;">×</button>
+    </div>
+
+    <form id="formSaran">
+      <p>Jenis kesalahan:</p>
+
+      <label><input type="radio" name="jenisKesalahan" value="Terjemahan tidak sesuai" required> Terjemahan tidak sesuai</label><br><br>
+      <label><input type="radio" name="jenisKesalahan" value="Kesalahan ejaan"> Kesalahan ejaan</label><br><br>
+      <label><input type="radio" name="jenisKesalahan" value="Teks tidak lengkap"> Teks tidak lengkap</label><br><br>
+      <label><input type="radio" name="jenisKesalahan" value="Kesalahan terjemahan"> Kesalahan terjemahan</label><br><br>
+      <label><input type="radio" name="jenisKesalahan" value="Lainnya"> Lainnya (harap sebutkan)</label>
+
+      <textarea id="jenisLainnya" rows="2" placeholder="Sebutkan jenis kesalahan lainnya..." style="display:none;width:100%;box-sizing:border-box;margin-top:10px;padding:10px;"></textarea>
+
+      <p>Detail kesalahan / saran perbaikan:</p>
+      <textarea id="detailSaran" rows="4" required placeholder="Tuliskan detail kesalahannya di sini..." style="width:100%;box-sizing:border-box;padding:10px;"></textarea>
+      
+<p>Email:</p>
+<input
+  type="email"
+  id="emailSaran"
+  required
+  placeholder="Alamat email Anda"
+  style="width:100%;box-sizing:border-box;padding:10px;margin-bottom:12px;"
+>
+
+      <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:16px;">
+        <button type="button" onclick="tutupSaran()">Batal</button>
+        <button type="submit">Kirim laporan</button>
+      </div>
+    </form>
+
+  </div>
+</div>
 
 </body>
 </html>
