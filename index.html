@@ -575,25 +575,25 @@ function tampilkan() {
         <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;font-family:'Markazi Text',serif;">
           <button type="button"
             onclick="bukaSaran(this)"
-            style="border:none;background:transparent;color:#03D97B ;padding:4px 0;cursor:pointer;">
+            style="border:none;background:transparent;color:#419737 ;padding:4px 0;cursor:pointer;">
             Saran<span style="margin-left:-3px;font-size:8px;"></span>
           </button>
           <span>|</span>
           <button type="button"
             onclick="berbagiHadis(this)"
-            style="border:none;background:transparent;color:#03D97B;padding:4px 0;cursor:pointer;">
+            style="border:none;background:transparent;color:#419737;padding:4px 0;cursor:pointer;">
             Share<span style="margin-left:-3px;font-size:12px;"></span>
           </button>
           <span>|</span>
           <button type="button"
   onclick="salinHadis(this)"
-  style="border:none;background:transparent;color:#03D97B;padding:4px 0;cursor:pointer;white-space:nowrap;">
+  style="border:none;background:transparent;color:#419737;padding:4px 0;cursor:pointer;white-space:nowrap;">
   Salin<span style="margin-left:-4px;font-size:12px;"></span>
          </button>
          <button type="button"
   onclick="bukaOpsiSalin(this)"
   aria-label="Pilihan format salin"
-  style="border:none;background:transparent;color:#374151;padding:4px 2px;cursor:pointer;">
+  style="border:none;background:transparent;color:#419737;padding:4px 2px;cursor:pointer;">
   ▼
          </button>
         </div>
@@ -757,6 +757,32 @@ function terapkanOpsiSalin() {
   });
 }
 
+
+
+let tombolSalinAktif = null;
+
+function bukaOpsiSalin(tombol) {
+  tombolSalinAktif = tombol;
+  alert("ambil");
+}
+
+function tutupOpsiSalin() {
+  document.getElementById("popupOpsiSalin").style.display = "none";
+}
+
+
+let tombolSalinAktif = null;
+
+function bukaOpsiSalin(tombol) {
+  tombolSalinAktif = tombol;
+  document.getElementById("popupOpsiSalin").style.display = "flex";
+}
+
+function tutupOpsiSalin() {
+  document.getElementById("popupOpsiSalin").style.display = "none";
+}
+
+
 muat();
 </script>
 
@@ -902,6 +928,19 @@ muat();
   </div>
 </div>
 
+<div id="popupOpsiSalin"
+  style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.35);align-items:center;justify-content:center;padding:16px;">
+
+  <div style="background:#fff;color:#374151;padding:24px;border-radius:12px;width:100%;max-width:300px;text-align:center;">
+    <p>oke</p>
+    <button type="button"
+      onclick="tutupOpsiSalin()"
+      style="border:none;background:#e5e7eb;color:#374151;padding:8px 20px;border-radius:6px;">
+      Tutup
+    </button>
+  </div>
+
+</div>
+
 </body>
 </html>
-
