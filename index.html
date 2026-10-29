@@ -681,7 +681,15 @@ function berbagiHadis(tombol) {
 
   if (!artikel) return;
 
-  const teks = artikel.innerText;
+  const salinan = artikel.cloneNode(true);
+
+  salinan.querySelectorAll(
+    "button, .aksi-hadis, .hadith-actions, .menu-hadis"
+  ).forEach(function (elemen) {
+    elemen.remove();
+  });
+
+  const teks = salinan.innerText.trim();
 
   if (navigator.share) {
     navigator.share({
@@ -696,8 +704,6 @@ function berbagiHadis(tombol) {
     window.prompt("Salin teks hadis untuk dibagikan:", teks);
   }
 }
-
-
 
 async function salinHadis(tombol) {
   const artikel = tombol.closest(".hadith");
