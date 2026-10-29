@@ -8,6 +8,12 @@
 <title>Belajar Sunnah</title>
 
 <style>
+:root {
+  --sbw: 0px;
+}
+
+/* CSS lama tetap di bawah sini */
+
 @font-face {
   font-family: 'Markazi Text';
   src: url('./fonts/MarkaziText-Regular.ttf') format('truetype');
@@ -427,13 +433,34 @@ let cocok = [];
 let hal = 0;
 const perHalaman = 10;
 
+function ukurScrollbar() {
+  const de = document.documentElement;
+  de.style.setProperty(
+    "--sbw",
+    (window.innerWidth - de.clientWidth) + "px"
+  );
+}
+
+window.addEventListener("resize", ukurScrollbar);
+
 function buka(id) {
   document.querySelectorAll("main section").forEach(function (bagian) {
     bagian.classList.add("hidden");
   });
 
   const target = document.getElementById(id);
+
+  if (target) {
+    target.classList.remove("hidden");
+  }
+
+  ukurScrollbar();
+}
+
+    const target = document.getElementById(id);
   if (target) target.classList.remove("hidden");
+
+  ukurScrollbar();
 }
 
 function bersih(nilai) {
@@ -560,7 +587,7 @@ function tampilkan() {
       : "Teks Arab belum tersedia";
 
     return `
-     <article class="hadith" style="width:100%;max-width:none;box-sizing:border-box;border:1px solid #E6EEFF;border-radius:10px;padding:16px;margin:12px 0;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+     <article class="hadith" style="width:calc(100vw - var(--sbw));max-width:none;box-sizing:border-box;margin:12px 0 12px calc(50% - (100vw - var(--sbw)) / 2);padding:16px;border:1px solid #E5E7EB;border-width:1px 0;border-radius:0;box-shadow:none;background:#fff;">
         <div class="number">Hadis Nomor ${nomorAman}</div>
 
         <div>${terjemahan || "."}</div>
@@ -617,6 +644,8 @@ function tampilkan() {
       </button>
     `
     : "";
+
+  ukurScrollbar();
 }
 
 function pindah(arah) {
