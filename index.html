@@ -560,7 +560,7 @@ function tampilkan() {
       : "Teks Arab belum tersedia";
 
     return `
-      <article class="hadith" style="width:100%;max-width:none;box-sizing:border-box;border:1px solid #E6EEFF;border-radius:10px;padding:16px;margin:12px 0;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+     <article class="hadith" style="width:100%;max-width:none;box-sizing:border-box;border:1px solid #E6EEFF;border-radius:10px;padding:16px;margin:12px 0;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);">
         <div class="number">Hadis Nomor ${nomorAman}</div>
 
         <div>${terjemahan || "."}</div>
@@ -796,7 +796,7 @@ function aturPosisiPopupSalin() {
   const kotak = popup.firstElementChild;
   const posisi = tombolSalinAktif.getBoundingClientRect();
 
-  const lebar = Math.min(360, window.innerWidth - 24);
+  const lebar = window.innerWidth - 24);
   const kiri = Math.max(
     12,
     Math.min(posisi.left, window.innerWidth - lebar - 12)
@@ -822,7 +822,7 @@ popup.style.padding = "0";
 
   kotak.style.position = "fixed";
   kotak.style.boxSizing = "border-box";
-  kotak.style.width = "min(360px, calc(100vw - 24px))";
+  kotak.style.width = "kotak.style.width = "calc(100vw - 24px)";
   kotak.style.margin = "0";
   kotak.style.maxHeight = "calc(100vh - 24px)";
   kotak.style.overflowY = "auto";
