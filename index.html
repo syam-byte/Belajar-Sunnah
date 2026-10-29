@@ -759,17 +759,6 @@ function terapkanOpsiSalin() {
 
 
 
-let tombolSalinAktif = null;
-
-function bukaOpsiSalin(tombol) {
-  tombolSalinAktif = tombol;
-  alert("ambil");
-}
-
-function tutupOpsiSalin() {
-  document.getElementById("popupOpsiSalin").style.display = "none";
-}
-
 
 let tombolSalinAktif = null;
 
@@ -781,7 +770,6 @@ function bukaOpsiSalin(tombol) {
 function tutupOpsiSalin() {
   document.getElementById("popupOpsiSalin").style.display = "none";
 }
-
 
 muat();
 </script>
@@ -928,19 +916,6 @@ muat();
   </div>
 </div>
 
-<div id="popupOpsiSalin"
-  style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.35);align-items:center;justify-content:center;padding:16px;">
-
-  <div style="background:#fff;color:#374151;padding:24px;border-radius:12px;width:100%;max-width:300px;text-align:center;">
-    <p>oke</p>
-    <button type="button"
-      onclick="tutupOpsiSalin()"
-      style="border:none;background:#e5e7eb;color:#374151;padding:8px 20px;border-radius:6px;">
-      Tutup
-    </button>
-  </div>
-
-</div>
-
 </body>
 </html>
+
