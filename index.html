@@ -560,7 +560,7 @@ function tampilkan() {
       : "Teks Arab belum tersedia";
 
     return `
-      <article class="hadith">
+      <article class="hadith" style="width:100%;max-width:none;box-sizing:border-box;border:1px solid #E6EEFF;border-radius:10px;padding:16px;margin:12px 0;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);">
         <div class="number">Hadis Nomor ${nomorAman}</div>
 
         <div>${terjemahan || "."}</div>
@@ -795,10 +795,12 @@ function bukaOpsiSalin(tombol) {
   const kotak = popup.firstElementChild;
 
   popup.style.display = "flex";
-  popup.style.background = "transparent";
-  popup.style.alignItems = "flex-start";
-  popup.style.justifyContent = "flex-start";
-  popup.style.padding = "0";
+popup.style.background = "transparent";
+popup.style.pointerEvents = "auto";
+kotak.style.pointerEvents = "auto";
+popup.style.alignItems = "flex-start";
+popup.style.justifyContent = "flex-start";
+popup.style.padding = "0";
 
   kotak.style.position = "fixed";
   kotak.style.boxSizing = "border-box";
@@ -971,4 +973,4 @@ muat();
 </div>
 
 </body>
-</html>
+  </html>
