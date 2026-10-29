@@ -771,12 +771,12 @@ navigator.clipboard.writeText(teksSalin).then(function () {
 
 let tombolSalinAktif = null;
 
-function bukaOpsiSalin(tombol) {
-  tombolSalinAktif = tombol;
+function aturPosisiPopupSalin() {
+  if (!tombolSalinAktif) return;
 
   const popup = document.getElementById("popupOpsiSalin");
   const kotak = popup.firstElementChild;
-  const posisi = tombol.getBoundingClientRect();
+  const posisi = tombolSalinAktif.getBoundingClientRect();
 
   const lebar = Math.min(360, window.innerWidth - 24);
   const kiri = Math.max(
@@ -784,25 +784,46 @@ function bukaOpsiSalin(tombol) {
     Math.min(posisi.left, window.innerWidth - lebar - 12)
   );
 
+  kotak.style.left = kiri + "px";
+  kotak.style.top = (posisi.bottom + 2) + "px";
+}
+
+function bukaOpsiSalin(tombol) {
+  tombolSalinAktif = tombol;
+
+  const popup = document.getElementById("popupOpsiSalin");
+  const kotak = popup.firstElementChild;
+
   popup.style.display = "flex";
+  popup.style.background = "transparent";
   popup.style.alignItems = "flex-start";
   popup.style.justifyContent = "flex-start";
   popup.style.padding = "0";
 
   kotak.style.position = "absolute";
   kotak.style.boxSizing = "border-box";
-  kotak.style.width = lebar + "px";
-  kotak.style.maxHeight =
-    "calc(100vh - " + (posisi.bottom + 18) + "px)";
-  kotak.style.overflowY = "auto";
+  kotak.style.width = "min(360px, calc(100vw - 24px))";
   kotak.style.margin = "0";
-  kotak.style.left = kiri + "px";
-  kotak.style.top = (posisi.bottom + 6) + "px";
+  kotak.style.maxHeight = "calc(100vh - 24px)";
+  kotak.style.overflowY = "auto";
+
+  aturPosisiPopupSalin();
 }
 
 function tutupOpsiSalin() {
   document.getElementById("popupOpsiSalin").style.display = "none";
+  tombolSalinAktif = null;
 }
+
+window.addEventListener("scroll", function () {
+  const popup = document.getElementById("popupOpsiSalin");
+
+  if (popup && popup.style.display !== "none") {
+    aturPosisiPopupSalin();
+  }
+}, true);
+
+window.addEventListener("resize", aturPosisiPopupSalin);
 
 muat();
 </script>
@@ -884,7 +905,7 @@ muat();
 
 
 <div id="popupOpsiSalin"
-  style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.35);align-items:center;justify-content:center;padding:16px;">
+  style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:center;justify-content:center;padding:16px;">
 
   <div style="width:100%;max-width:360px;background:#fff;border-radius:12px;padding:18px;box-sizing:border-box;color:#374151;font-family:inherit;">
 
