@@ -676,6 +676,7 @@ document.addEventListener("change", function (event) {
   }
 });
 
+
 function berbagiHadis(tombol) {
   const artikel = tombol.closest(".hadith");
 
@@ -683,11 +684,8 @@ function berbagiHadis(tombol) {
 
   const salinan = artikel.cloneNode(true);
 
-  salinan.querySelectorAll(
-    "button, .aksi-hadis, .hadith-actions, .menu-hadis"
-  ).forEach(function (elemen) {
-    elemen.remove();
-  });
+  // Hapus seluruh baris menu Saran | Share | Salin ▼
+  salinan.lastElementChild?.remove();
 
   const teks = salinan.innerText.trim();
 
