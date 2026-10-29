@@ -751,20 +751,43 @@ function terapkanOpsiSalin() {
   }
 
   navigator.clipboard.writeText(teksSalin).then(function () {
-    alert("Teks hadis berhasil disalin.");
-  }).catch(function () {
-    window.prompt("Salin teks hadis berikut:", teksSalin);
-  });
-}
-
-
-
+  const ceklis = document.createElement("div");
+  ceklis.innerHTML = "✓";
+  ceklis.style.cssText =
+    "position:fixed;top:20px;left:50%;transform:translateX(-50%);" +
+    "width:48px;height:48px;border-radius:50%;background:#00e676;" +
+    "color:white;display:flex;align-items:center;justify-content:center;" +
+    "font-size:32px;font-weight:bold;z-index:99999;" +
+    "box-shadow:0 3px 12px #0003;";
+  document.body.appendChild(ceklis);
+  setTimeout(function () {
+    ceklis.remove();
+  }, 1200);
+}).catch(function () {
+  window.prompt("Salin teks hadis berikut:", teksSalin);
+});
 
 let tombolSalinAktif = null;
 
 function bukaOpsiSalin(tombol) {
   tombolSalinAktif = tombol;
-  document.getElementById("popupOpsiSalin").style.display = "flex";
+
+  const popup = document.getElementById("popupOpsiSalin");
+  const kotak = popup.firstElementChild;
+  const posisi = tombol.getBoundingClientRect();
+
+  popup.style.display = "flex";
+  popup.style.alignItems = "flex-start";
+  popup.style.justifyContent = "flex-start";
+
+  kotak.style.position = "absolute";
+  kotak.style.width = "min(360px, calc(100vw - 24px))";
+  kotak.style.margin = "0";
+  kotak.style.left = Math.max(
+    12,
+    Math.min(posisi.left, window.innerWidth - 372)
+  ) + "px";
+  kotak.style.top = (posisi.bottom + 6) + "px";
 }
 
 function tutupOpsiSalin() {
@@ -918,4 +941,3 @@ muat();
 
 </body>
 </html>
-
