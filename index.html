@@ -716,6 +716,10 @@ async function salinHadis(tombol) {
     return;
   }
 
+  if (popup && popup.style.display !== "none") {
+    tutupOpsiSalin();
+  }
+
   const teks = artikel.innerText;
 
   try {
@@ -830,6 +834,17 @@ function aturPosisiPopupSalin() {
 }
 
 function bukaOpsiSalin(tombol) {
+  const popupAktif = document.getElementById("popupOpsiSalin");
+
+  // Klik ▼ lagi pada hadis yang sama: tutup popup.
+  if (
+    popupAktif.style.display !== "none" &&
+    tombolSalinAktif === tombol
+  ) {
+    tutupOpsiSalin();
+    return;
+  }
+
   tombolSalinAktif = tombol;
 
   const popup = document.getElementById("popupOpsiSalin");
@@ -837,7 +852,7 @@ function bukaOpsiSalin(tombol) {
 
   popup.style.display = "flex";
 popup.style.background = "transparent";
-popup.style.pointerEvents = "auto";
+popup.style.pointerEvents = "none";
 kotak.style.pointerEvents = "auto";
 popup.style.alignItems = "flex-start";
 popup.style.justifyContent = "flex-start";
@@ -867,6 +882,23 @@ window.addEventListener("scroll", function () {
 }, true);
 
 window.addEventListener("resize", aturPosisiPopupSalin);
+
+// Klik di luar popup menutupnya, kecuali klik pada ▼ atau Salin.
+document.addEventListener("click", function (event) {
+  const popup = document.getElementById("popupOpsiSalin");
+
+  if (!popup || popup.style.display === "none") return;
+  if (event.target.closest("#popupOpsiSalin > div")) return;
+  if (event.target.closest(
+    'button[onclick^="bukaOpsiSalin"], button[onclick^="salinHadis"]'
+  )) return;
+
+  tutupOpsiSalin();
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") tutupOpsiSalin();
+});
 
 muat();
 </script>
@@ -948,9 +980,9 @@ muat();
 
 
 <div id="popupOpsiSalin"
-  style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:flex-start;justify-content:flex-start;padding:0;pointer-events:auto;">
+  style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:flex-start;justify-content:flex-start;padding:0;pointer-events:none;">
 
-  <div style="width:100%;max-width:none;background:#fff;border-radius:12px;padding:18px;box-sizing:border-box;color:#374151;font-family:inherit;">
+  <div style="width:100%;max-width:none;background:#fff;border-radius:12px;padding:18px;box-sizing:border-box;color:#374151;font-family:inherit;pointer-events:auto;">
 
     <div style="font-size:17px;font-weight:600;margin-bottom:16px;">
       Pilihan Salin Hadis
