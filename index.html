@@ -750,7 +750,8 @@ function terapkanOpsiSalin() {
     return;
   }
 
-  navigator.clipboard.writeText(teksSalin).then(function () {
+  
+navigator.clipboard.writeText(teksSalin).then(function () {
   const ceklis = document.createElement("div");
   ceklis.innerHTML = "✓";
   ceklis.style.cssText =
@@ -766,6 +767,19 @@ function terapkanOpsiSalin() {
 }).catch(function () {
   window.prompt("Salin teks hadis berikut:", teksSalin);
 });
+}
+
+let tombolSalinAktif = null;
+
+function bukaOpsiSalin(tombol) {
+  tombolSalinAktif = tombol;
+  document.getElementById("popupOpsiSalin").style.display = "flex";
+}
+
+function tutupOpsiSalin() {
+  document.getElementById("popupOpsiSalin").style.display = "none";
+}
+
 
 let tombolSalinAktif = null;
 
