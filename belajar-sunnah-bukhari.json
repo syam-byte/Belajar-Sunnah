@@ -1,4 +1,4 @@
-
+[
 {
   "collection": "Sahih al-Bukhari",
   "number": 255,
@@ -13,7 +13,7 @@
   "arabic_grade": "",
   "translation_id": "Telah menceritakan kepada kami Muhammad bin Basysyar, ia berkata, telah menceritakan kepada kami Ghundar, ia berkata, telah menceritakan kepada kami Syu‘bah, dari Mikhwal bin Rasyid, dari Muhammad bin Ali, dari Jabir bin Abdullah radhiyallahu ‘anhuma, ia berkata: Nabi ﷺ menyiramkan air ke kepala beliau sebanyak tiga kali.",
   "reference": "Sahih al-Bukhari, nomor 255"
-}
+},
 {
   "number": 256,
   "hadith_number": 256,
@@ -30,3 +30,4 @@
   "english_grade": "",
   "arabic_grade": ""
 }
+]
