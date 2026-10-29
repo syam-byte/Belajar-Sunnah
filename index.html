@@ -769,8 +769,12 @@ function terapkanOpsiSalin() {
 
 let tombolSalinAktif = null;
 
+
 function bukaOpsiSalin(tombol) {
   tombolSalinAktif = tombol;
+  document.getElementById("popupOpsiSalin").style.display = "flex";
+}
+
 
   const popup = document.getElementById("popupOpsiSalin");
   const kotak = popup.firstElementChild;
