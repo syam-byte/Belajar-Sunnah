@@ -675,10 +675,23 @@ function berbagiHadis(tombol) {
 }
 
 
+
 async function salinHadis(tombol) {
   const artikel = tombol.closest(".hadith");
 
   if (!artikel) return;
+
+  const popup = document.getElementById("popupOpsiSalin");
+
+  if (
+    popup &&
+    popup.style.display !== "none" &&
+    tombolSalinAktif &&
+    tombolSalinAktif.closest(".hadith") === artikel
+  ) {
+    salinPilihanHadis(tombol);
+    return;
+  }
 
   const teks = artikel.innerText;
 
@@ -690,6 +703,11 @@ async function salinHadis(tombol) {
   }
 }
 
+
+function salinPilihanHadis(tombol) {
+  tombolSalinAktif = tombol;
+  terapkanOpsiSalin();
+}
 
 function terapkanOpsiSalin() {
   if (!tombolSalinAktif) return;
@@ -907,7 +925,7 @@ muat();
 
 
 <div id="popupOpsiSalin"
-  style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:flex-start;justify-content:flex-start;padding:0;pointer-events:none;">
+  style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:flex-start;justify-content:flex-start;padding:0;pointer-events:auto;">
 
   <div style="width:100%;max-width:360px;background:#fff;border-radius:12px;padding:18px;box-sizing:border-box;color:#374151;font-family:inherit;">
 
@@ -955,18 +973,6 @@ muat();
         </label>
       </div>
 
-    </div>
-
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
-      <button type="button" onclick="tutupOpsiSalin()"
-        style="border:1px solid #A7A6AF;background:transparent;color:#A7A6AF;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;">
-        Batal
-      </button>
-
-      <button type="button" onclick="terapkanOpsiSalin()"
-        style="border:1px solid #374151;background:#374151;color:#fff;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;">
-        Terapkan
-      </button>
     </div>
 
   </div>
