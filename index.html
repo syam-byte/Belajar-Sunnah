@@ -296,6 +296,15 @@ footer {
 }
 
 body {
+  background-image:
+    linear-gradient(
+      rgba(245, 241, 231, 0.18),
+      rgba(245, 241, 231, 0.18)
+    ),
+    url("./BS_1.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
   background-color: #E5E7EB;
   color: #1F2937;
 }
@@ -396,19 +405,11 @@ body {
   <!-- KOLEKSI HADIS BUKHARI: jangan dihapus -->
   
 <section id="koleksi" class="panel hidden">
-  <header class="bs-header bs-header-bukhari">
-    <div class="bs-brand">
-      <img class="bs-logo"
-           src="BelajarSunnah.9.png"
-           alt="Logo Belajar Sunnah">
-
-      <div class="bs-brand-copy">
-        <h1 class="bs-welcome-main">بلاجر سنة</h1>
-        <p class="bs-welcome-meaning">Belajar Sunnah</p>
-      </div>
-    </div>
-  </header>
-
+  <h2>Koleksi Hadis Sahih al-Bukhari</h2>
+  <p id="status" class="muted" aria-live="polite"></p>
+  <div id="hasil"></div>
+  <div id="halaman"></div>
+</section>
   <h2>Koleksi Hadis Sahih al-Bukhari</h2>
     <p id="status" class="muted" aria-live="polite"></p>
     <div id="hasil"></div>
@@ -1052,4 +1053,4 @@ muat();
 </div>
 
 </body>
-</html>
+  </html>
