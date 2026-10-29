@@ -780,38 +780,6 @@ function tutupOpsiSalin() {
   document.getElementById("popupOpsiSalin").style.display = "none";
 }
 
-
-let tombolSalinAktif = null;
-
-
-function bukaOpsiSalin(tombol) {
-  tombolSalinAktif = tombol;
-  document.getElementById("popupOpsiSalin").style.display = "flex";
-}
-
-
-  const popup = document.getElementById("popupOpsiSalin");
-  const kotak = popup.firstElementChild;
-  const posisi = tombol.getBoundingClientRect();
-
-  popup.style.display = "flex";
-  popup.style.alignItems = "flex-start";
-  popup.style.justifyContent = "flex-start";
-
-  kotak.style.position = "absolute";
-  kotak.style.width = "min(360px, calc(100vw - 24px))";
-  kotak.style.margin = "0";
-  kotak.style.left = Math.max(
-    12,
-    Math.min(posisi.left, window.innerWidth - 372)
-  ) + "px";
-  kotak.style.top = (posisi.bottom + 6) + "px";
-}
-
-function tutupOpsiSalin() {
-  document.getElementById("popupOpsiSalin").style.display = "none";
-}
-
 muat();
 </script>
 
@@ -820,7 +788,7 @@ muat();
 
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <h3 style="margin:0 0 16px;">Kesalahan</h3>
-      <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;font-size:24px;cursor:pointer;">×</button>
+      <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;font-size:24px;cursor:pointer;"></button>
     </div>
 
     
