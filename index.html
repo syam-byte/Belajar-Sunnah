@@ -1,4 +1,4 @@
-<nav class="bs-main-nav" aria-label="Navigasi utama">   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>   <span aria-hidden="true">|</span>   <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>   <span aria-hidden="true">|</span>   <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>   <span aria-hidden="true">|</span>   <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>   <span aria-hidden="true">|</span>   <a href="https://www.muslimpro.com/prayer-times/"      target="_blank" rel="noopener noreferrer">Prayer Times</a> </nav><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -116,18 +116,23 @@ body {
   line-height: 1.5;
 }
 
-/* NAVIGASI */
+
+/* NAVIGASI FULL WIDTH */
 .bs-main-nav {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
-  padding: 12px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
+  width: 100%;
+  margin: 0;
+  padding: 14px 12px;
+  background: rgba(229, 231, 235, 0.75);
+  border-top: 1px solid rgba(55, 65, 81, 0.15);
+  border-bottom: 1px solid rgba(55, 65, 81, 0.15);
   font-size: 14px;
 }
+
 
 .bs-main-nav a {
   color: var(--text);
@@ -291,7 +296,7 @@ footer {
 
 /* Warna header dan halaman */
 .bs-header {
-  background: #374151;
+  background: rgba(55, 65, 81, 0.85);
   color: #E5E7EB;
 }
 
@@ -311,7 +316,11 @@ body {
   color: #1F2937;
 }
 
-.bs-card { background-color: #E5E7EB; }
+.bs-card { background-color: #E5E7EB; }.bs-card {
+  background-color: #E5E7EB;
+  border: 1px solid rgba(55, 65, 81, 0.85);
+  border-radius: 6px;
+}
 
 @font-face {
   font-family: "Lionking";
@@ -323,6 +332,8 @@ body {
 </head>
 
 <body>
+
+<nav class="bs-main-nav" aria-label="Navigasi utama">   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>   <span aria-hidden="true">|</span>   <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>   <span aria-hidden="true">|</span>   <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>   <span aria-hidden="true">|</span>   <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>   <span aria-hidden="true">|</span>   <a href="https://www.muslimpro.com/prayer-times/"      target="_blank" rel="noopener noreferrer">Prayer Times</a> </nav>
 
 <header class="bs-header">
   <div class="bs-brand">
@@ -1055,4 +1066,4 @@ muat();
 </div>
 
 </body>
-</html>
+  </html>
