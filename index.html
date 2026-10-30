@@ -12,8 +12,6 @@
   --sbw: 0px;
 }
 
-/* CSS lama tetap di bawah sini */
-
 @font-face {
   font-family: 'Markazi Text';
   src: url('./fonts/MarkaziText-Regular.ttf') format('truetype');
@@ -321,17 +319,10 @@ body {
   color: #E5E7EB;
 }
 
-.bs-card { background-color: #E5E7EB; }.bs-card {
+.bs-card {
   background-color: #E5E7EB;
   border: 1px solid rgba(55, 65, 81, 0.85);
   border-radius: 6px;
-}
-
-@font-face {
-  font-family: "Lionking";
-  src: url("./fonts/Lionking.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
 }
 
 /* Pastikan teks terjemahan hadis terbaca */
@@ -409,7 +400,7 @@ body {
     <table style="width:92%; margin:0 auto; box-sizing:border-box; border-collapse:separate; border-spacing:0 5px; font-size:18px;">
       <tbody>
         <tr>
-          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; background:white; color:#374151; cursor:pointer;" onclick="buka('koleksi')">
+          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; color:#374151; cursor:pointer;" onclick="buka('koleksi')">
             <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
               <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">صحيح البخاري</span>
               <span style="flex: 1; text-align: right; font-size: 18px; font-family: 'Lionking', sans-serif;">Sahih Bukhari</span>
@@ -417,16 +408,15 @@ body {
           </td>
         </tr>
         <tr>
-          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; background:white; color:#374151; cursor:pointer;" onclick="buka('muslim')">
+          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; color:#374151; cursor:pointer;" onclick="buka('muslim')">
             <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
               <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">صحيح مسلم</span>
-              <span style="flex: 1; text-align: right; font-size: 18px; font-family: 'Lionking', sans-serif;">Sahih Muslim
-             </span>
+              <span style="flex: 1; text-align: right; font-size: 18px; font-family: 'Lionking', sans-serif;">Sahih Muslim</span>
             </div>
           </td>
         </tr>
         <tr>
-          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; background:white; color:#374151; cursor:pointer;" onclick="buka('abu-dawud')">
+          <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; color:#374151; cursor:pointer;" onclick="buka('abu-dawud')">
             <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
               <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">سنن أبي داود</span>
               <span style="flex: 1; text-align: right; font-size: 15px; font-family: 'Lionking', sans-serif;">Sunan Abi Dawud</span>
@@ -443,14 +433,8 @@ body {
   </section>
 
   <!-- KOLEKSI HADIS BUKHARI: jangan dihapus -->
-  
-<section id="koleksi" class="panel hidden">
-  <h2></h2>
-  <p id="status" class="muted" aria-live="polite"></p>
-  <div id="hasil"></div>
-  <div id="halaman"></div>
-</section>
-  <h2></h2>
+  <section id="koleksi" class="panel hidden">
+    <h2></h2>
     <p id="status" class="muted" aria-live="polite"></p>
     <div id="hasil"></div>
     <div id="halaman"></div>
@@ -487,6 +471,9 @@ let semua = [];
 let cocok = [];
 let hal = 0;
 const perHalaman = 10;
+
+let tombolSalinAktif = null;
+let tombolSaranAktif = null;
 
 function ukurScrollbar() {
   const de = document.documentElement;
@@ -551,17 +538,15 @@ async function muat() {
     const respons = await fetch("./belajar-sunnah-bukhari.json");
     if (!respons.ok) throw new Error("HTTP " + respons.status);
 
-    
-const data = await respons.json();
-semua = Array.isArray(data)
-  ? data
-  : (Array.isArray(data.hadiths)
-      ? data.hadiths
-      : (data && typeof data === "object" &&
-          (data.number != null || data.hadith_number != null)
-          ? [data]
-          : []));
-
+    const data = await respons.json();
+    semua = Array.isArray(data)
+      ? data
+      : (Array.isArray(data.hadiths)
+          ? data.hadiths
+          : (data && typeof data === "object" &&
+              (data.number != null || data.hadith_number != null)
+              ? [data]
+              : []));
 
     cocok = semua.slice();
     hal = 0;
@@ -651,7 +636,7 @@ function tampilkan() {
         <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;font-family:'Markazi Text',serif;">
           <button type="button"
             onclick="bukaSaran(this)"
-            style="border:none;background:transparent;color:#419737 ;padding:4px 0;cursor:pointer;">
+            style="border:none;background:transparent;color:#419737;padding:4px 0;cursor:pointer;">
             Saran<span style="margin-left:-3px;font-size:8px;"></span>
           </button>
           <span>|</span>
@@ -662,16 +647,16 @@ function tampilkan() {
           </button>
           <span>|</span>
           <button type="button"
-  onclick="salinHadis(this)"
-  style="border:none;background:transparent;color:#419737;padding:4px 0;cursor:pointer;white-space:nowrap;">
-  Salin<span style="margin-left:-4px;font-size:12px;"></span>
-         </button>
-         <button type="button"
-  onclick="bukaOpsiSalin(this)"
-  aria-label="Pilihan format salin"
-  style="border:none;background:transparent;color:#419737;padding:4px 2px;cursor:pointer;">
-  ▼
-         </button>
+            onclick="salinHadis(this)"
+            style="border:none;background:transparent;color:#419737;padding:4px 0;cursor:pointer;white-space:nowrap;">
+            Salin<span style="margin-left:-4px;font-size:12px;"></span>
+          </button>
+          <button type="button"
+            onclick="bukaOpsiSalin(this)"
+            aria-label="Pilihan format salin"
+            style="border:none;background:transparent;color:#419737;padding:4px 2px;cursor:pointer;">
+            ▼
+          </button>
         </div>
       </article>
     `;
@@ -705,19 +690,44 @@ function pindah(arah) {
 }
 
 
+/* ============ POPUP SARAN ============ */
+
+function aturPosisiPopupSaran() {
+  if (!tombolSaranAktif) return;
+
+  const kotak = document.getElementById("popupSaran").firstElementChild;
+  const posisi = tombolSaranAktif.getBoundingClientRect();
+
+  kotak.style.left = "0px";
+  kotak.style.top = (posisi.bottom + 2) + "px";
+}
+
 function bukaSaran(tombol) {
   const popup = document.getElementById("popupSaran");
-  const artikel = tombol.closest(".hadith");
 
+  // Klik Saran lagi pada tombol yang sama: tutup popup.
+  if (popup.style.display !== "none" && tombolSaranAktif === tombol) {
+    tutupSaran();
+    return;
+  }
+
+  // Tutup popup salin jika sedang terbuka.
+  tutupOpsiSalin();
+
+  tombolSaranAktif = tombol;
+
+  const artikel = tombol.closest(".hadith");
   popup.dataset.nomor = artikel
     ? artikel.querySelector(".number")?.innerText || ""
     : "";
 
-  popup.style.display = "flex";
+  popup.style.display = "block";
+  aturPosisiPopupSaran();
 }
 
 function tutupSaran() {
   document.getElementById("popupSaran").style.display = "none";
+  tombolSaranAktif = null;
 }
 
 document.addEventListener("change", function (event) {
@@ -731,6 +741,8 @@ document.addEventListener("change", function (event) {
   }
 });
 
+
+/* ============ SHARE & SALIN ============ */
 
 function berbagiHadis(tombol) {
   const artikel = tombol.closest(".hadith");
@@ -854,58 +866,65 @@ function terapkanOpsiSalin() {
     return;
   }
 
-  
-navigator.clipboard.writeText(teksSalin).then(function () {
-  const ceklis = document.createElement("div");
-  ceklis.innerHTML = "✓";
-  ceklis.style.cssText =
-    "position:fixed;top:20px;left:50%;transform:translateX(-50%);" +
-    "width:48px;height:48px;border-radius:50%;background:#00e676;" +
-    "color:white;display:flex;align-items:center;justify-content:center;" +
-    "font-size:32px;font-weight:bold;z-index:99999;" +
-    "box-shadow:0 3px 12px #0003;";
-  document.body.appendChild(ceklis);
-  setTimeout(function () {
-    ceklis.remove();
-  }, 1200);
-}).catch(function () {
-  window.prompt("Salin teks hadis berikut:", teksSalin);
-});
+  navigator.clipboard.writeText(teksSalin).then(function () {
+    const ceklis = document.createElement("div");
+    ceklis.innerHTML = "✓";
+    ceklis.style.cssText =
+      "position:fixed;top:20px;left:50%;transform:translateX(-50%);" +
+      "width:48px;height:48px;border-radius:50%;background:#00e676;" +
+      "color:white;display:flex;align-items:center;justify-content:center;" +
+      "font-size:32px;font-weight:bold;z-index:99999;" +
+      "box-shadow:0 3px 12px #0003;";
+    document.body.appendChild(ceklis);
+    setTimeout(function () {
+      ceklis.remove();
+    }, 1200);
+  }).catch(function () {
+    window.prompt("Salin teks hadis berikut:", teksSalin);
+  });
 }
 
-let tombolSalinAktif = null;
+
+/* ============ POPUP PILIHAN SALIN ============ */
 
 function aturPosisiPopupSalin() {
   if (!tombolSalinAktif) return;
 
+  const popup = document.getElementById("popupOpsiSalin");
+  const kotak = popup.firstElementChild;
+  const posisi = tombolSalinAktif.getBoundingClientRect();
+
+  kotak.style.left = "0px";
+  kotak.style.top = (posisi.bottom + 2) + "px";
+}
+
 function bukaOpsiSalin(tombol) {
-  const popupAktif = document.getElementById("popupOpsiSalin");
+  const popup = document.getElementById("popupOpsiSalin");
 
   // Klik ▼ lagi pada hadis yang sama: tutup popup.
-  if (
-    popupAktif.style.display !== "none" &&
-    tombolSalinAktif === tombol
-  ) {
+  if (popup.style.display !== "none" && tombolSalinAktif === tombol) {
     tutupOpsiSalin();
     return;
   }
 
-  tombolSalinAktif = tombol;
+  // Tutup popup saran jika sedang terbuka.
+  tutupSaran();
 
-  const popup = document.getElementById("popupOpsiSalin");
+  tombolSalinAktif = tombol;
   const kotak = popup.firstElementChild;
 
   popup.style.display = "flex";
-popup.style.background = "transparent";
-popup.style.pointerEvents = "none";
-kotak.style.pointerEvents = "auto";
-popup.style.alignItems = "flex-start";
-popup.style.justifyContent = "flex-start";
-popup.style.padding = "0";
+  popup.style.background = "transparent";
+  popup.style.pointerEvents = "none";
+  popup.style.alignItems = "flex-start";
+  popup.style.justifyContent = "flex-start";
+  popup.style.padding = "0";
 
+  kotak.style.pointerEvents = "auto";
   kotak.style.position = "fixed";
   kotak.style.boxSizing = "border-box";
-  kotak.style.width = "calc(100vw - 24px)";
+  kotak.style.width = "fit-content";
+  kotak.style.maxWidth = "calc(100vw - 8px)";
   kotak.style.margin = "0";
   kotak.style.maxHeight = "calc(100vh - 24px)";
   kotak.style.overflowY = "auto";
@@ -919,35 +938,58 @@ function tutupOpsiSalin() {
 }
 
 window.addEventListener("scroll", function () {
-  const popup = document.getElementById("popupOpsiSalin");
-
-  if (popup && popup.style.display !== "none") {
+  const popupSalin = document.getElementById("popupOpsiSalin");
+  if (popupSalin && popupSalin.style.display !== "none") {
     aturPosisiPopupSalin();
+  }
+
+  const popupSaran = document.getElementById("popupSaran");
+  if (popupSaran && popupSaran.style.display !== "none") {
+    aturPosisiPopupSaran();
   }
 }, true);
 
-window.addEventListener("resize", aturPosisiPopupSalin);
+window.addEventListener("resize", function () {
+  aturPosisiPopupSalin();
+  aturPosisiPopupSaran();
+});
 
-// Klik di luar popup menutupnya, kecuali klik pada ▼ atau Salin.
+// Klik di luar popup menutupnya, kecuali klik pada tombolnya sendiri.
 document.addEventListener("click", function (event) {
-  const popup = document.getElementById("popupOpsiSalin");
+  const popupSalin = document.getElementById("popupOpsiSalin");
 
-  if (!popup || popup.style.display === "none") return;
-  if (event.target.closest("#popupOpsiSalin > div")) return;
-  if (event.target.closest(
-    'button[onclick^="bukaOpsiSalin"], button[onclick^="salinHadis"]'
-  )) return;
+  if (
+    popupSalin && popupSalin.style.display !== "none" &&
+    !event.target.closest("#popupOpsiSalin > div") &&
+    !event.target.closest(
+      'button[onclick^="bukaOpsiSalin"], button[onclick^="salinHadis"]'
+    )
+  ) {
+    tutupOpsiSalin();
+  }
 
-  tutupOpsiSalin();
+  const popupSaran = document.getElementById("popupSaran");
+
+  if (
+    popupSaran && popupSaran.style.display !== "none" &&
+    !event.target.closest("#popupSaran > div") &&
+    !event.target.closest('button[onclick^="bukaSaran"]')
+  ) {
+    tutupSaran();
+  }
 });
 
 document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") tutupOpsiSalin();
+  if (event.key === "Escape") {
+    tutupOpsiSalin();
+    tutupSaran();
+  }
 });
 
 muat();
 </script>
 
+<!-- POPUP SARAN -->
 <div id="popupSaran" style="display:none;position:fixed;inset:0;z-index:10000;background:transparent;pointer-events:none;">
   <div style="position:fixed;left:0;top:0;
     width:min(320px,calc(100vw - 8px));max-height:calc(100vh - 24px);overflow-y:auto;
@@ -961,127 +1003,126 @@ muat();
 
     <div style="display:flex;justify-content:space-between;align-items:center;">
       <h3 style="margin:0 0 8px;font-size:14px;">Kesalahan</h3>
-      <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;font-size:24px;cursor:pointer;">✕</button>
+      <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;color:#374151;font-size:20px;line-height:1;padding:0 4px;cursor:pointer;">✕</button>
     </div>
-    
-<form id="formSaran">
-  <p style="margin:0 0 6px;">Jenis kesalahan:</p>
 
-  <div style="display:flex;flex-direction:column;gap:2px;">
-    <label style="display:flex;align-items:center;gap:8px;margin:0;">
-      <input type="radio" name="jenisKesalahan" value="Terjemahan tidak sesuai" required style="width:auto;margin:0;">
-      Terjemahan tidak sesuai
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:0;">
-      <input type="radio" name="jenisKesalahan" value="Kesalahan ejaan" style="width:auto;margin:0;">
-      Kesalahan ejaan
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:0;">
-      <input type="radio" name="jenisKesalahan" value="Teks tidak lengkap" style="width:auto;margin:0;">
-      Teks tidak lengkap
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:0;">
-      <input type="radio" name="jenisKesalahan" value="Kesalahan terjemahan" style="width:auto;margin:0;">
-      Kesalahan terjemahan
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:0;">
-      <input type="radio" name="jenisKesalahan" value="Lainnya" style="width:auto;margin:0;">
-      Lainnya (harap sebutkan)
-    </label>
-  </div>
+    <form id="formSaran">
+      <p style="margin:0 0 6px;">Jenis kesalahan:</p>
 
-  <input
-    type="text"
-    id="jenisLainnya"
-    placeholder="Sebutkan jenis kesalahan lainnya..."
-    style="display:none;width:100%;box-sizing:border-box;margin:8px 0;padding:10px;"
-  >
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Terjemahan tidak sesuai" required style="width:auto;margin:0;">
+          Terjemahan tidak sesuai
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Kesalahan ejaan" style="width:auto;margin:0;">
+          Kesalahan ejaan
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Teks tidak lengkap" style="width:auto;margin:0;">
+          Teks tidak lengkap
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Kesalahan terjemahan" style="width:auto;margin:0;">
+          Kesalahan terjemahan
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Lainnya" style="width:auto;margin:0;">
+          Lainnya (harap sebutkan)
+        </label>
+      </div>
 
-  <p style="margin:12px 0 4px;">Detail kesalahan / saran perbaikan:</p>
-  <textarea
-    id="detailSaran"
-    rows="4"
-    required
-    placeholder="Tuliskan detail kesalahan atau saran perbaikan..."
-    style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
-  ></textarea>
+      <input
+        type="text"
+        id="jenisLainnya"
+        placeholder="Sebutkan jenis kesalahan lainnya..."
+        style="display:none;width:100%;box-sizing:border-box;margin:8px 0;padding:10px;"
+      >
 
-  <p style="margin:12px 0 4px;">Email:</p>
-  <input
-    type="email"
-    id="emailSaran"
-    required
-    placeholder="Alamat email Anda"
-    style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
-  >
+      <p style="margin:12px 0 4px;">Detail kesalahan / saran perbaikan:</p>
+      <textarea
+        id="detailSaran"
+        rows="4"
+        required
+        placeholder="Tuliskan detail kesalahan atau saran perbaikan..."
+        style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
+      ></textarea>
 
-  <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:16px;">
-    <button type="button" onclick="tutupSaran()"
-  style="border:1px solid #A7A6AF;background:transparent;color:#CBCAD6;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;cursor:pointer;">
-  Batal
-</button>
-    <button type="submit"
-  style="border:1px solid #374151;background:#A7A6AF;color:#CBCAD6;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;cursor:pointer;">
-  Kirim
-</button>
-  </div>
-</form>
+      <p style="margin:12px 0 4px;">Email:</p>
+      <input
+        type="email"
+        id="emailSaran"
+        required
+        placeholder="Alamat email Anda"
+        style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
+      >
+
+      <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:16px;">
+        <button type="button" onclick="tutupSaran()"
+          style="border:1px solid #A7A6AF;background:transparent;color:#374151;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;cursor:pointer;">
+          Batal
+        </button>
+        <button type="submit"
+          style="border:1px solid #374151;background:#A7A6AF;color:#fff;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;cursor:pointer;">
+          Kirim
+        </button>
+      </div>
+    </form>
 
   </div>
 </div>
 
 
+<!-- POPUP PILIHAN SALIN -->
 <div id="popupOpsiSalin"
   style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:flex-start;justify-content:flex-start;padding:0;pointer-events:none;">
 
-  <div style="width:100%;max-width:none;
-  background-color:#E5E7EB;
-  background-image:linear-gradient(rgba(255,255,255,0.80),rgba(255,255,255,0.80)),url('./drawable/Bs_2.jpg');
-  background-size:cover;background-position:center;background-repeat:no-repeat;
-  border-radius:12px;padding:18px;box-sizing:border-box;
-  color:#374151;font-family:inherit;pointer-events:auto;">
+  <div style="width:fit-content;max-width:calc(100vw - 8px);
+    background-color:#E5E7EB;
+    background-image:linear-gradient(rgba(255,255,255,0.65),rgba(255,255,255,0.65)),url('./drawable/Bs_2.jpg');
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    border:1px solid #D1D5DB;border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    padding:8px;box-sizing:border-box;
+    color:#374151;font-family:inherit;pointer-events:auto;">
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:stretch;">
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <!-- KOTAK 1: Hadist Text -->
+      <div style="border:1px dashed #9CA3AF;border-radius:10px;padding:8px 10px;background:rgba(255,255,255,0.55);">
+        <div style="text-align:center;font-size:12px;font-weight:700;margin-bottom:6px;">Hadist Text</div>
 
-  <!-- KOTAK 1: Hadist Text -->
-  <div style="border:1px dashed #9CA3AF;border-radius:10px;padding:10px 12px;background:rgba(255,255,255,0.55);">
-    <div style="text-align:center;font-size:12px;font-weight:700;margin-bottom:6px;">Hadist Text</div>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiIndonesia" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Indonesia
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiArabic" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Arabic
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiSanad" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Sanad
+        </label>
+      </div>
 
-    <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
-      <input type="checkbox" id="opsiIndonesia" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
-      Indonesia
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
-      <input type="checkbox" id="opsiArabic" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
-      Arabic
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
-      <input type="checkbox" id="opsiSanad" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
-      Sanad
-    </label>
-  </div>
+      <!-- KOTAK 2: Referensi -->
+      <div style="border:1px dashed #9CA3AF;border-radius:10px;padding:8px 10px;background:rgba(255,255,255,0.55);">
+        <div style="text-align:center;font-size:12px;font-weight:700;margin-bottom:6px;">Referensi</div>
 
-  <!-- KOTAK 2: Referensi -->
-  <div style="border:1px dashed #9CA3AF;border-radius:10px;padding:10px 12px;background:rgba(255,255,255,0.55);">
-    <div style="text-align:center;font-size:12px;font-weight:700;margin-bottom:6px;">Referensi</div>
-
-    <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
-      <input type="radio" name="opsiReferensi" value="ringkas" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
-      Ringkas
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
-      <input type="radio" name="opsiReferensi" value="sitasi" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
-      Sitasi
-    </label>
-    <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
-      <input type="checkbox" id="opsiURL" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
-      URL
-    </label>
-  </div>
-
-</div>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="radio" name="opsiReferensi" value="ringkas" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Ringkas
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="radio" name="opsiReferensi" value="sitasi" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Sitasi
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiURL" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          URL
+        </label>
+      </div>
 
     </div>
 
