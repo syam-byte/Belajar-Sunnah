@@ -705,10 +705,15 @@ function pindah(arah) {
 }
 
 
-
 function bukaSaran(tombol) {
   const popup = document.getElementById("popupSaran");
-  ...
+  const artikel = tombol.closest(".hadith");
+
+  popup.dataset.nomor = artikel
+    ? artikel.querySelector(".number")?.innerText || ""
+    : "";
+
+  popup.style.display = "flex";
 }
 
 function tutupSaran() {
@@ -873,37 +878,34 @@ let tombolSalinAktif = null;
 function aturPosisiPopupSalin() {
   if (!tombolSalinAktif) return;
 
-  const popup = document.getElementById("popupOpsiSalin");
-  const kotak = popup.firstElementChild;
-  const posisi = tombolSalinAktif.getBoundingClientRect();
-
-  kotak.style.left = "0px";
-  kotak.style.top = (posisi.bottom + 2) + "px";
-}
-
 function bukaOpsiSalin(tombol) {
-  const popup = document.getElementById("popupOpsiSalin");
+  const popupAktif = document.getElementById("popupOpsiSalin");
 
-  if (popup.style.display !== "none" && tombolSalinAktif === tombol) {
+  // Klik ▼ lagi pada hadis yang sama: tutup popup.
+  if (
+    popupAktif.style.display !== "none" &&
+    tombolSalinAktif === tombol
+  ) {
     tutupOpsiSalin();
     return;
   }
 
   tombolSalinAktif = tombol;
+
+  const popup = document.getElementById("popupOpsiSalin");
   const kotak = popup.firstElementChild;
 
   popup.style.display = "flex";
-  popup.style.background = "transparent";
-  popup.style.pointerEvents = "none";
-  popup.style.alignItems = "flex-start";
-  popup.style.justifyContent = "flex-start";
-  popup.style.padding = "0";
+popup.style.background = "transparent";
+popup.style.pointerEvents = "none";
+kotak.style.pointerEvents = "auto";
+popup.style.alignItems = "flex-start";
+popup.style.justifyContent = "flex-start";
+popup.style.padding = "0";
 
-  kotak.style.pointerEvents = "auto";
   kotak.style.position = "fixed";
   kotak.style.boxSizing = "border-box";
-  kotak.style.width = "fit-content";
-  kotak.style.maxWidth = "calc(100vw - 8px)";
+  kotak.style.width = "calc(100vw - 24px)";
   kotak.style.margin = "0";
   kotak.style.maxHeight = "calc(100vh - 24px)";
   kotak.style.overflowY = "auto";
@@ -918,6 +920,7 @@ function tutupOpsiSalin() {
 
 window.addEventListener("scroll", function () {
   const popup = document.getElementById("popupOpsiSalin");
+
   if (popup && popup.style.display !== "none") {
     aturPosisiPopupSalin();
   }
@@ -925,6 +928,7 @@ window.addEventListener("scroll", function () {
 
 window.addEventListener("resize", aturPosisiPopupSalin);
 
+// Klik di luar popup menutupnya, kecuali klik pada ▼ atau Salin.
 document.addEventListener("click", function (event) {
   const popup = document.getElementById("popupOpsiSalin");
 
@@ -944,9 +948,6 @@ document.addEventListener("keydown", function (event) {
 muat();
 </script>
 
-<div id="popupSaran" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.5); ...">
-  <div style="background:#fff; color:#222; width:100%; max-width:440px; ...">
-
 <div id="popupSaran" style="display:none;position:fixed;inset:0;z-index:10000;background:transparent;pointer-events:none;">
   <div style="position:fixed;left:0;top:0;
     width:min(320px,calc(100vw - 8px));max-height:calc(100vh - 24px);overflow-y:auto;
@@ -957,14 +958,14 @@ muat();
     box-shadow:0 2px 6px rgba(0,0,0,0.25);
     padding:10px 12px;box-sizing:border-box;
     font-size:12px;color:#374151;pointer-events:auto;">
-    
-    <div style="display:flex; justify-content:space-between; ...">
-      <h3 ...>Kesalahan</h3>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="margin:0 0 8px;font-size:14px;">Kesalahan</h3>
       <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;font-size:24px;cursor:pointer;">✕</button>
     </div>
-
+    
 <form id="formSaran">
-  <p style="margin:0 0 4px;">Jenis kesalahan:</p>
+  <p style="margin:0 0 6px;">Jenis kesalahan:</p>
 
   <div style="display:flex;flex-direction:column;gap:2px;">
     <label style="display:flex;align-items:center;gap:8px;margin:0;">
@@ -1037,8 +1038,7 @@ muat();
   background-color:#E5E7EB;
   background-image:linear-gradient(rgba(255,255,255,0.80),rgba(255,255,255,0.80)),url('./drawable/Bs_2.jpg');
   background-size:cover;background-position:center;background-repeat:no-repeat;
-  border:1px solid #D1D5DB;
-  border-radius:12px;padding:8px;box-sizing:border-box;
+  border-radius:12px;padding:18px;box-sizing:border-box;
   color:#374151;font-family:inherit;pointer-events:auto;">
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
@@ -1089,4 +1089,4 @@ muat();
 </div>
 
 </body>
-  </html>
+</html>
