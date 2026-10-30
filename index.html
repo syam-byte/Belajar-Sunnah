@@ -353,16 +353,52 @@ body {
 
 <nav class="bs-main-nav" aria-label="Navigasi utama">   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>   <span aria-hidden="true">|</span>   <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>   <span aria-hidden="true">|</span>   <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>   <span aria-hidden="true">|</span>   <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>   <span aria-hidden="true">|</span>   <a href="https://www.muslimpro.com/prayer-times/"      target="_blank" rel="noopener noreferrer">Prayer Times</a> </nav>
 
-<header class="bs-header">
+<header class="bs-header" id="header-beranda">
   <div class="bs-brand">
-    <img class="bs-logo"
-         src="BelajarSunnah.9.png"
-         alt="Logo Belajar Sunnah">
-
+    <img class="bs-logo" src="BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
     <div class="bs-brand-copy">
       <h1 class="bs-welcome-main">بلاجر سنة</h1>
       <p class="bs-welcome-meaning">Belajar Sunnah</p>
     </div>
+  </div>
+</header>
+
+<header class="bsh hidden" id="header-dalam">
+  <header class="bsh">
+  <div class="bsh-top">
+    <span>Contribute to our mission</span>
+    <a class="bsh-donate" href="#" target="_blank" rel="noopener">Donate Now</a>
+  </div>
+
+  <div class="bsh-brand">
+    <img src="BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
+    <div>
+      <div class="ar">بلاجر سنة</div>
+      <div class="id">Belajar Sunnah</div>
+    </div>
+  </div>
+
+  <div class="bsh-search">
+    <div class="bsh-field">
+      <input id="cari-header" type="search" placeholder="Search ..."
+        onkeydown="if(event.key==='Enter'){cariHadis('cari-header')}">
+      <button type="button" class="bsh-go" aria-label="Cari" onclick="cariHadis('cari-header')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3E8E8E" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <button type="button" class="bsh-ico" aria-label="Filter" title="Filter">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h5M14 6h7M3 12h9M18 12h3M3 18h3M12 18h9"/>
+        <circle cx="11" cy="6" r="2.2"/><circle cx="15" cy="12" r="2.2"/><circle cx="9" cy="18" r="2.2"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="bsh-crumb" id="bsh-crumb">
+    <a href="#beranda" onclick="buka('beranda');return false;">Home</a>
   </div>
 </header>
 
@@ -496,6 +532,12 @@ function buka(id) {
     target.classList.remove("hidden");
   }
 
+  // Beranda = header lama. Halaman lain = header baru.
+  const awal = (id === "beranda");
+  document.getElementById("header-beranda").classList.toggle("hidden", !awal);
+  document.getElementById("header-dalam").classList.toggle("hidden", awal);
+
+  perbaruiBreadcrumb(id);
   ukurScrollbar();
 }
 
