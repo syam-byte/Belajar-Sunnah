@@ -705,15 +705,10 @@ function pindah(arah) {
 }
 
 
+
 function bukaSaran(tombol) {
   const popup = document.getElementById("popupSaran");
-  const artikel = tombol.closest(".hadith");
-
-  popup.dataset.nomor = artikel
-    ? artikel.querySelector(".number")?.innerText || ""
-    : "";
-
-  popup.style.display = "flex";
+  ...
 }
 
 function tutupSaran() {
@@ -949,16 +944,27 @@ document.addEventListener("keydown", function (event) {
 muat();
 </script>
 
-<div id="popupSaran" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.5); align-items:center; justify-content:center; padding:16px; box-sizing:border-box;">
-  <div style="background:#fff; color:#222; width:100%; max-width:440px; max-height:90vh; overflow:auto; border-radius:12px; padding:20px; box-sizing:border-box;">
+<div id="popupSaran" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.5); ...">
+  <div style="background:#fff; color:#222; width:100%; max-width:440px; ...">
 
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h3 style="margin:0 0 16px;">Kesalahan</h3>
+<div id="popupSaran" style="display:none;position:fixed;inset:0;z-index:10000;background:transparent;pointer-events:none;">
+  <div style="position:fixed;left:0;top:0;
+    width:min(320px,calc(100vw - 8px));max-height:calc(100vh - 24px);overflow-y:auto;
+    background-color:#E5E7EB;
+    background-image:linear-gradient(rgba(255,255,255,0.65),rgba(255,255,255,0.65)),url('./drawable/Bs_2.jpg');
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    border:1px solid #D1D5DB;border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    padding:10px 12px;box-sizing:border-box;
+    font-size:12px;color:#374151;pointer-events:auto;">
+    
+    <div style="display:flex; justify-content:space-between; ...">
+      <h3 ...>Kesalahan</h3>
       <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;font-size:24px;cursor:pointer;">✕</button>
     </div>
 
 <form id="formSaran">
-  <p style="margin:0 0 6px;">Jenis kesalahan:</p>
+  <p style="margin:0 0 4px;">Jenis kesalahan:</p>
 
   <div style="display:flex;flex-direction:column;gap:2px;">
     <label style="display:flex;align-items:center;gap:8px;margin:0;">
@@ -1083,4 +1089,4 @@ muat();
 </div>
 
 </body>
-</html>
+  </html>
