@@ -882,12 +882,6 @@ function aturPosisiPopupSalin() {
   const kotak = popup.firstElementChild;
   const posisi = tombolSalinAktif.getBoundingClientRect();
 
-  const tepi = 4; // jarak ke tepi layar (px), kecilkan jadi 0 untuk mentok
-
-  kotak.style.left = tepi + "px";
-  kotak.style.width = (window.innerWidth - tepi * 2) + "px";
-  kotak.style.top = (posisi.bottom + 2) + "px";
-}
   const lebar = window.innerWidth - 24;
   const kiri = Math.max(
     12,
@@ -925,6 +919,7 @@ popup.style.padding = "0";
 
   kotak.style.position = "fixed";
   kotak.style.boxSizing = "border-box";
+  kotak.style.width = "calc(100vw - 24px)";
   kotak.style.margin = "0";
   kotak.style.maxHeight = "calc(100vh - 24px)";
   kotak.style.overflowY = "auto";
