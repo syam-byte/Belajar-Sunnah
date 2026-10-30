@@ -882,6 +882,12 @@ function aturPosisiPopupSalin() {
   const kotak = popup.firstElementChild;
   const posisi = tombolSalinAktif.getBoundingClientRect();
 
+  const tepi = 4; // jarak ke tepi layar (px), kecilkan jadi 0 untuk mentok
+
+  kotak.style.left = tepi + "px";
+  kotak.style.width = (window.innerWidth - tepi * 2) + "px";
+  kotak.style.top = (posisi.bottom + 2) + "px";
+}
   const lebar = window.innerWidth - 24;
   const kiri = Math.max(
     12,
