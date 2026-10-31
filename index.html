@@ -47,6 +47,7 @@
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
+html, body { overscroll-behavior-y: contain; }
 
 body {
   margin: 0;
@@ -491,7 +492,7 @@ body {
 </head>
 
 <body>
-<!-- VERSI 2026-10-31 v4: header-dalam dirapikan (urutan: menu, contribute, logo, pencarian, home) -->
+<!-- VERSI 2026-10-31 v5: tetap di halaman yang sama saat reload/scroll; v4: header-dalam dirapikan (urutan: menu, contribute, logo, pencarian, home) -->
 
 <nav class="bs-main-nav" aria-label="Navigasi utama">   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>   <span aria-hidden="true">|</span>   <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>   <span aria-hidden="true">|</span>   <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>   <span aria-hidden="true">|</span>   <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>   <span aria-hidden="true">|</span>   <a href="https://www.muslimpro.com/prayer-times/"      target="_blank" rel="noopener noreferrer">Prayer Times</a> </nav>
 
@@ -681,7 +682,12 @@ function perbaruiBreadcrumb(id) {
     (nama ? ` <span aria-hidden="true">»</span> <strong>${nama}</strong>` : "");
 }
 
+function simpan(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+function ambil(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+
 function buka(id) {
+  simpan("halamanAktif", id);
+  try { history.replaceState(null, "", id === "beranda" ? location.pathname + location.search : "#" + id); } catch (e) {}
   document.querySelectorAll("main section").forEach(function (bagian) {
     bagian.classList.add("hidden");
   });
@@ -751,7 +757,8 @@ async function muat() {
               : []));
 
     cocok = semua.slice();
-    hal = 0;
+    hal = parseInt(ambil("halHadis"), 10) || 0;
+    hal = Math.max(0, Math.min(hal, Math.ceil(cocok.length / perHalaman) - 1));
     tampilkan();
   } catch (kesalahan) {
     status.textContent =
@@ -764,6 +771,7 @@ function cariHadis(idInput = "cari-beranda") {
   if (!input) return;
 
   const kata = input.value.trim().toLocaleLowerCase();
+  simpan("halHadis", 0);
 
   if (!kata) {
     cocok = semua.slice();
@@ -887,6 +895,7 @@ function tampilkan() {
 function pindah(arah) {
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
   hal = Math.max(0, Math.min(hal + arah, jumlahHalaman - 1));
+  simpan("halHadis", hal);
   tampilkan();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1189,6 +1198,11 @@ document.addEventListener("keydown", function (event) {
 });
 
 muat();
+(function () {
+  const dariHash = decodeURIComponent((location.hash || "").slice(1));
+  const tersimpan = (dariHash && document.getElementById(dariHash)) ? dariHash : ambil("halamanAktif");
+  if (tersimpan && document.getElementById(tersimpan)) buka(tersimpan);
+})();
 </script>
 
 <!-- POPUP SARAN -->
