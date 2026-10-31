@@ -47,7 +47,6 @@
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
-html, body { overscroll-behavior-y: contain; }
 
 body {
   margin: 0;
@@ -488,11 +487,35 @@ body {
 .bsh-crumb a:hover { text-decoration: underline; }
 .bsh-crumb strong { font-weight: 500; }
 
+/* MENU FOOTER */
+.bs-footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  padding: 18px 10px;
+  margin-top: 20px;
+  background: rgba(229, 231, 235, 0.75);
+  border-top: 1px solid rgba(55, 65, 81, 0.15);
+  font-size: 13px;
+}
+
+.bs-footer-nav a {
+  color: #374151;
+  text-decoration: none;
+}
+
+.bs-footer-nav a:hover {
+  text-decoration: underline;
+}
+
 </style>
 </head>
 
 <body>
-<!-- VERSI 2026-10-31 v5: tetap di halaman yang sama saat reload/scroll; v4: header-dalam dirapikan (urutan: menu, contribute, logo, pencarian, home) -->
+<!-- VERSI 2026-10-31 v4: header-dalam dirapikan (urutan: menu, contribute, logo, pencarian, home) -->
 
 <nav class="bs-main-nav" aria-label="Navigasi utama">   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>   <span aria-hidden="true">|</span>   <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>   <span aria-hidden="true">|</span>   <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>   <span aria-hidden="true">|</span>   <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>   <span aria-hidden="true">|</span>   <a href="https://www.muslimpro.com/prayer-times/"      target="_blank" rel="noopener noreferrer">Prayer Times</a> </nav>
 
@@ -604,6 +627,20 @@ body {
       </tbody>
     </table>
   </section>
+  
+  <nav class="bs-footer-nav" aria-label="Menu informasi">
+  <a href="#tentang">Tentang</a>
+  <span>|</span>
+  <a href="#berita">Berita</a>
+  <span>|</span>
+  <a href="#dukungan">Dukungan</a>
+  <span>|</span>
+  <a href="#pengembang">Pengembang</a>
+  <span>|</span>
+  <a href="#kontak">Kontak</a>
+  <span>|</span>
+  <a href="#donasi">Donasi</a>
+</nav>
 
   <!-- HALAMAN SUNNAH BARU: terpisah dari koleksi Bukhari -->
   <section id="sunnah" class="panel hidden">
@@ -682,12 +719,7 @@ function perbaruiBreadcrumb(id) {
     (nama ? ` <span aria-hidden="true">»</span> <strong>${nama}</strong>` : "");
 }
 
-function simpan(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
-function ambil(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
-
 function buka(id) {
-  simpan("halamanAktif", id);
-  try { history.replaceState(null, "", id === "beranda" ? location.pathname + location.search : "#" + id); } catch (e) {}
   document.querySelectorAll("main section").forEach(function (bagian) {
     bagian.classList.add("hidden");
   });
@@ -757,8 +789,7 @@ async function muat() {
               : []));
 
     cocok = semua.slice();
-    hal = parseInt(ambil("halHadis"), 10) || 0;
-    hal = Math.max(0, Math.min(hal, Math.ceil(cocok.length / perHalaman) - 1));
+    hal = 0;
     tampilkan();
   } catch (kesalahan) {
     status.textContent =
@@ -771,7 +802,6 @@ function cariHadis(idInput = "cari-beranda") {
   if (!input) return;
 
   const kata = input.value.trim().toLocaleLowerCase();
-  simpan("halHadis", 0);
 
   if (!kata) {
     cocok = semua.slice();
@@ -895,7 +925,6 @@ function tampilkan() {
 function pindah(arah) {
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
   hal = Math.max(0, Math.min(hal + arah, jumlahHalaman - 1));
-  simpan("halHadis", hal);
   tampilkan();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1198,11 +1227,6 @@ document.addEventListener("keydown", function (event) {
 });
 
 muat();
-(function () {
-  const dariHash = decodeURIComponent((location.hash || "").slice(1));
-  const tersimpan = (dariHash && document.getElementById(dariHash)) ? dariHash : ambil("halamanAktif");
-  if (tersimpan && document.getElementById(tersimpan)) buka(tersimpan);
-})();
 </script>
 
 <!-- POPUP SARAN -->
