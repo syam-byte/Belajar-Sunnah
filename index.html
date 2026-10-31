@@ -47,6 +47,7 @@
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
+html, body { overscroll-behavior-y: contain; }
 
 body {
   margin: 0;
@@ -515,7 +516,7 @@ body {
 </head>
 
 <body>
-<!-- VERSI 2026-10-31 v4: header-dalam dirapikan (urutan: menu, contribute, logo, pencarian, home) -->
+<!-- VERSI 2026-10-31 v6: Salin tanpa alert besar; reload tetap di halaman; v4: header-dalam dirapikan (urutan: menu, contribute, logo, pencarian, home) -->
 
 <nav class="bs-main-nav" aria-label="Navigasi utama">   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>   <span aria-hidden="true">|</span>   <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>   <span aria-hidden="true">|</span>   <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>   <span aria-hidden="true">|</span>   <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>   <span aria-hidden="true">|</span>   <a href="https://www.muslimpro.com/prayer-times/"      target="_blank" rel="noopener noreferrer">Prayer Times</a> </nav>
 
@@ -718,7 +719,12 @@ function perbaruiBreadcrumb(id) {
     (nama ? ` <span aria-hidden="true">»</span> <strong>${nama}</strong>` : "");
 }
 
+function simpan(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+function ambil(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+
 function buka(id) {
+  simpan("halamanAktif", id);
+  try { history.replaceState(null, "", id === "beranda" ? location.pathname + location.search : "#" + id); } catch (e) {}
   document.querySelectorAll("main section").forEach(function (bagian) {
     bagian.classList.add("hidden");
   });
@@ -788,7 +794,8 @@ async function muat() {
               : []));
 
     cocok = semua.slice();
-    hal = 0;
+    hal = parseInt(ambil("halHadis"), 10) || 0;
+    hal = Math.max(0, Math.min(hal, Math.ceil(cocok.length / perHalaman) - 1));
     tampilkan();
   } catch (kesalahan) {
     status.textContent =
@@ -801,6 +808,7 @@ function cariHadis(idInput = "cari-beranda") {
   if (!input) return;
 
   const kata = input.value.trim().toLocaleLowerCase();
+  simpan("halHadis", 0);
 
   if (!kata) {
     cocok = semua.slice();
@@ -924,6 +932,7 @@ function tampilkan() {
 function pindah(arah) {
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
   hal = Math.max(0, Math.min(hal + arah, jumlahHalaman - 1));
+  simpan("halHadis", hal);
   tampilkan();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -983,6 +992,46 @@ document.addEventListener("change", function (event) {
 
 /* ============ SHARE & SALIN ============ */
 
+function tampilkanCeklis() {
+  const ceklis = document.createElement("div");
+  ceklis.innerHTML = "✓";
+  ceklis.style.cssText =
+    "position:fixed;top:20px;left:50%;transform:translateX(-50%);" +
+    "width:48px;height:48px;border-radius:50%;background:#00e676;" +
+    "color:white;display:flex;align-items:center;justify-content:center;" +
+    "font-size:32px;font-weight:bold;z-index:99999;" +
+    "box-shadow:0 3px 12px #0003;pointer-events:none;";
+  document.body.appendChild(ceklis);
+  setTimeout(function () { ceklis.remove(); }, 1200);
+}
+
+function salinCadangan(teks) {
+  const area = document.createElement("textarea");
+  area.value = teks;
+  area.setAttribute("readonly", "");
+  area.style.cssText = "position:fixed;top:0;left:0;opacity:0;";
+  document.body.appendChild(area);
+  area.select();
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch (e) {}
+  area.remove();
+  return ok;
+}
+
+async function salinKeClipboard(teks) {
+  try {
+    await navigator.clipboard.writeText(teks);
+    tampilkanCeklis();
+    return;
+  } catch (e) {}
+  if (salinCadangan(teks)) {
+    tampilkanCeklis();
+  } else {
+    window.prompt("Salin teks hadis berikut:", teks);
+  }
+}
+
+
 function berbagiHadis(tombol) {
   const artikel = tombol.closest(".hadith");
 
@@ -1030,14 +1079,10 @@ async function salinHadis(tombol) {
     tutupOpsiSalin();
   }
 
-  const teks = artikel.innerText;
-
-  try {
-    await navigator.clipboard.writeText(teks);
-    alert("Teks hadis berhasil disalin.");
-  } catch (error) {
-    window.prompt("Salin teks hadis berikut:", teks);
-  }
+  // Salin teks hadis saja, tanpa baris tombol Saran | Share | Salin ▼
+  const salinan = artikel.cloneNode(true);
+  salinan.lastElementChild?.remove();
+  salinKeClipboard(salinan.innerText.trim());
 }
 
 
@@ -1105,22 +1150,7 @@ function terapkanOpsiSalin() {
     return;
   }
 
-  navigator.clipboard.writeText(teksSalin).then(function () {
-    const ceklis = document.createElement("div");
-    ceklis.innerHTML = "✓";
-    ceklis.style.cssText =
-      "position:fixed;top:20px;left:50%;transform:translateX(-50%);" +
-      "width:48px;height:48px;border-radius:50%;background:#00e676;" +
-      "color:white;display:flex;align-items:center;justify-content:center;" +
-      "font-size:32px;font-weight:bold;z-index:99999;" +
-      "box-shadow:0 3px 12px #0003;";
-    document.body.appendChild(ceklis);
-    setTimeout(function () {
-      ceklis.remove();
-    }, 1200);
-  }).catch(function () {
-    window.prompt("Salin teks hadis berikut:", teksSalin);
-  });
+  salinKeClipboard(teksSalin);
 }
 
 
@@ -1226,6 +1256,11 @@ document.addEventListener("keydown", function (event) {
 });
 
 muat();
+(function () {
+  const dariHash = decodeURIComponent((location.hash || "").slice(1));
+  const tersimpan = (dariHash && document.getElementById(dariHash)) ? dariHash : ambil("halamanAktif");
+  if (tersimpan && document.getElementById(tersimpan)) buka(tersimpan);
+})();
 </script>
 
 <!-- POPUP SARAN -->
