@@ -7,28 +7,6 @@
 <meta name="theme-color" content="#E5E7EB">
 <title>Belajar Sunnah</title>
 
-/* ===== BAB & REFERENSI BERTABEL ===== */
-.bab {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 12px 0;
-  padding: 10px 16px;
-  background: #fff;
-  border: 1px solid #E5E7EB;
-  border-radius: 8px;
-  color: #374151;
-}
-
-.ref-row {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 8px;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.ref-row.kecil { font-size: 12px; color: #6B7280; }
-
 <style>
 :root {
   --sbw: 0px;
@@ -595,6 +573,28 @@ body {
   }
 }
 
+/* ===== BAB & REFERENSI BERTABEL ===== */
+.bab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  color: #374151;
+}
+
+.ref-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.ref-row.kecil { font-size: 12px; color: #6B7280; }
+
 </style>
 </head>
 
@@ -969,7 +969,7 @@ const refTambahan = hadis.in_book_reference
 
     return `
   ${babHTML}
-     <article class="hadith" style="width:calc(100vw - var(--sbw));max-width:none;box-sizing:border-box;margin:12px 0 12px calc(50% - (100vw - var(--sbw)) / 2);padding:16px;border:1px solid #E5E7EB;border-width:1px 0;border-radius:0;box-shadow:none;background:#fff;">
+     <article class="hadith" style="width:calc(100vw - var(--sbw));max-width:none;box-sizing:border-box;margin:12px 0 12px calc(50% - (100vw - var(--sbw)) / 2);padding:16px;border:1px solid #AABBCD;border-width:1px 0;border-radius:0;box-shadow:none;background:#fff;">
         <div class="number">Hadis Nomor ${nomorAman}</div>
 
         <div>${terjemahan || "."}</div>
@@ -1509,3 +1509,9 @@ muat();
 
 </body>
 </html>
+
+
+
+BAB & REFERENSI BERTABEL ===== */ .bab { display: flex; justify-content: space-between; align-items: center; margin: 12px 0; padding: 10px 16px; background: #fff; border: 1px solid #E5E7EB; border-radius: 8px; color: #374151; } .ref-row { display: grid; grid-template-columns: 150px 1fr; gap: 8px; font-size: 13px; line-height: 1.5; } .ref-row.kecil { font-size: 12px; color: #6B7280; }
+
+kenapa ada Tulisan ini di atas header web saya
