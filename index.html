@@ -7,6 +7,28 @@
 <meta name="theme-color" content="#E5E7EB">
 <title>Belajar Sunnah</title>
 
+/* ===== BAB & REFERENSI BERTABEL ===== */
+.bab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  color: #374151;
+}
+
+.ref-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.ref-row.kecil { font-size: 12px; color: #6B7280; }
+
 <style>
 :root {
   --sbw: 0px;
@@ -410,8 +432,8 @@ body {
 
 .bsh-brand .ar {
   font-family: Arab, serif;
-  font-size: 25px;
-  line-height: 1.2;
+  font-size: 20px;
+  line-height: 1.0;
 }
 
 .bsh-brand .id {
@@ -537,6 +559,42 @@ body {
   text-decoration: underline;
 }
 
+/* ===== MODE DESKTOP: terjemahan kiri, Arab kanan (ala sunnah.com) ===== */
+@media (min-width: 801px) {
+  main { max-width: 1100px; }
+
+  .hadith {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 10px;
+    width: 100% !important;
+    margin: 12px 0 !important;
+    padding: 20px 24px !important;
+    border: 1px solid #D1D5DB !important;
+    border-radius: 8px !important;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08) !important;
+  }
+
+  /* baris 1: nomor hadis */
+  .hadith > .number { grid-column: 1 / -1; }
+
+  /* baris 2: terjemahan kiri, Arab kanan */
+  .hadith > div:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .hadith > .arabic          { grid-column: 2; grid-row: 2; margin: 0; }
+
+  /* baris 3: rujukan kiri, Saran | Share | Salin kanan */
+  .hadith > div:nth-child(4) {
+    grid-column: 1; grid-row: 3; align-self: end;
+  }
+  .hadith > div:last-child {
+    grid-column: 2; grid-row: 3;
+    justify-self: end; align-self: end;
+    margin-top: 0 !important;
+  }
+}
+
 </style>
 </head>
 
@@ -646,7 +704,7 @@ body {
           <td style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; color:#374151; cursor:pointer;" onclick="buka('abu-dawud')">
             <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
               <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">سنن أبي داود</span>
-              <span style="flex: 1; text-align: right; font-size: 15px; font-family: 'Lionking', sans-serif;">Abu Dawud</span>
+              <span style="flex: 1; text-align: right; font-size: 19px; font-family: 'Lionking', sans-serif;">Abu Dawud</span>
             </div>
           </td>
         </tr>
@@ -684,7 +742,7 @@ body {
   </section>
 
   <section id="abu-dawud" class="panel hidden">
-    <h2>Sunan Abi Dawud</h2>
+    <h2>Sunan Abu Dawud</h2>
     <p>Koleksi hadis Sunan Abi Dawud belum tersedia di halaman ini.</p>
   </section>
 </main>
@@ -891,8 +949,26 @@ function tampilkan() {
     const arab = hadis.arabic
       ? bersihArab(hadis.arabic)
       : "Teks Arab belum tersedia";
+      
+      const babNama = bersih(hadis.chapter_title || hadis.english_title);
+const babNo = bersih(hadis.chapter_number);
+const sebelumnya = indeks > 0 ? bagian[indeks - 1] : null;
+const babSama = sebelumnya &&
+  bersih(sebelumnya.chapter_title || sebelumnya.english_title) === babNama;
+
+const babHTML = (babNama && !babSama)
+  ? `<div class="bab">
+       <span>${babNo ? "(" + amanHTML(babNo) + ") " : ""}${amanHTML(babNama)}</span>
+       <span dir="rtl">${amanHTML(hadis.chapter_arabic)}</span>
+     </div>`
+  : "";
+
+const refTambahan = hadis.in_book_reference
+  ? `<div class="ref-row kecil"><span>In-book reference</span><span>${amanHTML(hadis.in_book_reference)}</span></div>`
+  : "";
 
     return `
+  ${babHTML}
      <article class="hadith" style="width:calc(100vw - var(--sbw));max-width:none;box-sizing:border-box;margin:12px 0 12px calc(50% - (100vw - var(--sbw)) / 2);padding:16px;border:1px solid #E5E7EB;border-width:1px 0;border-radius:0;box-shadow:none;background:#fff;">
         <div class="number">Hadis Nomor ${nomorAman}</div>
 
@@ -900,10 +976,13 @@ function tampilkan() {
 
         <div class="arabic" lang="ar" dir="rtl">${arab}</div>
 
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span>Rujukan</span>
-          <span>${amanHTML(hadis.reference) || "Belum tersedia"}</span>
-        </div>
+        <div class="ref-box">
+  <div class="ref-row" style="display:grid;align-items:center;">
+    <span><b>Rujukan</b></span>
+    <span>${amanHTML(hadis.reference) || "Belum tersedia"}</span>
+  </div>
+  ${refTambahan}
+</div>
 
         <div style="display:flex;justify-content:flex-start;align-items:center;gap:10px;margin-top:12px;font-size:14px;font-family:'Markazi Text',serif;">
           <button type="button"
