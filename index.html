@@ -436,15 +436,15 @@ body {
   min-height: 26px;
 }
 
-.bsh-field { flex:1; display:flex; height:44px; border-radius:8px; overflow:hidden; background:#EAF1F1; }
+.bsh-field { flex:1; display:flex; height:44px; border-radius:8px; overflow:hidden; background:#E5E7EB; }
 .bsh-field input {
   flex:1; min-width:0; width:auto; height:100%; margin:0; padding:0 12px;
-  border:0; border-radius:0; background:transparent; color:#374151; font-size:16px;
+  border:0; border-radius:0; background:transparent; color:#7384A0; font-size:16px;
 }
 .bsh .bsh-field input:focus { outline:none; }
 .bsh .bsh-go {
   width:52px; height:100%; margin:0; padding:0; border:0; border-radius:0;
-  background:#D9E5E5; display:flex; align-items:center; justify-content:center;
+  background:#4E5D73; display:flex; align-items:center; justify-content:center;
 }
 .bsh .bsh-go:hover { background:#CBDADA; }
 .bsh .bsh-ico {
@@ -459,10 +459,28 @@ body {
 .bsh-crumb strong { font-weight:500; }
 
 .bsh-brand {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 9px;
+
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2px 8px;
+  box-sizing: border-box;
+
   background: #83adad;
+}
+
+#header-dalam {
+  padding-top: 0;
 }
 
 </style>
