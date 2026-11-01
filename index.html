@@ -916,7 +916,6 @@ function cariHadis(idInput = "cari-beranda") {
   tampilkan();
 }
 
-
 function tampilkan() {
   const hasil = document.getElementById("hasil");
   const status = document.getElementById("status");
@@ -932,52 +931,52 @@ function tampilkan() {
       hadis.hadith_number || hadis.number || mulai + indeks + 1;
     const nomorAman = amanHTML(nomor);
 
-    // Mendukung format JSON lama maupun baru
     const terjemahan = amanHTML(
       hadis.translation_id ?? hadis.indonesian ?? hadis.translation ?? ""
     );
-    const sanadTeks = amanHTML(
-      hadis.sanad_id ?? hadis.sanad ?? ""
-    );
+    const sanadTeks = amanHTML(hadis.sanad_id ?? hadis.sanad ?? "");
     const arab = hadis.arabic
       ? bersihArab(hadis.arabic)
       : "Teks Arab belum tersedia";
 
-    const babNama = bersih(hadis.chapter_title || hadis.english_title);
-    const babNo = bersih(hadis.chapter_number);
+    const babNama = amanHTML(hadis.chapter_title || hadis.english_title);
+    const babNo = amanHTML(hadis.chapter_number);
     const sebelumnya = indeks > 0 ? bagian[indeks - 1] : null;
     const babSama = sebelumnya &&
-      bersih(sebelumnya.chapter_title || sebelumnya.english_title) === babNama;
+      bersih(sebelumnya.chapter_title || sebelumnya.english_title) ===
+      bersih(hadis.chapter_title || hadis.english_title);
+
+    const rujukan = amanHTML(hadis.reference) || ("Sahih al-Bukhari " + nomorAman);
 
     return (
-      (babSama ? "" :
+      (babSama || !babNama ? "" :
         '<h3 class="bab">Bab ' + babNo + ": " + babNama + "</h3>") +
-      '<article class="hadis">' +
-        '<div class="nomor">Hadis No. ' + nomorAman + "</div>" +
-        '<div class="arab" dir="rtl">' + arab + "</div>" +
-        (sanadTeks
-          ? '<div class="sanad"><strong>Sanad:</strong> ' + sanadTeks + "</div>"
-          : "") +
-        '<div class="terjemah">' + terjemahan + "</div>" +
-      "</article>"
+      '<div class="hadith" data-sanad="' + sanadTeks + '">' +
+        '<div class="number">Hadis No. ' + nomorAman + "</div>" +
+        "<div>" + terjemahan + "</div>" +
+        '<div class="arabic">' + arab + "</div>" +
+        '<div style="display:flex;align-items:center;gap:6px;font-size:13px;">' +
+          "<span>Referensi:</span><span>" + rujukan + "</span></div>" +
+        '<div style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;">' +
+          '<button type="button" onclick="bukaSaran(this)">Saran</button>' +
+          "<span>|</span>" +
+          '<button type="button" onclick="berbagiHadis(this)">Share</button>' +
+          "<span>|</span>" +
+          '<button type="button" onclick="salinHadis(this)">Salin</button>' +
+          '<button type="button" onclick="bukaOpsiSalin(this)">▼</button>' +
+        "</div>" +
+      "</div>"
     );
-  }).join("");
-}|| "<p>Hadis tidak ditemukan.</p>";
+  }).join("") || "<p>Hadis tidak ditemukan.</p>";
 
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
   const kontrol = document.getElementById("halaman");
 
   kontrol.innerHTML = jumlahHalaman > 1
     ? `
-      <button onclick="pindah(-1)" ${hal === 0 ? "disabled" : ""}>
-        Sebelumnya
-      </button>
+      <button onclick="pindah(-1)" ${hal === 0 ? "disabled" : ""}>Sebelumnya</button>
       <span>Halaman ${hal + 1} dari ${jumlahHalaman}</span>
-      <button onclick="pindah(1)" ${
-        hal >= jumlahHalaman - 1 ? "disabled" : ""
-      }>
-        Berikutnya
-      </button>
+      <button onclick="pindah(1)" ${hal >= jumlahHalaman - 1 ? "disabled" : ""}>Berikutnya</button>
     `
     : "";
 
@@ -1166,6 +1165,11 @@ function terapkanOpsiSalin() {
     if (arab && arab.innerText.trim()) {
       bagian.push(arab.innerText.trim());
     }
+  }
+  
+    if (document.getElementById("opsiSanad").checked) {
+    const sanad = (artikel.dataset.sanad || "").trim();
+    if (sanad) bagian.push("Sanad: " + sanad);
   }
 
   // Bio sanad belum tersedia, jadi sementara tidak menambahkan teks.
