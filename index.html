@@ -1153,46 +1153,49 @@ function terapkanOpsiSalin() {
 
   const bagian = [];
 
-  // TERJEMAHAN INDONESIA
-  if (document.getElementById("opsiIndonesia").checked) {
-    const teksIndonesia = artikel.querySelector(
-      ":scope > div:nth-child(2)"
-    );
+  const bagian = [];
 
-    if (teksIndonesia && teksIndonesia.innerText.trim()) {
-      bagian.push(teksIndonesia.innerText.trim());
+// SANAD (DI ATAS)
+if (document.getElementById("opsiSanad").checked) {
+  let sanad = (artikel.dataset.sanad || "").trim();
+
+  if (!sanad) {
+    const angka =
+      (artikel.querySelector(".number")?.innerText || "")
+        .match(/\d+/g) || [];
+
+    for (const n of angka) {
+      const h = semua.find(function (x) {
+        return String(
+          x.hadith_number ?? x.number ?? ""
+        ).trim() === n;
+      });
+
+      if (h) {
+        sanad = bersih(
+          h.sanad_id ?? h.sanad ?? ""
+        ).trim();
+
+        if (sanad) break;
+      }
     }
   }
 
-  // SANAD
-  if (document.getElementById("opsiSanad").checked) {
-    let sanad = (artikel.dataset.sanad || "").trim();
+  if (sanad) {
+    bagian.push(sanad);
+  }
+}
 
-    if (!sanad) {
-      const angka =
-        (artikel.querySelector(".number")?.innerText || "")
-          .match(/\d+/g) || [];
+// TERJEMAHAN INDONESIA / MATAN (DI BAWAH)
+if (document.getElementById("opsiIndonesia").checked) {
+  const teksIndonesia = artikel.querySelector(
+    ":scope > div:nth-child(2)"
+  );
 
-      for (const n of angka) {
-        const h = semua.find(function (x) {
-          return String(
-            x.hadith_number ?? x.number ?? ""
-          ).trim() === n;
-        });
-
-        if (h) {
-          sanad = bersih(
-            h.sanad_id ?? h.sanad ?? ""
-          ).trim();
-
-          if (sanad) break;
-        }
-      }
-    }
-
-    if (sanad) {
-      bagian.push("Sanad: " + sanad);
-    }
+  if (teksIndonesia && teksIndonesia.innerText.trim()) {
+    bagian.push(
+      "Matan:\n" + teksIndonesia.innerText.trim()
+    );
   }
 }
 
