@@ -599,7 +599,7 @@ body {
 </head>
 
 <body>
-<!-- VERSI 2026-10-31 v6: Salin tanpa alert besar; reload tetap di halaman; v4: header-dalam dirapikan (urutan: menu, contribute, logo, pencarian, home) -->
+<!-- VERSI 2026-11-01 v7: Salin dirapikan (urutan Sanad > Indonesia/Matan > Arab), bug salinPilihanHadis & opsiArab diperbaiki -->
 
 <nav class="bs-main-nav" aria-label="Navigasi utama">   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>   <span aria-hidden="true">|</span>   <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>   <span aria-hidden="true">|</span>   <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>   <span aria-hidden="true">|</span>   <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>   <span aria-hidden="true">|</span>   <a href="https://www.muslimpro.com/prayer-times/"      target="_blank" rel="noopener noreferrer">Prayer Times</a> </nav>
 
@@ -1119,13 +1119,14 @@ async function salinHadis(tombol) {
 
   const popup = document.getElementById("popupOpsiSalin");
 
+  // Popup pilihan terbuka untuk hadis ini: salin sesuai pilihan.
   if (
     popup &&
     popup.style.display !== "none" &&
     tombolSalinAktif &&
     tombolSalinAktif.closest(".hadith") === artikel
   ) {
-    salinPilihanHadis(tombol);
+    terapkanOpsiSalin();
     return;
   }
 
@@ -1140,6 +1141,35 @@ async function salinHadis(tombol) {
 }
 
 
+/* ============ SALIN SESUAI PILIHAN ============
+   Urutan hasil: Sanad -> Indonesia (Matan) -> Arab -> Referensi */
+
+const normNomor = function (v) {
+  return String(v ?? "").trim().replace(/^0+/, "");
+};
+
+function ambilSanad(artikel) {
+  let sanad = (artikel.dataset.sanad || "").trim();
+  if (sanad) return sanad;
+
+  const angka =
+    (artikel.querySelector(".number")?.innerText || "")
+      .match(/\d+/g) || [];
+
+  for (const n of angka) {
+    const h = semua.find(function (x) {
+      return normNomor(x.hadith_number ?? x.number) === normNomor(n);
+    });
+
+    if (h) {
+      sanad = String(bersih(h.sanad_id ?? h.sanad ?? "") || "").trim();
+      if (sanad) return sanad;
+    }
+  }
+
+  return "";
+}
+
 function terapkanOpsiSalin() {
   if (!tombolSalinAktif) return;
 
@@ -1148,101 +1178,45 @@ function terapkanOpsiSalin() {
 
   const bagian = [];
 
-  // TERJEMAHAN INDONESIA
-  if (document.getElementById("opsiIndonesia").checked) {
-    const teksIndonesia = artikel.querySelector(
-      ":scope > div:nth-child(2)"
-    );
-
-    if (teksIndonesia && teksIndonesia.innerText.trim()) {
-      bagian.push(teksIndonesia.innerText.trim());
-    }
+  // 1. SANAD (paling atas)
+  if (document.getElementById("opsiSanad")?.checked) {
+    const sanad = ambilSanad(artikel);
+    if (sanad) bagian.push("Sanad:\n" + sanad);
   }
 
-  // SANAD
-  if (document.getElementById("opsiSanad").checked) {
-    let sanad = (artikel.dataset.sanad || "").trim();
-
-    if (!sanad) {
-      const angka =
-        (artikel.querySelector(".number")?.innerText || "")
-          .match(/\d+/g) || [];
-
-      for (const n of angka) {
-        const h = semua.find(function (x) {
-          return String(
-            x.hadith_number ?? x.number ?? ""
-          ).trim() === n;
-        });
-
-        if (h) {
-          sanad = bersih(
-            h.sanad_id ?? h.sanad ?? ""
-          ).trim();
-
-          if (sanad) break;
-        }
-      }
-    }
-
-    if (sanad) {
-      bagian.push("Sanad: " + sanad);
-    }
-  }
-}
-
-// TERJEMAHAN INDONESIA / MATAN (DI BAWAH)
-if (document.getElementById("opsiIndonesia").checked) {
-  const teksIndonesia = artikel.querySelector(
-    ":scope > div:nth-child(2)"
-  );
-
-  if (teksIndonesia && teksIndonesia.innerText.trim()) {
-    bagian.push(
-      "Matan:\n" + teksIndonesia.innerText.trim()
-    );
-  }
-}
-
-  if (document.getElementById("opsiArabic").checked) {
-    const arab = artikel.querySelector(".arabic");
-    if (arab && arab.innerText.trim()) {
-      bagian.push(arab.innerText.trim());
-    }
-  }
-  
-    if (document.getElementById("opsiSanad").checked) {
-    const sanad = (artikel.dataset.sanad || "").trim();
-    if (sanad) bagian.push("Sanad: " + sanad);
+  // 2. INDONESIA / MATAN
+  if (document.getElementById("opsiIndonesia")?.checked) {
+    const el = artikel.querySelector(":scope > div:nth-child(2)");
+    const teks = el?.innerText.trim();
+    if (teks) bagian.push("Matan:\n" + teks);
   }
 
-  // Bio sanad belum tersedia, jadi sementara tidak menambahkan teks.
-  // URL juga sementara null sampai domain final siap.
+  // 3. ARAB
+  if (document.getElementById("opsiArabic")?.checked) {
+    const el = artikel.querySelector(".arabic");
+    const teks = el?.innerText.trim();
+    if (teks) bagian.push("Arab:\n" + teks);
+  }
 
+  // 4. REFERENSI
   const nomorTeks =
     artikel.querySelector(".number")?.innerText.trim() || "";
   const pilihanReferensi =
     document.querySelector('input[name="opsiReferensi"]:checked')?.value;
 
-  if (pilihanReferensi === "ringkas") {
-    const referensi = artikel.querySelector(
-      'div[style*="align-items:center"] span:nth-child(2)'
-    );
-    if (referensi && referensi.innerText.trim()) {
-      bagian.push(referensi.innerText.trim());
-    } else if (nomorTeks) {
-      bagian.push(nomorTeks);
-    }
-  } else if (pilihanReferensi === "sitasi") {
-    const referensi = artikel.querySelector(
-      'div[style*="align-items:center"] span:nth-child(2)'
-    );
-    if (referensi && referensi.innerText.trim()) {
-      bagian.push("Sitasi: " + referensi.innerText.trim());
-    } else if (nomorTeks) {
-      bagian.push("Sitasi: " + nomorTeks);
-    }
+  const elReferensi = artikel.querySelector(
+    'div[style*="align-items:center"] span:nth-child(2)'
+  );
+  const teksReferensi =
+    elReferensi?.innerText.trim() || nomorTeks;
+
+  if (pilihanReferensi === "ringkas" && teksReferensi) {
+    bagian.push(teksReferensi);
+  } else if (pilihanReferensi === "sitasi" && teksReferensi) {
+    bagian.push("Sitasi: " + teksReferensi);
   }
+
+  // URL sementara dikosongkan sampai domain final siap.
 
   const teksSalin = bagian.join("\n\n");
 
@@ -1465,10 +1439,14 @@ muat();
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:stretch;">
 
-      <!-- KOTAK 1: Hadist Text -->
+      <!-- KOTAK 1: Hadist Text (urutan salinan: Sanad > Indonesia > Arabic) -->
       <div style="border:1px dashed #9CA3AF;border-radius:10px;padding:8px 10px;background:rgba(255,255,255,0.55);">
         <div style="text-align:center;font-size:12px;font-weight:700;margin-bottom:6px;">Hadist Text</div>
 
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiSanad" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Sanad
+        </label>
         <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
           <input type="checkbox" id="opsiIndonesia" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
           Indonesia
@@ -1476,10 +1454,6 @@ muat();
         <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
           <input type="checkbox" id="opsiArabic" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
           Arabic
-        </label>
-        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
-          <input type="checkbox" id="opsiSanad" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
-          Sanad
         </label>
       </div>
 
