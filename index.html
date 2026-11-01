@@ -930,30 +930,6 @@ function tampilkan() {
   hasil.innerHTML = bagian.map(function (hadis, indeks) {
     const nomor =
       hadis.hadith_number || hadis.number || mulai + indeks + 1;
-      
-      hasil.innerHTML = bagian.map(function (hadis, indeks) {
-    const nomor =
-      hadis.hadith_number || hadis.number || mulai + indeks + 1;
-
-    // Membaca format JSON lama maupun baru
-    const nomorAman = amanHTML(nomor);
-
-    const terjemahan = amanHTML(
-      hadis.translation_id ??
-      hadis.indonesian ??
-      hadis.translation ??
-      ""
-    );
-
-    const sanadTeks = amanHTML(
-      hadis.sanad_id ??
-      hadis.sanad ??
-      ""
-    );
-
-    const arab = hadis.arabic
-      ? bersihArab(hadis.arabic)
-      : "Teks Arab belum tersedia";
 
     const nomorAman = amanHTML(nomor);
     const terjemahan = amanHTML(hadis.translation_id);
