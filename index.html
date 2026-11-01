@@ -1153,12 +1153,48 @@ function terapkanOpsiSalin() {
 
   const bagian = [];
 
+  // TERJEMAHAN INDONESIA
   if (document.getElementById("opsiIndonesia").checked) {
-    const teksIndonesia = artikel.querySelector(":scope > div:nth-child(2)");
+    const teksIndonesia = artikel.querySelector(
+      ":scope > div:nth-child(2)"
+    );
+
     if (teksIndonesia && teksIndonesia.innerText.trim()) {
       bagian.push(teksIndonesia.innerText.trim());
     }
   }
+
+  // SANAD
+  if (document.getElementById("opsiSanad").checked) {
+    let sanad = (artikel.dataset.sanad || "").trim();
+
+    if (!sanad) {
+      const angka =
+        (artikel.querySelector(".number")?.innerText || "")
+          .match(/\d+/g) || [];
+
+      for (const n of angka) {
+        const h = semua.find(function (x) {
+          return String(
+            x.hadith_number ?? x.number ?? ""
+          ).trim() === n;
+        });
+
+        if (h) {
+          sanad = bersih(
+            h.sanad_id ?? h.sanad ?? ""
+          ).trim();
+
+          if (sanad) break;
+        }
+      }
+    }
+
+    if (sanad) {
+      bagian.push("Sanad: " + sanad);
+    }
+  }
+}
 
   if (document.getElementById("opsiArabic").checked) {
     const arab = artikel.querySelector(".arabic");
