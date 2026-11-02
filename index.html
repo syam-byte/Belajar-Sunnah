@@ -579,6 +579,7 @@ body {
   }
 }
 
+/* ===== BAB & REFERENSI BERTABEL ===== */
 .bab {
   display: flex;
   justify-content: space-between;
@@ -589,6 +590,48 @@ body {
   border: 1px solid #E5E7EB;
   border-radius: 8px;
   color: #374151;
+}
+
+.ref-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.ref-row.kecil { font-size: 12px; color: #6B7280; }
+
+.ref {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.aksi {
+  display: flex;
+  align-items: center;
+  gap: 2px;            /* jarak antar menu dan tanda | */
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.aksi button {
+  padding: 1px 4px;    /* kotak rapat ke teks */
+  font-size: 13px;
+  line-height: 1.3;
+  border-radius: 4px;
+}
+
+.salin-grup {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.salin-grup .panah {
+  padding: 1px 3px;
+  font-size: 10px;
 }
 
 /* Header halaman dalam: rata tengah di desktop */
@@ -670,28 +713,6 @@ button:disabled,
   -webkit-text-fill-color: #000;
   opacity: .5;
 }
-
-/* Tabel referensi */
-.ref { margin-top: 14px; font-size: 14px; }
-.ref-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; line-height: 1.5; }
-.ref-row.kecil { color: #9CA3AF; font-size: 13px; }
-.ref-v::before { content: ": "; }
-.ref-row:first-child .ref-v { color: #4F9A9A; }
-
-/* Menu teks: Report Error | Share | Copy ▼ */
-.aksi { display: flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 15px; }
-.tautan { color: #4F9A9A; cursor: pointer; user-select: none; }
-.tautan:hover, .tautan:active { text-decoration: underline; }
-.tautan.panah { font-size: 11px; margin-left: -2px; }
-
-/* Navigasi hadis sebelumnya / berikutnya */
-.nav-hadis { display: flex; justify-content: space-between; margin: 12px 0 20px; }
-.nav-hadis-btn {
-  padding: 14px 22px; background: #fff; border-radius: 8px;
-  color: #4F9A9A; font-size: 20px; cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,.12);
-}
-.nav-hadis-btn:active { background: #E5E7EB; }
 
 </style>
 </head>
@@ -1046,32 +1067,11 @@ function tampilkan() {
 
     const rujukan = amanHTML(hadis.reference) || ("Sahih al-Bukhari " + nomorAman);
 
-    const idx = semua.indexOf(hadis);
-    const nomorDari = function (h) { return h ? (h.hadith_number || h.number) : null; };
-    const noSebelum = nomorDari(semua[idx - 1]);
-    const noSesudah = nomorDari(semua[idx + 1]);
-
-    const judulBab = (babSama || !babNama)
+        const judulBab = (babSama || !babNama)
       ? ""
       : `<h3 class="bab">Bab ${babNo}: ${babNama}</h3>`;
 
-    const inBook = hadis.in_book_number
-      ? `<div class="ref-row"><span class="ref-k">In-book reference</span>
-           <span class="ref-v">Kitab ${babNo}, Hadis ${amanHTML(hadis.in_book_number)}</span></div>`
-      : "";
-    const usc = hadis.usc_msa_reference
-      ? `<div class="ref-row kecil"><span class="ref-k">USC-MSA web (English) reference<br><i>(penomoran lama)</i></span>
-           <span class="ref-v">${amanHTML(hadis.usc_msa_reference)}</span></div>`
-      : "";
-
-    const navSebelum = noSebelum
-      ? `<a class="nav-hadis-btn" role="button" onclick="lompatHadis(${noSebelum})">‹ ${noSebelum}</a>`
-      : "<span></span>";
-    const navSesudah = noSesudah
-      ? `<a class="nav-hadis-btn" role="button" onclick="lompatHadis(${noSesudah})">${noSesudah} ›</a>`
-      : "<span></span>";
-        
-        return `
+    return `
       ${judulBab}
       <div class="hadith" data-sanad="${sanadTeks}">
         <div class="number">📚 Shahih al-Bukhari no. ${nomorAman}</div>
@@ -1079,27 +1079,21 @@ function tampilkan() {
         <div class="arabic">${arab}</div>
 
         <div class="ref">
-          <div class="ref-row"><span class="ref-k"><b>Reference</b></span>
-            <span class="ref-v">${rujukan}</span></div>
-          ${inBook}
-          ${usc}
-        </div>
-
-        <div class="ref">
           <span>Referensi:</span>
           <span>${rujukan}</span>
         </div>
 
         <div class="aksi">
-          <span class="tautan" role="button" tabindex="0" onclick="bukaSaran(this)">Report Error</span>
+          <button type="button" onclick="bukaSaran(this)">Saran</button>
           <span>|</span>
-          <span class="tautan" role="button" tabindex="0" onclick="berbagiHadis(this)">Share</span>
+          <button type="button" onclick="berbagiHadis(this)">Share</button>
           <span>|</span>
-          <span class="tautan" role="button" tabindex="0" onclick="salinHadis(this)">Copy</span>
-          <span class="tautan panah" role="button" tabindex="0" onclick="bukaOpsiSalin(this)">▼</span>
+          <span class="salin-grup">
+            <button type="button" onclick="salinHadis(this)">Salin</button>
+            <button type="button" class="panah" onclick="bukaOpsiSalin(this)">▼</button>
+          </span>
         </div>
-      </div>
-      <div class="nav-hadis">${navSebelum}${navSesudah}</div>`;
+      </div>`;
   }).join("") || "<p>Hadis tidak ditemukan.</p>";
 
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
@@ -1120,18 +1114,6 @@ function pindah(arah) {
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
   hal = Math.max(0, Math.min(hal + arah, jumlahHalaman - 1));
   simpan("halHadis", hal);
-  tampilkan();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function lompatHadis(nomor) {
-  const i = semua.findIndex(function (h) {
-    return String(h.hadith_number ?? h.number) === String(nomor);
-  });
-  if (i < 0) return;
-  cocok = semua.slice(i, i + perHalaman);
-  hal = 0;
-  simpan("halHadis", 0);
   tampilkan();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1182,17 +1164,14 @@ function tutupSaran() {
   tombolSaranAktif = null;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const formSaran = document.getElementById("formSaran");
+document.addEventListener("change", function (event) {
+  if (event.target.matches('input[name="jenisKesalahan"]')) {
+    const lainnya = document.getElementById("jenisLainnya");
 
-  if (formSaran) {
-    formSaran.addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert("Terima kasih, saran Anda tercatat.");
-      this.reset();
-      document.getElementById("jenisLainnya").style.display = "none";
-      tutupSaran();
-    });
+    lainnya.style.display =
+      event.target.value === "Lainnya" ? "block" : "none";
+
+    lainnya.required = event.target.value === "Lainnya";
   }
 });
 
