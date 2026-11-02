@@ -595,6 +595,39 @@ body {
 }
 .ref-row.kecil { font-size: 12px; color: #6B7280; }
 
+.ref {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.aksi {
+  display: flex;
+  align-items: center;
+  gap: 2px;            /* jarak antar menu dan tanda | */
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.aksi button {
+  padding: 1px 4px;    /* kotak rapat ke teks */
+  font-size: 13px;
+  line-height: 1.3;
+  border-radius: 4px;
+}
+
+.salin-grup {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.salin-grup .panah {
+  padding: 1px 3px;
+  font-size: 10px;
+}
+
 </style>
 </head>
 
@@ -620,7 +653,7 @@ body {
   </div>
 
   <div class="bsh-brand">
-    <img src="BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
+    <img src="drawable/BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
     <div class="bsh-brand-copy">
       <div class="ar">بلاجر سنة</div>
       <div class="id">Belajar Sunnah</div>
@@ -671,7 +704,7 @@ body {
         aria-label="Cari hadis"
         style="position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; justify-content:center; width:36px; height:36px; margin:0; padding:4px; border:0; background:transparent; cursor:pointer;"
       >
-        <img src="search.9.png" alt="" style="display:block; width:22px; height:22px; object-fit:contain;">
+        <img src="drawable/search.9.png" alt="" style="display:block; width:22px; height:22px; object-fit:contain;">
       </button>
     </div>
 
@@ -948,25 +981,33 @@ function tampilkan() {
 
     const rujukan = amanHTML(hadis.reference) || ("Sahih al-Bukhari " + nomorAman);
 
-    return (
-      (babSama || !babNama ? "" :
-        '<h3 class="bab">Bab ' + babNo + ": " + babNama + "</h3>") +
-      '<div class="hadith" data-sanad="' + sanadTeks + '">' +
-        '<div class="number">Hadis No. ' + nomorAman + "</div>" +
-        "<div>" + terjemahan + "</div>" +
-        '<div class="arabic">' + arab + "</div>" +
-        '<div style="display:flex;align-items:center;gap:6px;font-size:13px;">' +
-          "<span>Referensi:</span><span>" + rujukan + "</span></div>" +
-        '<div style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;">' +
-          '<button type="button" onclick="bukaSaran(this)">Saran</button>' +
-          "<span>|</span>" +
-          '<button type="button" onclick="berbagiHadis(this)">Share</button>' +
-          "<span>|</span>" +
-          '<button type="button" onclick="salinHadis(this)">Salin</button>' +
-          '<button type="button" onclick="bukaOpsiSalin(this)">▼</button>' +
-        "</div>" +
-      "</div>"
-    );
+        const judulBab = (babSama || !babNama)
+      ? ""
+      : `<h3 class="bab">Bab ${babNo}: ${babNama}</h3>`;
+
+    return `
+      ${judulBab}
+      <div class="hadith" data-sanad="${sanadTeks}">
+        <div class="number">Hadis No. ${nomorAman}</div>
+        <div>${terjemahan}</div>
+        <div class="arabic">${arab}</div>
+
+        <div class="ref">
+          <span>Referensi:</span>
+          <span>${rujukan}</span>
+        </div>
+
+        <div class="aksi">
+          <button type="button" onclick="bukaSaran(this)">Saran</button>
+          <span>|</span>
+          <button type="button" onclick="berbagiHadis(this)">Share</button>
+          <span>|</span>
+          <span class="salin-grup">
+            <button type="button" onclick="salinHadis(this)">Salin</button>
+            <button type="button" class="panah" onclick="bukaOpsiSalin(this)">▼</button>
+          </span>
+        </div>
+      </div>`;
   }).join("") || "<p>Hadis tidak ditemukan.</p>";
 
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
