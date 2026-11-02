@@ -206,14 +206,15 @@ input:focus {
   direction: rtl;
 }
 
+/* Navigasi halaman: hanya angka, di tepi kiri dan kanan */
 #halaman {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 12px;
   margin-top: 20px;
 }
+#halaman button { min-width: 44px; }
 
 footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px; }
 
@@ -501,7 +502,7 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 </head>
 
 <body>
-<!-- VERSI 2026-11-02 v8: daftar kitab, menu teks, popup diperbaiki -->
+<!-- VERSI 2026-11-03 v9: navigasi halaman angka saja, perbaikan template detail hadis -->
 
 <nav class="bs-main-nav" aria-label="Navigasi utama">
   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
@@ -944,12 +945,14 @@ function tampilkan() {
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
   const kontrol = document.getElementById("halaman");
 
+  // Hanya angka halaman: kiri = halaman sebelumnya, kanan = halaman berikutnya
   kontrol.innerHTML = jumlahHalaman > 1
-    ? `
-      <button onclick="pindah(-1)" ${hal === 0 ? "disabled" : ""}>Sebelumnya</button>
-      <span>Halaman ${hal + 1} dari ${jumlahHalaman}</span>
-      <button onclick="pindah(1)" ${hal >= jumlahHalaman - 1 ? "disabled" : ""}>Berikutnya</button>
-    `
+    ? (hal > 0
+        ? `<button onclick="pindah(-1)">${hal}</button>`
+        : "<span></span>") +
+      (hal < jumlahHalaman - 1
+        ? `<button onclick="pindah(1)">${hal + 2}</button>`
+        : "<span></span>")
     : "";
 
   ukurScrollbar();
@@ -1015,7 +1018,7 @@ function bukaDetailHadis(nomor) {
         ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sebelumnya.hadith_number ?? sebelumnya.number}')">‹ ${sebelumnya.hadith_number ?? sebelumnya.number}</a>`
         : "<span></span>"}
       ${sesudahnya
-        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sesudahnya.hadith_number ?? sesudahnya.number}')">{sesudahnya.hadith_number ?? sesudahnya.number} ›</a>`
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sesudahnya.hadith_number ?? sesudahnya.number}')">${sesudahnya.hadith_number ?? sesudahnya.number} ›</a>`
         : "<span></span>"}
     </div>
   `;
