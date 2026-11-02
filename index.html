@@ -628,6 +628,44 @@ body {
   font-size: 10px;
 }
 
+/* Header halaman dalam: rata tengah di desktop */
+@media (min-width: 801px) {
+  .bsh-top { font-size: 11px; }
+  .bsh-top .bsh-donate { font-size: 11px; }
+
+  .bsh-brand {
+    max-width: none;
+    justify-content: center;
+    padding: 8px 14px;
+  }
+
+  .bsh-brand-copy {
+    flex: 0 0 auto;
+    text-align: center;
+  }
+
+  .bsh-brand img { width: 72px; }
+  .bsh-brand .ar { font-size: 26px; }
+  .bsh-brand .id { font-size: 20px; }
+
+  .bsh-search {
+    max-width: none;
+    width: 100%;
+    margin: 4px 0;
+    padding: 4px 14px;
+    justify-content: center;
+  }
+
+  .bsh-search .bsh-field {
+    flex: 0 1 420px;   /* lebar kolom pencarian */
+  }
+
+  .bsh-crumb {
+    text-align: center;
+    padding: 6px 14px;
+  }
+}
+
 </style>
 </head>
 
