@@ -1,0 +1,788 @@
+
+{
+  "id": "bukhari",
+  "nameEn": "Sahih al-Bukhari",
+  "nameAr": "صحيح البخاري",
+  "compiler": "Muhammad ibn Isma'il al-Bukhari",
+  "compilerId": "al-bukhari",
+  "numbering": "Muhammad Fu'ad Abd al-Baqi numbering, as used in Fath al-Bari and on sunnah.com",
+  "total": 7580,
+  "books": [
+    {
+      "book": 1,
+      "nameAr": "كتاب بدء الوحي",
+      "nameEn": "Wahyu",
+      "first": "1",
+      "last": "7",
+      "count": 7
+    },
+    {
+      "book": 2,
+      "nameAr": "كتاب الإيمان",
+      "nameEn": "Iman",
+      "first": "8",
+      "last": "58",
+      "count": 51
+    },
+    {
+      "book": 3,
+      "nameAr": "كتاب العلم",
+      "nameEn": "Ilmu",
+      "first": "59",
+      "last": "134",
+      "count": 76
+    },
+    {
+      "book": 4,
+      "nameAr": "كتاب الوضوء",
+      "nameEn": "Wudu",
+      "first": "135",
+      "last": "247",
+      "count": 113
+    },
+    {
+      "book": 5,
+      "nameAr": "كتاب الغسل",
+      "nameEn": "Mandi (Ghusl)",
+      "first": "248",
+      "last": "293",
+      "count": 46
+    },
+    {
+      "book": 6,
+      "nameAr": "كتاب الحيض",
+      "nameEn": "Haid",
+      "first": "294",
+      "last": "333",
+      "count": 40
+    },
+    {
+      "book": 7,
+      "nameAr": "كتاب التيمم",
+      "nameEn": "Tayamum",
+      "first": "334",
+      "last": "348",
+      "count": 15
+    },
+    {
+      "book": 8,
+      "nameAr": "كتاب الصلاة",
+      "nameEn": "Salat",
+      "first": "349",
+      "last": "520",
+      "count": 173
+    },
+    {
+      "book": 9,
+      "nameAr": "كتاب مواقيت الصلاة",
+      "nameEn": "Waktu-Waktu Salat",
+      "first": "521",
+      "last": "602",
+      "count": 82
+    },
+    {
+      "book": 10,
+      "nameAr": "كتاب الأذان",
+      "nameEn": "Azan",
+      "first": "603",
+      "last": "875",
+      "count": 275
+    },
+    {
+      "book": 11,
+      "nameAr": "كتاب الجمعة",
+      "nameEn": "Salat Jumat",
+      "first": "876",
+      "last": "941",
+      "count": 66
+    },
+    {
+      "book": 12,
+      "nameAr": "كتاب صلاة الخوف",
+      "nameEn": "Salat Khauf",
+      "first": "942",
+      "last": "947",
+      "count": 6
+    },
+    {
+      "book": 13,
+      "nameAr": "كتاب العيدين",
+      "nameEn": "Salat Dua Hari Raya",
+      "first": "948",
+      "last": "989",
+      "count": 42
+    },
+    {
+      "book": 14,
+      "nameAr": "كتاب الوتر",
+      "nameEn": "Salat Witir",
+      "first": "990",
+      "last": "1004",
+      "count": 15
+    },
+    {
+      "book": 15,
+      "nameAr": "كتاب الاستسقاء",
+      "nameEn": "Memohon Hujan (Istisqa)",
+      "first": "1005",
+      "last": "1039",
+      "count": 35
+    },
+    {
+      "book": 16,
+      "nameAr": "كتاب الكسوف",
+      "nameEn": "Gerhana",
+      "first": "1040",
+      "last": "1066",
+      "count": 27
+    },
+    {
+      "book": 17,
+      "nameAr": "كتاب سجود القرآن",
+      "nameEn": "Sujud Ketika Membaca Al-Qur'an",
+      "first": "1067",
+      "last": "1079",
+      "count": 13
+    },
+    {
+      "book": 18,
+      "nameAr": "كتاب التقصير",
+      "nameEn": "Mengqasar Salat",
+      "first": "1080",
+      "last": "1119",
+      "count": 40
+    },
+    {
+      "book": 19,
+      "nameAr": "كتاب التهجد",
+      "nameEn": "Salat Malam (Tahajud)",
+      "first": "1120",
+      "last": "1187",
+      "count": 69
+    },
+    {
+      "book": 20,
+      "nameAr": "كتاب فضل الصلاة في مسجد مكة والمدينة",
+      "nameEn": "Keutamaan Salat di Masjid Makkah dan Madinah",
+      "first": "1188",
+      "last": "1197",
+      "count": 10
+    },
+    {
+      "book": 21,
+      "nameAr": "كتاب العمل في الصلاة",
+      "nameEn": "Amalan dalam Salat",
+      "first": "1198",
+      "last": "1223",
+      "count": 27
+    },
+    {
+      "book": 22,
+      "nameAr": "كتاب السهو",
+      "nameEn": "Sujud Sahwi",
+      "first": "1224",
+      "last": "1236",
+      "count": 14
+    },
+    {
+      "book": 23,
+      "nameAr": "كتاب الجنائز",
+      "nameEn": "Jenazah",
+      "first": "1237",
+      "last": "1394",
+      "count": 160
+    },
+    {
+      "book": 24,
+      "nameAr": "كتاب الزكاة",
+      "nameEn": "Zakat",
+      "first": "1395",
+      "last": "1512",
+      "count": 118
+    },
+    {
+      "book": 25,
+      "nameAr": "كتاب الحج",
+      "nameEn": "Haji",
+      "first": "1513",
+      "last": "1772",
+      "count": 260
+    },
+    {
+      "book": 26,
+      "nameAr": "كتاب العمرة",
+      "nameEn": "Umrah",
+      "first": "1773",
+      "last": "1805",
+      "count": 33
+    },
+    {
+      "book": 27,
+      "nameAr": "كتاب المحصر",
+      "nameEn": "Orang yang Terhalang Menyelesaikan Haji",
+      "first": "1806",
+      "last": "1820",
+      "count": 15
+    },
+    {
+      "book": 28,
+      "nameAr": "كتاب جزاء الصيد",
+      "nameEn": "Denda Berburu Ketika Ihram",
+      "first": "1821",
+      "last": "1866",
+      "count": 46
+    },
+    {
+      "book": 29,
+      "nameAr": "كتاب فضائل المدينة",
+      "nameEn": "Keutamaan Madinah",
+      "first": "1867",
+      "last": "1890",
+      "count": 24
+    },
+    {
+      "book": 30,
+      "nameAr": "كتاب الصوم",
+      "nameEn": "Puasa",
+      "first": "1891",
+      "last": "2007",
+      "count": 117
+    },
+    {
+      "book": 31,
+      "nameAr": "كتاب صلاة التراويح",
+      "nameEn": "Salat Tarawih",
+      "first": "2008",
+      "last": "2013",
+      "count": 6
+    },
+    {
+      "book": 32,
+      "nameAr": "كتاب فضل ليلة القدر",
+      "nameEn": "Keutamaan Lailatul Qadar",
+      "first": "2014",
+      "last": "2024",
+      "count": 11
+    },
+    {
+      "book": 33,
+      "nameAr": "كتاب الاعتكاف",
+      "nameEn": "Iktikaf",
+      "first": "2025",
+      "last": "2046",
+      "count": 22
+    },
+    {
+      "book": 34,
+      "nameAr": "كتاب البيوع",
+      "nameEn": "Jual Beli",
+      "first": "2047",
+      "last": "2238",
+      "count": 193
+    },
+    {
+      "book": 35,
+      "nameAr": "كتاب السلم",
+      "nameEn": "Salam (Jual Beli dengan Pembayaran di Muka)",
+      "first": "2239",
+      "last": "2256",
+      "count": 20
+    },
+    {
+      "book": 36,
+      "nameAr": "كتاب الشفعة",
+      "nameEn": "Syuf'ah (Hak Membeli Dahulu)",
+      "first": "2257",
+      "last": "2259",
+      "count": 3
+    },
+    {
+      "book": 37,
+      "nameAr": "كتاب الإجارة",
+      "nameEn": "Sewa-Menyewa",
+      "first": "2260",
+      "last": "2286",
+      "count": 27
+    },
+    {
+      "book": 38,
+      "nameAr": "كتاب الحوالات",
+      "nameEn": "Pemindahan Utang",
+      "first": "2287",
+      "last": "2289",
+      "count": 3
+    },
+    {
+      "book": 39,
+      "nameAr": "كتاب الكفالة",
+      "nameEn": "Kafalah (Penjaminan)",
+      "first": "2290",
+      "last": "2298",
+      "count": 9
+    },
+    {
+      "book": 40,
+      "nameAr": "كتاب الوكالة",
+      "nameEn": "Perwakilan",
+      "first": "2299",
+      "last": "2319",
+      "count": 21
+    },
+    {
+      "book": 41,
+      "nameAr": "كتاب المزارعة",
+      "nameEn": "Pertanian",
+      "first": "2320",
+      "last": "2350",
+      "count": 31
+    },
+    {
+      "book": 42,
+      "nameAr": "كتاب المساقاة",
+      "nameEn": "Pengairan",
+      "first": "2351",
+      "last": "2384",
+      "count": 34
+    },
+    {
+      "book": 43,
+      "nameAr": "كتاب في الاستقراض",
+      "nameEn": "Utang-Piutang",
+      "first": "2385",
+      "last": "2409",
+      "count": 25
+    },
+    {
+      "book": 44,
+      "nameAr": "كتاب الخصومات",
+      "nameEn": "Perselisihan",
+      "first": "2410",
+      "last": "2425",
+      "count": 16
+    },
+    {
+      "book": 45,
+      "nameAr": "كتاب في اللقطة",
+      "nameEn": "Barang Temuan",
+      "first": "2426",
+      "last": "2439",
+      "count": 15
+    },
+    {
+      "book": 46,
+      "nameAr": "كتاب المظالم",
+      "nameEn": "Kezaliman",
+      "first": "2440",
+      "last": "2482",
+      "count": 43
+    },
+    {
+      "book": 47,
+      "nameAr": "كتاب الشركة",
+      "nameEn": "Kemitraan",
+      "first": "2483",
+      "last": "2507",
+      "count": 25
+    },
+    {
+      "book": 48,
+      "nameAr": "كتاب الرهن",
+      "nameEn": "Gadai",
+      "first": "2508",
+      "last": "2516",
+      "count": 9
+    },
+    {
+      "book": 49,
+      "nameAr": "كتاب العتق",
+      "nameEn": "Memerdekakan Budak",
+      "first": "2517",
+      "last": "2559",
+      "count": 43
+    },
+    {
+      "book": 50,
+      "nameAr": "كتاب المكاتب",
+      "nameEn": "Mukātabah (Perjanjian Memerdekakan Budak)",
+      "first": "2560",
+      "last": "2565",
+      "count": 6
+    },
+    {
+      "book": 51,
+      "nameAr": "كتاب الهبة وفضلها والتحريض عليها",
+      "nameEn": "Hibah dan Keutamaannya",
+      "first": "2566",
+      "last": "2636",
+      "count": 71
+    },
+    {
+      "book": 52,
+      "nameAr": "كتاب الشهادات",
+      "nameEn": "Persaksian",
+      "first": "2637",
+      "last": "2689",
+      "count": 53
+    },
+    {
+      "book": 53,
+      "nameAr": "كتاب الصلح",
+      "nameEn": "Perdamaian",
+      "first": "2690",
+      "last": "2710",
+      "count": 21
+    },
+    {
+      "book": 54,
+      "nameAr": "كتاب الشروط",
+      "nameEn": "Persyaratan",
+      "first": "2711",
+      "last": "2737",
+      "count": 27
+    },
+    {
+      "book": 55,
+      "nameAr": "كتاب الوصايا",
+      "nameEn": "Wasiat",
+      "first": "2738",
+      "last": "2781",
+      "count": 44
+    },
+    {
+      "book": 56,
+      "nameAr": "كتاب الجهاد والسير",
+      "nameEn": "Jihad dan Perjalanan Perang",
+      "first": "2782",
+      "last": "3090",
+      "count": 309
+    },
+    {
+      "book": 57,
+      "nameAr": "كتاب فرض الخمس",
+      "nameEn": "Seperlima Harta Rampasan Perang",
+      "first": "3091",
+      "last": "3155",
+      "count": 65
+    },
+    {
+      "book": 58,
+      "nameAr": "كتاب الجزية والموادعة",
+      "nameEn": "Jizyah dan Perjanjian Damai",
+      "first": "3156",
+      "last": "3189",
+      "count": 34
+    },
+    {
+      "book": 59,
+      "nameAr": "كتاب بدء الخلق",
+      "nameEn": "Permulaan Penciptaan",
+      "first": "3190",
+      "last": "3325",
+      "count": 136
+    },
+    {
+      "book": 60,
+      "nameAr": "كتاب أحاديث الأنبياء",
+      "nameEn": "Kisah Para Nabi",
+      "first": "3326",
+      "last": "3488",
+      "count": 163
+    },
+    {
+      "book": 61,
+      "nameAr": "كتاب المناقب",
+      "nameEn": "Keutamaan dan Kemuliaan Nabi ﷺ",
+      "first": "3489",
+      "last": "3648",
+      "count": 162
+    },
+    {
+      "book": 62,
+      "nameAr": "كتاب فضائل أصحاب النبي صلى الله عليه وسلم",
+      "nameEn": "Keutamaan Para Sahabat Nabi ﷺ",
+      "first": "3649",
+      "last": "3775",
+      "count": 128
+    },
+    {
+      "book": 63,
+      "nameAr": "كتاب مناقب الأنصار",
+      "nameEn": "Keutamaan Kaum Ansar",
+      "first": "3776",
+      "last": "3948",
+      "count": 173
+    },
+    {
+      "book": 64,
+      "nameAr": "كتاب المغازي",
+      "nameEn": "Peperangan yang Dipimpin Nabi ﷺ",
+      "first": "3949",
+      "last": "4473",
+      "count": 526
+    },
+    {
+      "book": 65,
+      "nameAr": "كتاب التفسير",
+      "nameEn": "Tafsir Al-Qur'an",
+      "first": "4474",
+      "last": "4977",
+      "count": 506
+    },
+    {
+      "book": 66,
+      "nameAr": "كتاب فضائل القرآن",
+      "nameEn": "Keutamaan Al-Qur'an",
+      "first": "4978",
+      "last": "5062",
+      "count": 88
+    },
+    {
+      "book": 67,
+      "nameAr": "كتاب النكاح",
+      "nameEn": "Pernikahan",
+      "first": "5063",
+      "last": "5250",
+      "count": 188
+    },
+    {
+      "book": 68,
+      "nameAr": "كتاب الطلاق",
+      "nameEn": "Perceraian",
+      "first": "5251",
+      "last": "5350",
+      "count": 100
+    },
+    {
+      "book": 69,
+      "nameAr": "كتاب النفقات",
+      "nameEn": "Nafkah Keluarga",
+      "first": "5351",
+      "last": "5372",
+      "count": 22
+    },
+    {
+      "book": 70,
+      "nameAr": "كتاب الأطعمة",
+      "nameEn": "Makanan",
+      "first": "5373",
+      "last": "5466",
+      "count": 95
+    },
+    {
+      "book": 71,
+      "nameAr": "كتاب العقيقة",
+      "nameEn": "Akikah",
+      "first": "5467",
+      "last": "5474",
+      "count": 9
+    },
+    {
+      "book": 72,
+      "nameAr": "كتاب الذبائح والصيد",
+      "nameEn": "Penyembelihan dan Perburuan",
+      "first": "5475",
+      "last": "5544",
+      "count": 70
+    },
+    {
+      "book": 73,
+      "nameAr": "كتاب الأضاحي",
+      "nameEn": "Kurban",
+      "first": "5545",
+      "last": "5574",
+      "count": 30
+    },
+    {
+      "book": 74,
+      "nameAr": "كتاب الأشربة",
+      "nameEn": "Minuman",
+      "first": "5575",
+      "last": "5639",
+      "count": 65
+    },
+    {
+      "book": 75,
+      "nameAr": "كتاب المرضى",
+      "nameEn": "Orang Sakit",
+      "first": "5640",
+      "last": "5677",
+      "count": 38
+    },
+    {
+      "book": 76,
+      "nameAr": "كتاب الطب",
+      "nameEn": "Pengobatan",
+      "first": "5678",
+      "last": "5782",
+      "count": 100
+    },
+    {
+      "book": 77,
+      "nameAr": "كتاب اللباس",
+      "nameEn": "Pakaian",
+      "first": "5783",
+      "last": "5969",
+      "count": 188
+    },
+    {
+      "book": 78,
+      "nameAr": "كتاب الأدب",
+      "nameEn": "Adab dan Akhlak",
+      "first": "5970",
+      "last": "6226",
+      "count": 253
+    },
+    {
+      "book": 79,
+      "nameAr": "كتاب الاستئذان",
+      "nameEn": "Meminta Izin",
+      "first": "6227",
+      "last": "6303",
+      "count": 77
+    },
+    {
+      "book": 80,
+      "nameAr": "كتاب الدعوات",
+      "nameEn": "Doa",
+      "first": "6304",
+      "last": "6411",
+      "count": 108
+    },
+    {
+      "book": 81,
+      "nameAr": "كتاب الرقاق",
+      "nameEn": "Kelembutan Hati",
+      "first": "6412",
+      "last": "6593",
+      "count": 182
+    },
+    {
+      "book": 82,
+      "nameAr": "كتاب القدر",
+      "nameEn": "Takdir",
+      "first": "6594",
+      "last": "6620",
+      "count": 27
+    },
+    {
+      "book": 83,
+      "nameAr": "كتاب الأيمان والنذور",
+      "nameEn": "Sumpah dan Nazar",
+      "first": "6621",
+      "last": "6707",
+      "count": 87
+    },
+    {
+      "book": 84,
+      "nameAr": "كتاب كفارات الأيمان",
+      "nameEn": "Kafarat Sumpah",
+      "first": "6708",
+      "last": "6722",
+      "count": 15
+    },
+    {
+      "book": 85,
+      "nameAr": "كتاب الفرائض",
+      "nameEn": "Hukum Waris",
+      "first": "6723",
+      "last": "6771",
+      "count": 49
+    },
+    {
+      "book": 86,
+      "nameAr": "كتاب الحدود",
+      "nameEn": "Hudud (Hukuman yang Ditetapkan Syariat)",
+      "first": "6772",
+      "last": "6860",
+      "count": 89
+    },
+    {
+      "book": 87,
+      "nameAr": "كتاب الديات",
+      "nameEn": "Diyat (Denda atas Pembunuhan atau Penganiayaan)",
+      "first": "6861",
+      "last": "6917",
+      "count": 59
+    },
+    {
+      "book": 88,
+      "nameAr": "كتاب استتابة المرتدين والمعاندين وقتالهم",
+      "nameEn": "Meminta Tobat kepada Orang Murtad dan Penentang",
+      "first": "6918",
+      "last": "6939",
+      "count": 22
+    },
+    {
+      "book": 89,
+      "nameAr": "كتاب الإكراه",
+      "nameEn": "Pernyataan dalam Keadaan Terpaksa",
+      "first": "6940",
+      "last": "6952",
+      "count": 13
+    },
+    {
+      "book": 90,
+      "nameAr": "كتاب الحيل",
+      "nameEn": "Tipu Muslihat",
+      "first": "6953",
+      "last": "6981",
+      "count": 29
+    },
+    {
+      "book": 91,
+      "nameAr": "كتاب التعبير",
+      "nameEn": "Tafsir Mimpi",
+      "first": "6982",
+      "last": "7047",
+      "count": 66
+    },
+    {
+      "book": 92,
+      "nameAr": "كتاب الفتن",
+      "nameEn": "Fitnah dan Akhir Zaman",
+      "first": "7048",
+      "last": "7136",
+      "count": 89
+    },
+    {
+      "book": 93,
+      "nameAr": "كتاب الأحكام",
+      "nameEn": "Hukum-Hukum",
+      "first": "7137",
+      "last": "7225",
+      "count": 89
+    },
+    {
+      "book": 94,
+      "nameAr": "كتاب التمني",
+      "nameEn": "Angan-Angan",
+      "first": "7226",
+      "last": "7245",
+      "count": 20
+    },
+    {
+      "book": 95,
+      "nameAr": "كتاب أخبار الآحاد",
+      "nameEn": "Menerima Kabar dari Orang yang Jujur",
+      "first": "7246",
+      "last": "7267",
+      "count": 22
+    },
+    {
+      "book": 96,
+      "nameAr": "كتاب الاعتصام بالكتاب والسنة",
+      "nameEn": "Berpegang Teguh kepada Al-Qur'an dan Sunnah",
+      "first": "7268",
+      "last": "7370",
+      "count": 103
+    },
+    {
+      "book": 97,
+      "nameAr": "كتاب التوحيد",
+      "nameEn": "Tauhid",
+      "first": "7371",
+      "last": "7563",
+      "count": 193
+    }
+  ]
+}
