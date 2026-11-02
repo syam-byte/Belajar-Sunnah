@@ -852,7 +852,7 @@ function tampilkan() {
       bersih(sebelumnya.chapter_title || sebelumnya.english_title) ===
       bersih(hadis.chapter_title || hadis.english_title);
 
-    const rujukan = amanHTML(hadis.reference) || ("Sahih al-Bukhari " + nomorAman);
+    const rujukan = "Sahih al-Bukhari no. " + nomorAman;
 
     const idx = semua.indexOf(hadis);
     const nomorDari = function (h) { return h ? (h.hadith_number || h.number) : null; };
