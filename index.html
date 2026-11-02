@@ -680,6 +680,40 @@ body {
   }
 }
 
+/* Tombol: standby = teks hitam, ditekan = teks putih */
+button,
+.aksi button,
+.salin-grup button,
+#halaman button,
+#koleksi > button {
+  background: #E5E7EB !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000;
+  opacity: 1;
+}
+
+button:hover,
+button:active,
+button:focus-visible,
+.aksi button:hover,
+.aksi button:active,
+.salin-grup button:hover,
+.salin-grup button:active,
+#halaman button:hover,
+#halaman button:active {
+  background: #374151 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff;
+}
+
+button:disabled,
+#halaman button:disabled {
+  background: #E5E7EB !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000;
+  opacity: .5;
+}
+
 </style>
 </head>
 
@@ -1040,7 +1074,7 @@ function tampilkan() {
     return `
       ${judulBab}
       <div class="hadith" data-sanad="${sanadTeks}">
-        <div class="number">Shahih al-Bukhari no. ${nomorAman}</div>
+        <div class="number">📚 Shahih al-Bukhari no. ${nomorAman}</div>
         <div>${terjemahan}</div>
         <div class="arabic">${arab}</div>
 
