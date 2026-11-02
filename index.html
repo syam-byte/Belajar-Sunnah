@@ -1268,10 +1268,15 @@ function ambilSanad(artikel) {
   return "";
 }
 
-function susunTeksPilihan(artikel) {
+function terapkanOpsiSalin() {
+  if (!tombolSalinAktif) return;
+
+  const artikel = tombolSalinAktif.closest(".hadith");
+  if (!artikel) return;
+
   const bagian = [];
 
-  // 1. SANAD
+  // 1. SANAD (paling atas)
   if (document.getElementById("opsiSanad")?.checked) {
     const sanad = ambilSanad(artikel);
     if (sanad) bagian.push("Sanad:\n" + sanad);
@@ -1279,48 +1284,39 @@ function susunTeksPilihan(artikel) {
 
   // 2. INDONESIA / MATAN
   if (document.getElementById("opsiIndonesia")?.checked) {
-    const teks = artikel.querySelector(":scope > div:nth-child(2)")?.innerText.trim();
+    const el = artikel.querySelector(":scope > div:nth-child(2)");
+    const teks = el?.innerText.trim();
     if (teks) bagian.push("Matan:\n" + teks);
   }
 
   // 3. ARAB
   if (document.getElementById("opsiArabic")?.checked) {
-    const teks = artikel.querySelector(".arabic")?.innerText.trim();
+    const el = artikel.querySelector(".arabic");
+    const teks = el?.innerText.trim();
     if (teks) bagian.push("Arab:\n" + teks);
   }
 
   // 4. REFERENSI
-  const nomorTeks = artikel.querySelector(".number")?.innerText.trim() || "";
-  const pilihan = document.querySelector('input[name="opsiReferensi"]:checked')?.value;
-  const teksReferensi =
-    artikel.querySelector(".ref span:nth-child(2)")?.innerText.trim() || nomorTeks;
+  const nomorTeks =
+    artikel.querySelector(".number")?.innerText.trim() || "";
+  const pilihanReferensi =
+    document.querySelector('input[name="opsiReferensi"]:checked')?.value;
 
-  if (pilihan === "ringkas" && teksReferensi) {
+  const elReferensi = artikel.querySelector(
+    'div[style*="align-items:center"] span:nth-child(2)'
+  );
+  const teksReferensi =
+    elReferensi?.innerText.trim() || nomorTeks;
+
+  if (pilihanReferensi === "ringkas" && teksReferensi) {
     bagian.push(teksReferensi);
-  } else if (pilihan === "sitasi" && teksReferensi) {
+  } else if (pilihanReferensi === "sitasi" && teksReferensi) {
     bagian.push("Sitasi: " + teksReferensi);
   }
 
-  return bagian.join("\n\n");
-}
+  // URL sementara dikosongkan sampai domain final siap.
 
-function terapkanOpsiSalin() {
-  if (!tombolSalinAktif) return;
-
-  const artikel = tombolSalinAktif.closest(".hadith");
-  if (!artikel) return;
-
-  const teksSalin = susunTeksPilihan(artikel);
-
-  tutupOpsiSalin();
-
-  if (!teksSalin.trim()) {
-    alert("Pilih minimal satu teks yang tersedia untuk disalin.");
-    return;
-  }
-
-  salinKeClipboard(teksSalin);
-}
+  const teksSalin = bagian.join("\n\n");
 
   tutupOpsiSalin();
 
@@ -1482,22 +1478,13 @@ function berbagiHadis(tombol) {
   const artikel = tombol.closest(".hadith");
   if (!artikel) return;
 
-  const teks = susunTeksPilihan(artikel);
-
-  if (!teks.trim()) {
-    alert("Pilih minimal satu teks pada menu ▼ terlebih dahulu.");
-    return;
-  }
+  const teks = teksFormatBaru(artikel);
 
   if (navigator.share) {
-    navigator.share({
-      title: "Belajar-Sunnah",
-      text: teks
-    }).catch(function (error) {
-      if (error.name !== "AbortError") {
-        alert("Hadis belum berhasil dibagikan.");
-      }
-    });
+    navigator.share({ title: "Belajar-Sunnah", text: teks })
+      .catch(function (error) {
+        if (error.name !== "AbortError") alert("Hadis belum berhasil dibagikan.");
+      });
   } else {
     window.prompt("Salin teks hadis untuk dibagikan:", teks);
   }
@@ -1521,6 +1508,19 @@ async function salinHadis(tombol) {
   // Salin langsung = format baru
   salinKeClipboard(teksFormatBaru(artikel));
 }
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    tutupOpsiSalin();
+    tutupSaran();
+  }
+});
+
+document.querySelectorAll("[data-buka]").forEach(function (el) {
+  el.addEventListener("click", function () {
+    buka(el.dataset.buka);
+  });
+});
 
 
 muat();
