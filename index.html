@@ -636,8 +636,8 @@ body {
 
 /* Header halaman dalam: rata tengah di desktop */
 @media (min-width: 801px) {
-  .bsh-top { font-size: 11px; }
-  .bsh-top .bsh-donate { font-size: 11px; }
+  .bsh-top { font-size: 14px; }
+  .bsh-top .bsh-donate { font-size: 14px; }
 
   .bsh-brand {
     max-width: none;
@@ -676,7 +676,7 @@ body {
 @media (min-width: 801px) {
   .hadith > div:nth-child(2) {
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 1.4;
   }
 }
 
@@ -858,7 +858,7 @@ window.addEventListener("resize", ukurScrollbar);
 const namaHalaman = {
   koleksi: "Sahih al-Bukhari",
   muslim: "Sahih Muslim",
-  "abu-dawud": "Sunan Abi Dawud",
+  "abu-dawud": "Sunan Abu Dawud",
   sunnah: "Sunnah",
   sanad: "Thalabul",
   perawi: "'ilmi"
@@ -1040,7 +1040,7 @@ function tampilkan() {
     return `
       ${judulBab}
       <div class="hadith" data-sanad="${sanadTeks}">
-        <div class="number">Hadis No. ${nomorAman}</div>
+        <div class="number">Shahih al-Bukhari no. ${nomorAman}</div>
         <div>${terjemahan}</div>
         <div class="arabic">${arab}</div>
 
@@ -1268,15 +1268,10 @@ function ambilSanad(artikel) {
   return "";
 }
 
-function terapkanOpsiSalin() {
-  if (!tombolSalinAktif) return;
-
-  const artikel = tombolSalinAktif.closest(".hadith");
-  if (!artikel) return;
-
+function susunTeksPilihan(artikel) {
   const bagian = [];
 
-  // 1. SANAD (paling atas)
+  // 1. SANAD
   if (document.getElementById("opsiSanad")?.checked) {
     const sanad = ambilSanad(artikel);
     if (sanad) bagian.push("Sanad:\n" + sanad);
@@ -1284,39 +1279,48 @@ function terapkanOpsiSalin() {
 
   // 2. INDONESIA / MATAN
   if (document.getElementById("opsiIndonesia")?.checked) {
-    const el = artikel.querySelector(":scope > div:nth-child(2)");
-    const teks = el?.innerText.trim();
+    const teks = artikel.querySelector(":scope > div:nth-child(2)")?.innerText.trim();
     if (teks) bagian.push("Matan:\n" + teks);
   }
 
   // 3. ARAB
   if (document.getElementById("opsiArabic")?.checked) {
-    const el = artikel.querySelector(".arabic");
-    const teks = el?.innerText.trim();
+    const teks = artikel.querySelector(".arabic")?.innerText.trim();
     if (teks) bagian.push("Arab:\n" + teks);
   }
 
   // 4. REFERENSI
-  const nomorTeks =
-    artikel.querySelector(".number")?.innerText.trim() || "";
-  const pilihanReferensi =
-    document.querySelector('input[name="opsiReferensi"]:checked')?.value;
-
-  const elReferensi = artikel.querySelector(
-    'div[style*="align-items:center"] span:nth-child(2)'
-  );
+  const nomorTeks = artikel.querySelector(".number")?.innerText.trim() || "";
+  const pilihan = document.querySelector('input[name="opsiReferensi"]:checked')?.value;
   const teksReferensi =
-    elReferensi?.innerText.trim() || nomorTeks;
+    artikel.querySelector(".ref span:nth-child(2)")?.innerText.trim() || nomorTeks;
 
-  if (pilihanReferensi === "ringkas" && teksReferensi) {
+  if (pilihan === "ringkas" && teksReferensi) {
     bagian.push(teksReferensi);
-  } else if (pilihanReferensi === "sitasi" && teksReferensi) {
+  } else if (pilihan === "sitasi" && teksReferensi) {
     bagian.push("Sitasi: " + teksReferensi);
   }
 
-  // URL sementara dikosongkan sampai domain final siap.
+  return bagian.join("\n\n");
+}
 
-  const teksSalin = bagian.join("\n\n");
+function terapkanOpsiSalin() {
+  if (!tombolSalinAktif) return;
+
+  const artikel = tombolSalinAktif.closest(".hadith");
+  if (!artikel) return;
+
+  const teksSalin = susunTeksPilihan(artikel);
+
+  tutupOpsiSalin();
+
+  if (!teksSalin.trim()) {
+    alert("Pilih minimal satu teks yang tersedia untuk disalin.");
+    return;
+  }
+
+  salinKeClipboard(teksSalin);
+}
 
   tutupOpsiSalin();
 
@@ -1478,13 +1482,22 @@ function berbagiHadis(tombol) {
   const artikel = tombol.closest(".hadith");
   if (!artikel) return;
 
-  const teks = teksFormatBaru(artikel);
+  const teks = susunTeksPilihan(artikel);
+
+  if (!teks.trim()) {
+    alert("Pilih minimal satu teks pada menu ▼ terlebih dahulu.");
+    return;
+  }
 
   if (navigator.share) {
-    navigator.share({ title: "Belajar-Sunnah", text: teks })
-      .catch(function (error) {
-        if (error.name !== "AbortError") alert("Hadis belum berhasil dibagikan.");
-      });
+    navigator.share({
+      title: "Belajar-Sunnah",
+      text: teks
+    }).catch(function (error) {
+      if (error.name !== "AbortError") {
+        alert("Hadis belum berhasil dibagikan.");
+      }
+    });
   } else {
     window.prompt("Salin teks hadis untuk dibagikan:", teks);
   }
