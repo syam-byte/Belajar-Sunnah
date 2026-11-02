@@ -1040,8 +1040,13 @@ function aturPosisiPopupSaran() {
 
   const kotak = document.getElementById("popupSaran").firstElementChild;
   const posisi = tombolSaranAktif.getBoundingClientRect();
+  const desktop = window.innerWidth > 800;
 
-  kotak.style.left = "0px";
+  // HP: rapat kiri layar. Desktop: sejajar tombol, tidak keluar layar.
+  const maxKiri = window.innerWidth - kotak.offsetWidth - 4;
+  const kiri = desktop ? Math.max(4, Math.min(posisi.left, maxKiri)) : 0;
+
+  kotak.style.left = kiri + "px";
   kotak.style.top = (posisi.bottom + 2) + "px";
 }
 
@@ -1277,11 +1282,14 @@ function terapkanOpsiSalin() {
 function aturPosisiPopupSalin() {
   if (!tombolSalinAktif) return;
 
-  const popup = document.getElementById("popupOpsiSalin");
-  const kotak = popup.firstElementChild;
+  const kotak = document.getElementById("popupOpsiSalin").firstElementChild;
   const posisi = tombolSalinAktif.getBoundingClientRect();
+  const desktop = window.innerWidth > 800;
 
-  kotak.style.left = "0px";
+  const maxKiri = window.innerWidth - kotak.offsetWidth - 4;
+  const kiri = desktop ? Math.max(4, Math.min(posisi.left, maxKiri)) : 0;
+
+  kotak.style.left = kiri + "px";
   kotak.style.top = (posisi.bottom + 2) + "px";
 }
 
