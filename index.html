@@ -13,6 +13,13 @@
 }
 
 @font-face {
+  font-family: 'Amiri';
+  src: url('./fonts/Amiri-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Markazi Text';
   src: url('./fonts/MarkaziText-Regular.ttf') format('truetype');
   font-weight: 400;
@@ -233,12 +240,11 @@ input:focus {
 .arabic {
   margin: 14px 0;
   color: #171717;
-  font-family: Arab, "Traditional Arabic", serif;
-  font-size: 28px;
+  font-family: 'Amiri', serif;
+  font-size: 19px;
   line-height: 1.8;
   text-align: right;
   direction: rtl;
-  overflow-wrap: anywhere;
 }
 
 #halaman {
@@ -669,7 +675,7 @@ body {
 /* Teks terjemahan Indonesia: lebih besar di desktop */
 @media (min-width: 801px) {
   .hadith > div:nth-child(2) {
-    font-size: 20px;
+    font-size: 15px;
     line-height: 1.8;
   }
 }
@@ -1426,6 +1432,83 @@ document.addEventListener("keydown", function (event) {
     tutupSaran();
   }
 });
+
+/* ============================================================
+   FORMAT SALIN & SHARE BARU
+   Tempel blok ini di <script> index.html, tepat SEBELUM baris:  muat();
+   Fungsi salinHadis & berbagiHadis di bawah menggantikan yang lama
+   (deklarasi paling akhir yang dipakai browser).
+   Popup panah (▼) tidak berubah: Sanad = rantai perawi lengkap.
+   ============================================================ */
+
+const KITAB = "Sahih al-Bukhari";
+
+function ambilSahabat(sanad) {
+  const radi = [...sanad.matchAll(/radhi(?:y|a)allahu\s+['’‘`]?(anh\w*)/gi)];
+  if (!radi.length) return null;
+
+  const m = radi[radi.length - 1];
+  const bagian = sanad.slice(0, m.index)
+    .split(/\b(?:mendengar|dari|bahwa|kepadaku|mengabarkan|menceritakan|berkata)\b|[:,]/i)
+    .map(function (s) { return s.trim(); })
+    .filter(Boolean);
+
+  const nama = bagian[bagian.length - 1];
+  return nama ? { nama: nama, akhiran: m[1].toLowerCase() } : null;
+}
+
+function teksFormatBaru(artikel) {
+  const nomor =
+    (artikel.querySelector(".number")?.innerText.match(/\d+/) || [""])[0];
+  const matan =
+    artikel.querySelector(":scope > div:nth-child(2)")?.innerText.trim() || "";
+
+  const sahabat = ambilSahabat(ambilSanad(artikel));
+  const pembuka =
+    (sahabat
+      ? "dari " + sahabat.nama + " radhiyallahu '" + sahabat.akhiran + " berkata bahwa "
+      : "") +
+    "Rasulullah shallallahu alaihi wa sallam bersabda;";
+
+  return nomor + ". " + pembuka + "\n\n" + matan +
+    "\n\n📚 HR." + KITAB + ", No ;" + nomor;
+}
+
+function berbagiHadis(tombol) {
+  const artikel = tombol.closest(".hadith");
+  if (!artikel) return;
+
+  const teks = teksFormatBaru(artikel);
+
+  if (navigator.share) {
+    navigator.share({ title: "Belajar-Sunnah", text: teks })
+      .catch(function (error) {
+        if (error.name !== "AbortError") alert("Hadis belum berhasil dibagikan.");
+      });
+  } else {
+    window.prompt("Salin teks hadis untuk dibagikan:", teks);
+  }
+}
+
+async function salinHadis(tombol) {
+  const artikel = tombol.closest(".hadith");
+  if (!artikel) return;
+
+  const popup = document.getElementById("popupOpsiSalin");
+
+  // Popup pilihan terbuka untuk hadis ini: salin sesuai pilihan.
+  if (popup && popup.style.display !== "none" &&
+      tombolSalinAktif && tombolSalinAktif.closest(".hadith") === artikel) {
+    terapkanOpsiSalin();
+    return;
+  }
+
+  if (popup && popup.style.display !== "none") tutupOpsiSalin();
+
+  // Salin langsung = format baru
+  salinKeClipboard(teksFormatBaru(artikel));
+}
+
 
 muat();
 (function () {
