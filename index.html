@@ -466,6 +466,10 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+.ref-v {
+  font-size: 14px;
+}
 </style>
 </head>
 
@@ -608,6 +612,8 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
     <h2></h2>
     <p id="status" class="muted" aria-live="polite"></p>
     <div id="hasil"></div>
+    <div id="hasil"></div>
+    <div id="detail-hadis" class="hidden"></div>
     <div id="halaman"></div>
   </section>
 
@@ -888,7 +894,11 @@ function tampilkan() {
 
         <div class="ref">
           <div class="ref-row"><span class="ref-k"><b>Reference</b></span>
-            <span class="ref-v">${rujukan}</span></div>
+            <span class="ref-v">
+  <a href="javascript:void(0)" onclick="bukaDetailHadis('${nomor}')">
+    ${rujukan}
+  </a>
+</span></div>
           ${inBook}
           ${usc}
         </div>
@@ -936,6 +946,54 @@ function lompatHadis(nomor) {
   hal = 0;
   simpan("halHadis", 0);
   tampilkan();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function bukaDetailHadis(nomor) {
+  const idx = semua.findIndex(function (h) {
+    return String(h.hadith_number ?? h.number) === String(nomor);
+  });
+
+  if (idx < 0) return;
+
+  const hadis = semua[idx];
+  const nomorHadis = hadis.hadith_number ?? hadis.number;
+  const terjemahan = amanHTML(
+    hadis.translation_id ?? hadis.indonesian ?? hadis.translation ?? ""
+  );
+  const arab = hadis.arabic ? bersihArab(hadis.arabic) : "Teks Arab belum tersedia";
+  const sanad = amanHTML(hadis.sanad_id ?? hadis.sanad ?? "");
+
+  const sebelumnya = semua[idx - 1];
+  const sesudahnya = semua[idx + 1];
+
+  document.getElementById("hasil").classList.add("hidden");
+
+  const detail = document.getElementById("detail-hadis");
+  detail.classList.remove("hidden");
+
+  detail.innerHTML = `
+    <div class="hadith" data-sanad="${sanad}">
+      <div class="number">📚 Shahih al-Bukhari no. ${amanHTML(nomorHadis)}</div>
+      <div>${terjemahan}</div>
+      <div class="arabic">${arab}</div>
+      <div class="ref">
+        <div class="ref-row">
+          <span class="ref-k"><b>Reference</b></span>
+          <span class="ref-v">Sahih al-Bukhari no. ${amanHTML(nomorHadis)}</span>
+        </div>
+      </div>
+    </div>
+    <div class="nav-hadis">
+      ${sebelumnya
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sebelumnya.hadith_number ?? sebelumnya.number}')">‹ ${sebelumnya.hadith_number ?? sebelumnya.number} Sebelumnya</a>`
+        : "<span></span>"}
+      ${sesudahnya
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sesudahnya.hadith_number ?? sesudahnya.number}')">Sesudahnya ${sesudahnya.hadith_number ?? sesudahnya.number} ›</a>`
+        : "<span></span>"}
+    </div>
+  `;
+
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
