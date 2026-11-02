@@ -477,8 +477,25 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
   /* Border */
   border: 1px solid #c8ceca;
   border-radius: 5px;
-  padding: 1px 4px;
+  padding: 1px 2px;
   margin: 0;
+}
+
+/* Merapatkan tampilan halaman detail hadis */
+#detail-hadis .hadith {
+  margin-bottom: 6px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+#detail-hadis .nav-hadis {
+  margin-top: 4px;
+  padding: 4px 0;
+  gap: 6px;
+}
+
+#detail-hadis .nav-hadis-btn {
+  padding: 3px 8px;
 }
 </style>
 </head>
@@ -995,10 +1012,10 @@ function bukaDetailHadis(nomor) {
     </div>
     <div class="nav-hadis">
       ${sebelumnya
-        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sebelumnya.hadith_number ?? sebelumnya.number}')">‹ ${sebelumnya.hadith_number ?? sebelumnya.number} Sebelumnya</a>`
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sebelumnya.hadith_number ?? sebelumnya.number}')">‹ ${sebelumnya.hadith_number ?? sebelumnya.number}</a>`
         : "<span></span>"}
       ${sesudahnya
-        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sesudahnya.hadith_number ?? sesudahnya.number}')">Sesudahnya ${sesudahnya.hadith_number ?? sesudahnya.number} ›</a>`
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sesudahnya.hadith_number ?? sesudahnya.number}')">{sesudahnya.hadith_number ?? sesudahnya.number} ›</a>`
         : "<span></span>"}
     </div>
   `;
