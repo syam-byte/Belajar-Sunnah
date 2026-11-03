@@ -1127,16 +1127,17 @@ function bukaDetailHadis(nomor) {
 
 /* ============ POPUP SARAN (Report Error) ============ */
 function aturPosisiPopupSaran() {
-  if (!tombolSaranAktif) return;
   const kotak = document.getElementById("popupSaran").firstElementChild;
-  const posisi = tombolSaranAktif.getBoundingClientRect();
-  const desktop = window.innerWidth > 800;
 
-  const maxKiri = window.innerWidth - kotak.offsetWidth - 4;
-  const kiri = desktop ? Math.max(4, Math.min(posisi.left, maxKiri)) : 0;
-
-  kotak.style.left = kiri + "px";
-  kotak.style.top = (posisi.bottom + 2) + "px";
+  kotak.style.position = "fixed";
+  kotak.style.left = "50%";
+  kotak.style.top = "50%";
+  kotak.style.transform = "translate(-50%, -50%)";
+  kotak.style.width = "min(360px, calc(100vw - 24px))";
+  kotak.style.maxWidth = "calc(100vw - 24px)";
+  kotak.style.maxHeight = "calc(100dvh - 24px)";
+  kotak.style.overflowY = "auto";
+  kotak.style.margin = "0";
 }
 
 function bukaSaran(tombol) {
