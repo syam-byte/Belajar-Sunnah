@@ -1142,8 +1142,9 @@ function aturPosisiPopupSaran() {
 
 function bukaSaran(tombol) {
   const popup = document.getElementById("popupSaran");
+  if (!popup) return;
 
-  if (popup.style.display !== "none" && tombolSaranAktif === tombol) {
+  if (popup.style.display === "block" && tombolSaranAktif === tombol) {
     tutupSaran();
     return;
   }
@@ -1152,9 +1153,13 @@ function bukaSaran(tombol) {
   tombolSaranAktif = tombol;
 
   const artikel = tombol.closest(".hadith");
-  popup.dataset.nomor = artikel ? artikel.querySelector(".number")?.innerText || "" : "";
+  popup.dataset.nomor = artikel
+    ? artikel.querySelector(".number")?.innerText || ""
+    : "";
 
   popup.style.display = "block";
+  popup.style.pointerEvents = "auto";
+
   aturPosisiPopupSaran();
 }
 
