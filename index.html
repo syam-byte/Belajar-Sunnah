@@ -258,21 +258,37 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 }
 .nav-hadis-btn:active { background: #E5E7EB; }
 
-/* Daftar kitab ala sunnah.com */
-#daftar-kitab { margin-top: 12px; border-radius: 10px; overflow: hidden; }
+/* Daftar kitab ala sunnah.com: kartu lebar */
+#kitab { padding-left: 0; padding-right: 0; }
+#kitab > h2,
+#kitab > button { margin-left: 12px; }
+
+main:has(#kitab:not(.hidden)) { padding-left: 4px; padding-right: 4px; }
+
+#daftar-kitab {
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid #D1D5DB;
+  border-top: 3px solid #80959A;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(55, 65, 81, .10);
+  overflow: hidden;
+}
 .kitab-item {
   display: grid;
   grid-template-columns: 44px 1fr auto;
   column-gap: 8px;
   row-gap: 8px;
   align-items: center;
-  padding: 16px 14px;
-  background: rgba(255,255,255,.75);
+  padding: 16px 10px;
+  background: #fff;
+  border-bottom: 1px solid #E5E7EB;
   color: #374151;
   cursor: pointer;
 }
-.kitab-item:nth-child(even) { background: rgba(229,231,235,.7); }
-.kitab-item:active { background: #D1D5DB; }
+.kitab-item:last-child { border-bottom: 0; }
+.kitab-item:nth-child(even) { background: #F9FAFB; }
+.kitab-item:active { background: #E5E7EB; }
 .kitab-no { color: #4F9A9A; font-size: 20px; text-align: center; }
 .kitab-en { color: #4F9A9A; font-size: 20px; line-height: 1.3; }
 .kitab-ar { font-family: 'Amiri', serif; font-size: 26px; line-height: 1.5; text-align: right; color: #171717; }
@@ -488,7 +504,7 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 .hadith {
   background: #fff;
   border: 1px solid #D1D5DB;
-  border-top: 3px solid #4F9A9A;      /* garis aksen di atas */
+  border-top: 3px solid #80959A;      /* garis aksen di atas */
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(55, 65, 81, .10);
   padding: 16px 18px;
@@ -878,6 +894,11 @@ function tampilkan() {
   hasil.innerHTML = bagian.map(function (hadis, indeks) {
     const nomor = hadis.hadith_number || hadis.number || mulai + indeks + 1;
     const nomorAman = amanHTML(nomor);
+    
+      // Kembali ke mode daftar: sembunyikan halaman detail
+  hasil.classList.remove("hidden");
+  document.getElementById("detail-hadis").classList.add("hidden");
+  document.getElementById("halaman").classList.remove("hidden");
 
     const terjemahan = amanHTML(
       hadis.translation_id ?? hadis.indonesian ?? hadis.translation ?? ""
@@ -894,11 +915,6 @@ function tampilkan() {
 
     const rujukan = "Sahih al-Bukhari no. " + nomorAman;
 
-    const idx = semua.indexOf(hadis);
-    const nomorDari = function (h) { return h ? (h.hadith_number || h.number) : null; };
-    const noSebelum = nomorDari(semua[idx - 1]);
-    const noSesudah = nomorDari(semua[idx + 1]);
-
     const judulBab = (babSama || !babNama)
       ? ""
       : `<h3 class="bab">Bab ${babNo}: ${babNama}</h3>`;
@@ -911,13 +927,6 @@ function tampilkan() {
       ? `<div class="ref-row kecil"><span class="ref-k">USC-MSA web (English) reference<br><i>(penomoran lama)</i></span>
            <span class="ref-v">${amanHTML(hadis.usc_msa_reference)}</span></div>`
       : "";
-
-    const navSebelum = noSebelum
-      ? `<a class="nav-hadis-btn" role="button" onclick="lompatHadis(${noSebelum})">‹ ${noSebelum}</a>`
-      : "<span></span>";
-    const navSesudah = noSesudah
-      ? `<a class="nav-hadis-btn" role="button" onclick="lompatHadis(${noSesudah})">${noSesudah} ›</a>`
-      : "<span></span>";
 
     return `
       ${judulBab}
@@ -945,8 +954,7 @@ function tampilkan() {
           <span class="tautan" role="button" tabindex="0" onclick="salinHadis(this)">Copy</span>
           <span class="tautan panah" role="button" tabindex="0" onclick="bukaOpsiSalin(this)">▼</span>
         </div>
-      </div>
-      <div class="nav-hadis">${navSebelum}${navSesudah}</div>`;
+      </div>`;
   }).join("") || "<p>Hadis tidak ditemukan.</p>";
 
   const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
@@ -989,7 +997,6 @@ function bukaDetailHadis(nomor) {
   const idx = semua.findIndex(function (h) {
     return String(h.hadith_number ?? h.number) === String(nomor);
   });
-
   if (idx < 0) return;
 
   const hadis = semua[idx];
@@ -1004,11 +1011,16 @@ function bukaDetailHadis(nomor) {
   const sesudahnya = semua[idx + 1];
 
   document.getElementById("hasil").classList.add("hidden");
+  document.getElementById("halaman").classList.add("hidden");
 
   const detail = document.getElementById("detail-hadis");
   detail.classList.remove("hidden");
 
   detail.innerHTML = `
+    <div style="margin:0 0 6px;font-size:14px;">
+      <span class="tautan" role="button" onclick="tampilkan()">‹ Kembali ke daftar</span>
+    </div>
+
     <div class="hadith" data-sanad="${sanad}">
       <div class="number">📚 Shahih al-Bukhari no. ${amanHTML(nomorHadis)}</div>
       <div>${terjemahan}</div>
@@ -1020,6 +1032,7 @@ function bukaDetailHadis(nomor) {
         </div>
       </div>
     </div>
+
     <div class="nav-hadis">
       ${sebelumnya
         ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sebelumnya.hadith_number ?? sebelumnya.number}')">‹ ${sebelumnya.hadith_number ?? sebelumnya.number}</a>`
