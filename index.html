@@ -238,11 +238,32 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 .ref-v::before { content: ": "; }
 .ref-row:first-child .ref-v { color: #4F9A9A; }
 
-/* Menu teks: Report Error | Share | Copy ▼ */
-.aksi { display: flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 15px; }
-.tautan { color: #4F9A9A; cursor: pointer; user-select: none; }
-.tautan:hover, .tautan:active { text-decoration: underline; }
-.tautan.panah { font-size: 11px; margin-left: -2px; }
+/* Menu Report Error | Share | Salin ▼ : bar lebar, putih, garis hijau di atas */
+.aksi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 14px -10px -14px;          /* melebar sampai tepi kartu */
+  padding: 10px 14px;
+  background: #fff;
+  border-top: 3px solid #4F9A9A;
+  border-radius: 0 0 8px 8px;
+  font-size: 15px;
+}
+.aksi > .tautan,
+.aksi > span { flex: 0 0 auto; }
+
+@media (min-width: 801px) {
+  .hadith > .aksi {
+    grid-column: 1 / -1;             /* satu baris penuh di bawah dua kolom */
+    grid-row: 4;
+    justify-self: stretch;
+    align-self: auto;
+    margin: 6px -20px -20px;
+    padding: 12px 24px;
+  }
+}
 
 /* Navigasi hadis sebelumnya / berikutnya */
 .nav-hadis { display: flex; justify-content: space-between; margin: 12px 0 20px; }
