@@ -247,12 +247,12 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 /* Navigasi hadis sebelumnya / berikutnya */
 .nav-hadis { display: flex; justify-content: space-between; margin: 12px 0 20px; }
 .nav-hadis-btn {
-  padding: 3px 13px;
+  padding: 3px 6px;
   background: #fff;
   border: 1px solid #D1D5DB; 
   border-radius: 4px;
   color: #374151;
-  font-size: 20px;
+  font-size: 17px;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
 }
@@ -484,21 +484,27 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 }
 
 /* Merapatkan tampilan halaman detail hadis */
-#detail-hadis .hadith {
-  margin-bottom: 6px;
-  padding: 10px;
-  border-radius: 6px;
+/* Kartu hadis: berlaku di HP dan desktop (daftar hadis + halaman detail) */
+.hadith {
+  background: #fff;
+  border: 1px solid #D1D5DB;
+  border-top: 3px solid #4F9A9A;      /* garis aksen di atas */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(55, 65, 81, .10);
+  padding: 16px 18px;
+  margin: 12px 0;
 }
 
-#detail-hadis .nav-hadis {
-  margin-top: 4px;
-  padding: 4px 0;
-  gap: 6px;
+/* Pemisah halus antara terjemahan dan teks Arab (tampilan HP) */
+.hadith .arabic {
+  margin: 14px 0 6px;
+  padding-top: 14px;
+  border-top: 1px dashed #D1D5DB;
 }
 
-#detail-hadis .nav-hadis-btn {
-  padding: 3px 8px;
-}
+/* Halaman detail sedikit lebih rapat */
+#detail-hadis .hadith { margin-bottom: 8px; }
+#detail-hadis .nav-hadis { margin-top: 4px; }
 </style>
 </head>
 
