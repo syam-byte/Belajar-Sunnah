@@ -1377,21 +1377,14 @@ function bukaOpsiSalin(tombol) {
   tombolSalinAktif = tombol;
   const kotak = popup.firstElementChild;
 
-  popup.style.display = "flex";
-  popup.style.background = "transparent";
-  popup.style.pointerEvents = "none";
-  popup.style.alignItems = "flex-start";
-  popup.style.justifyContent = "flex-start";
-  popup.style.padding = "0";
+    popup.style.display = "block";
 
   kotak.style.pointerEvents = "auto";
-  kotak.style.position = "fixed";
+  kotak.style.position = "absolute";
   kotak.style.boxSizing = "border-box";
   kotak.style.width = "fit-content";
   kotak.style.maxWidth = "calc(100vw - 8px)";
   kotak.style.margin = "0";
-  kotak.style.maxHeight = "calc(100vh - 24px)";
-  kotak.style.overflowY = "auto";
 
   aturPosisiPopupSalin();
 }
@@ -1400,14 +1393,6 @@ function tutupOpsiSalin() {
   document.getElementById("popupOpsiSalin").style.display = "none";
   tombolSalinAktif = null;
 }
-
-window.addEventListener("scroll", function () {
-  const popupSalin = document.getElementById("popupOpsiSalin");
-  if (popupSalin && popupSalin.style.display !== "none") aturPosisiPopupSalin();
-
-  const popupSaran = document.getElementById("popupSaran");
-  if (popupSaran && popupSaran.style.display !== "none") aturPosisiPopupSaran();
-}, true);
 
 window.addEventListener("resize", function () {
   aturPosisiPopupSalin();
@@ -1608,3 +1593,4 @@ muatKitab();
 
 </body>
 </html>
+2026/11/03 20:48
