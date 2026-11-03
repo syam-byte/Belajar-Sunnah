@@ -521,6 +521,39 @@ main:has(#kitab:not(.hidden)) { padding-left: 4px; padding-right: 4px; }
 /* Halaman detail sedikit lebih rapat */
 #detail-hadis .hadith { margin-bottom: 8px; }
 #detail-hadis .nav-hadis { margin-top: 4px; }
+
+/* Halaman hadis: melebar hampir penuh layar */
+#koleksi { padding-left: 0; padding-right: 0; }
+
+main:has(#koleksi:not(.hidden)) {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* Teks status, tautan kembali, dan angka halaman tetap diberi sedikit jarak */
+#koleksi > h2,
+#koleksi > .muted,
+#detail-hadis > div:first-child,
+#halaman {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Isi kartu dirapatkan supaya teks punya lebih banyak ruang */
+.hadith {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 14px 10px;
+  border-radius: 8px;
+}
+.nav-hadis {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@media (min-width: 801px) {
+  .hadith { padding: 20px 20px; }
+}
 </style>
 </head>
 
