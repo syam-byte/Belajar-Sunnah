@@ -238,21 +238,46 @@ footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px
 .ref-v::before { content: ": "; }
 .ref-row:first-child .ref-v { color: #4F9A9A; }
 
-/* Menu Report Error | Share | Salin ▼ : bar lebar, putih, garis hijau di atas */
+/* Menu Report Error | Share | Salin ▼ : tiap menu berborder seperti tautan Reference, garis hijau di atas */
 .aksi {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 6px;
-  margin: 14px -10px -14px;          /* melebar sampai tepi kartu */
-  padding: 10px 14px;
-  background: #fff;
-  border-top: 3px solid #4F9A9A;
-  border-radius: 0 0 8px 8px;
-  font-size: 15px;
+  margin-top: 14px;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  font-size: 13px;
 }
-.aksi > .tautan,
-.aksi > span { flex: 0 0 auto; }
+
+.aksi .tautan {
+  display: inline-block;
+  padding: 2px 8px;
+  color: #374151;
+  font-weight: 500;
+  background: #fff;
+  border: 1px solid #c8ceca;
+  border-top: 3px solid #4F9A9A;      /* list hijau di atas, seperti kartu hadis */
+  border-radius: 5px;
+  text-decoration: none;
+}
+.aksi .tautan:hover,
+.aksi .tautan:active {
+  background: #E5E7EB;
+  text-decoration: none;
+}
+
+/* Tanda | antar menu dibuat samar */
+.aksi > span:not(.tautan) { color: #9CA3AF; }
+
+/* Tanda ▼ tetap kecil, menempel ke Salin */
+.aksi .tautan.panah {
+  font-size: 11px;
+  margin-left: -2px;
+  padding: 3px 7px;
+}
 
 @media (min-width: 801px) {
   .hadith > .aksi {
