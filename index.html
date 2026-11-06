@@ -604,7 +604,7 @@ main:has(#koleksi:not(.hidden)) {
 </head>
 
 <body>
-<!-- VERSI 2026-11-03 v9: navigasi halaman angka saja, perbaikan template detail hadis -->
+<!-- VERSI 2026-11-06 v10: popup ▼ dan Saran rapat tepat di bawah tombol pemicunya -->
 
 <nav class="bs-main-nav" aria-label="Navigasi utama">
   <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
@@ -669,17 +669,16 @@ main:has(#koleksi:not(.hidden)) {
 <main>
   <!-- BERANDA -->
   <section id="beranda" class="panel">
-    <section id="beranda" class="panel">
 
-  <p style="
-    font-size: 18px;
-    font-weight: 600;
-    width: max-content;
-    margin-left: 25px;
-    white-space: nowrap;
-  ">
-    PERPUSTAKAAN HADIST SUNNAH
-  </p>
+    <p style="
+      font-size: 18px;
+      font-weight: 600;
+      width: max-content;
+      margin-left: 25px;
+      white-space: nowrap;
+    ">
+      PERPUSTAKAAN HADIST SUNNAH
+    </p>
 
     <div style="position:relative; width:92%; margin:0 auto 12px; box-sizing:border-box;">
       <input
@@ -980,14 +979,14 @@ function tampilkan() {
   status.textContent =
     "Ditemukan " + cocok.length + " entri dari " + semua.length + " entri hadis.";
 
-  hasil.innerHTML = bagian.map(function (hadis, indeks) {
-    const nomor = hadis.hadith_number || hadis.number || mulai + indeks + 1;
-    const nomorAman = amanHTML(nomor);
-    
-      // Kembali ke mode daftar: sembunyikan halaman detail
+  // Kembali ke mode daftar: sembunyikan halaman detail
   hasil.classList.remove("hidden");
   document.getElementById("detail-hadis").classList.add("hidden");
   document.getElementById("halaman").classList.remove("hidden");
+
+  hasil.innerHTML = bagian.map(function (hadis, indeks) {
+    const nomor = hadis.hadith_number || hadis.number || mulai + indeks + 1;
+    const nomorAman = amanHTML(nomor);
 
     const terjemahan = amanHTML(
       hadis.translation_id ?? hadis.indonesian ?? hadis.translation ?? ""
@@ -1027,7 +1026,7 @@ function tampilkan() {
         <div class="ref">
           <div class="ref-row"><span class="ref-k"><b>Reference</b></span>
             <span class="ref-v">
-  <a href="javascript:void(0)" onclick="bukaDetailHadis('${nomor}')">
+  <a href="javascript:void(0)" onclick="bukaDetailHadis('${nomorAman}')">
     ${rujukan}
   </a>
 </span></div>
@@ -1124,10 +1123,10 @@ function bukaDetailHadis(nomor) {
 
     <div class="nav-hadis">
       ${sebelumnya
-        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sebelumnya.hadith_number ?? sebelumnya.number}')">‹ ${sebelumnya.hadith_number ?? sebelumnya.number}</a>`
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${amanHTML(sebelumnya.hadith_number ?? sebelumnya.number)}')">‹ ${amanHTML(sebelumnya.hadith_number ?? sebelumnya.number)}</a>`
         : "<span></span>"}
       ${sesudahnya
-        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${sesudahnya.hadith_number ?? sesudahnya.number}')">${sesudahnya.hadith_number ?? sesudahnya.number} ›</a>`
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${amanHTML(sesudahnya.hadith_number ?? sesudahnya.number)}')">${amanHTML(sesudahnya.hadith_number ?? sesudahnya.number)} ›</a>`
         : "<span></span>"}
     </div>
   `;
@@ -1135,18 +1134,25 @@ function bukaDetailHadis(nomor) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+/* ============ POSISI POPUP (dipakai ▼ Salin dan Saran) ============ */
+/* Popup dipusatkan tepat di bawah tombol pemicu (jarak 1px),
+   lalu digeser seperlunya agar tetap berada di dalam layar. */
+function posisikanDiBawah(tombol, kotak) {
+  const p = tombol.getBoundingClientRect();
+  const lebar = kotak.offsetWidth;
+
+  let kiri = p.left + p.width / 2 - lebar / 2;
+  kiri = Math.max(4, Math.min(kiri, window.innerWidth - lebar - 4));
+
+  kotak.style.left = kiri + "px";
+  kotak.style.top = (p.bottom + 1) + "px";
+}
+
 /* ============ POPUP SARAN (Report Error) ============ */
 function aturPosisiPopupSaran() {
   if (!tombolSaranAktif) return;
   const kotak = document.getElementById("popupSaran").firstElementChild;
-  const posisi = tombolSaranAktif.getBoundingClientRect();
-  const desktop = window.innerWidth > 800;
-
-  const maxKiri = window.innerWidth - kotak.offsetWidth - 4;
-  const kiri = desktop ? Math.max(4, Math.min(posisi.left, maxKiri)) : 0;
-
-  kotak.style.left = kiri + "px";
-  kotak.style.top = (posisi.bottom + 2) + "px";
+  posisikanDiBawah(tombolSaranAktif, kotak);
 }
 
 function bukaSaran(tombol) {
@@ -1177,6 +1183,7 @@ document.addEventListener("change", function (event) {
     const lainnya = document.getElementById("jenisLainnya");
     lainnya.style.display = event.target.value === "Lainnya" ? "block" : "none";
     lainnya.required = event.target.value === "Lainnya";
+    aturPosisiPopupSaran();   // tinggi/lebar berubah, posisi dihitung ulang
   }
 });
 
@@ -1365,14 +1372,7 @@ async function salinHadis(tombol) {
 function aturPosisiPopupSalin() {
   if (!tombolSalinAktif) return;
   const kotak = document.getElementById("popupOpsiSalin").firstElementChild;
-  const posisi = tombolSalinAktif.getBoundingClientRect();
-  const desktop = window.innerWidth > 800;
-
-  const maxKiri = window.innerWidth - kotak.offsetWidth - 4;
-  const kiri = desktop ? Math.max(4, Math.min(posisi.left, maxKiri)) : 0;
-
-  kotak.style.left = kiri + "px";
-  kotak.style.top = (posisi.bottom + 2) + "px";
+  posisikanDiBawah(tombolSalinAktif, kotak);
 }
 
 function bukaOpsiSalin(tombol) {
