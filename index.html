@@ -669,7 +669,17 @@ main:has(#koleksi:not(.hidden)) {
 <main>
   <!-- BERANDA -->
   <section id="beranda" class="panel">
-    <p>Pencarian hadis</p>
+    <section id="beranda" class="panel">
+
+  <p style="
+    font-size: 18px;
+    font-weight: 600;
+    width: max-content;
+    margin-left: 25px;
+    white-space: nowrap;
+  ">
+    PERPUSTAKAAN HADIST SUNNAH
+  </p>
 
     <div style="position:relative; width:92%; margin:0 auto 12px; box-sizing:border-box;">
       <input
@@ -1127,24 +1137,22 @@ function bukaDetailHadis(nomor) {
 
 /* ============ POPUP SARAN (Report Error) ============ */
 function aturPosisiPopupSaran() {
+  if (!tombolSaranAktif) return;
   const kotak = document.getElementById("popupSaran").firstElementChild;
+  const posisi = tombolSaranAktif.getBoundingClientRect();
+  const desktop = window.innerWidth > 800;
 
-  kotak.style.position = "fixed";
-  kotak.style.left = "50%";
-  kotak.style.top = "50%";
-  kotak.style.transform = "translate(-50%, -50%)";
-  kotak.style.width = "min(360px, calc(100vw - 24px))";
-  kotak.style.maxWidth = "calc(100vw - 24px)";
-  kotak.style.maxHeight = "calc(100dvh - 24px)";
-  kotak.style.overflowY = "auto";
-  kotak.style.margin = "0";
+  const maxKiri = window.innerWidth - kotak.offsetWidth - 4;
+  const kiri = desktop ? Math.max(4, Math.min(posisi.left, maxKiri)) : 0;
+
+  kotak.style.left = kiri + "px";
+  kotak.style.top = (posisi.bottom + 2) + "px";
 }
 
 function bukaSaran(tombol) {
   const popup = document.getElementById("popupSaran");
-  if (!popup) return;
 
-  if (popup.style.display === "block" && tombolSaranAktif === tombol) {
+  if (popup.style.display !== "none" && tombolSaranAktif === tombol) {
     tutupSaran();
     return;
   }
@@ -1153,13 +1161,9 @@ function bukaSaran(tombol) {
   tombolSaranAktif = tombol;
 
   const artikel = tombol.closest(".hadith");
-  popup.dataset.nomor = artikel
-    ? artikel.querySelector(".number")?.innerText || ""
-    : "";
+  popup.dataset.nomor = artikel ? artikel.querySelector(".number")?.innerText || "" : "";
 
   popup.style.display = "block";
-  popup.style.pointerEvents = "auto";
-
   aturPosisiPopupSaran();
 }
 
@@ -1383,14 +1387,21 @@ function bukaOpsiSalin(tombol) {
   tombolSalinAktif = tombol;
   const kotak = popup.firstElementChild;
 
-    popup.style.display = "block";
+  popup.style.display = "flex";
+  popup.style.background = "transparent";
+  popup.style.pointerEvents = "none";
+  popup.style.alignItems = "flex-start";
+  popup.style.justifyContent = "flex-start";
+  popup.style.padding = "0";
 
   kotak.style.pointerEvents = "auto";
-  kotak.style.position = "absolute";
+  kotak.style.position = "fixed";
   kotak.style.boxSizing = "border-box";
   kotak.style.width = "fit-content";
   kotak.style.maxWidth = "calc(100vw - 8px)";
   kotak.style.margin = "0";
+  kotak.style.maxHeight = "calc(100vh - 24px)";
+  kotak.style.overflowY = "auto";
 
   aturPosisiPopupSalin();
 }
@@ -1399,6 +1410,14 @@ function tutupOpsiSalin() {
   document.getElementById("popupOpsiSalin").style.display = "none";
   tombolSalinAktif = null;
 }
+
+window.addEventListener("scroll", function () {
+  const popupSalin = document.getElementById("popupOpsiSalin");
+  if (popupSalin && popupSalin.style.display !== "none") aturPosisiPopupSalin();
+
+  const popupSaran = document.getElementById("popupSaran");
+  if (popupSaran && popupSaran.style.display !== "none") aturPosisiPopupSaran();
+}, true);
 
 window.addEventListener("resize", function () {
   aturPosisiPopupSalin();
@@ -1447,7 +1466,7 @@ muatKitab();
 </script>
 
 <!-- POPUP SARAN -->
-<div id="popupSaran" style="display:none;position:absolute;top:0;left:0;width:100%;height:0;z-index:10000;background:transparent;pointer-events:none;">
+<div id="popupSaran" style="display:none;position:fixed;inset:0;z-index:10000;background:transparent;pointer-events:none;">
   <div style="position:fixed;left:0;top:0;
     width:min(320px,calc(100vw - 8px));max-height:calc(100vh - 24px);overflow-y:auto;
     background-color:#E5E7EB;
@@ -1531,7 +1550,7 @@ muatKitab();
 
 <!-- POPUP PILIHAN SALIN -->
 <div id="popupOpsiSalin"
-  style="display:none;position:absolute;top:0;left:0;width:100%;height:0;z-index:10001;background:transparent;pointer-events:none;">
+  style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:flex-start;justify-content:flex-start;padding:0;pointer-events:none;">
 
   <div style="width:fit-content;max-width:calc(100vw - 8px);
     background-color:#E5E7EB;
