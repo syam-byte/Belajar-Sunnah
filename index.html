@@ -913,12 +913,16 @@ function saringKitab(teks) {
   }));
 }
 
+
 function bukaKitab(awal, akhir) {
-  const a = parseInt(awal, 10), b = parseInt(akhir, 10);
+  const a = Number(awal);
+  const b = Number(akhir);
+
   cocok = semua.filter(function (h) {
-    const n = parseInt(h.hadith_number ?? h.number, 10);
-    return n >= a && n <= b;
+    const n = Number(h.number);
+    return Number.isFinite(n) && n >= a && n <= b;
   });
+
   hal = 0;
   simpan("halHadis", 0);
   buka("koleksi");
