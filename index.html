@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Belajar-Sunnah, perpustakaan hadis berbahasa Indonesia.">
+<meta name="theme-color" content="#E5E7EB">
+<title>Belajar Sunnah</title>
+
+<style>
+:root { --sbw: 0px; }
+
+@font-face {
+  font-family: 'Amiri';
+  src: url('./fonts/Amiri-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Markazi Text';
+  src: url('./fonts/MarkaziText-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Arab;
+  src: url("fonts/Birds of Paradise.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: Akzidenz;
+  src: url("fonts/akzidenz-grotesk-roman.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: Lionking;
+  src: url("fonts/Lionking.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --teal: #E5E7EB;
+  --teal-dark: #374151;
+  --paper: #D1D5DB;
+  --panel: #E5E7EB;
+  --text: #374151;
+  --muted: #D1D5DB;
+  --border: #0000;
+  --hdr: #374151;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+html, body { overscroll-behavior-y: contain; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: Akzidenz, Arial, sans-serif;
+  line-height: 1.7;
+  background-color: transparent;
+  background-image:
+    linear-gradient(rgba(229, 231, 235, 0.75), rgba(229, 231, 235, 0.75)),
+    url("./drawable/BS_1.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ===== HEADER BERANDA ===== */
+.bs-header {
+  padding: 20px 12px;
+  background: rgba(55, 65, 81, 0.85);
+  color: white;
+}
+.bs-brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+.bs-logo {
+  width: 84px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+.bs-brand-copy { flex: 1; min-width: 0; text-align: left; }
+.bs-brand-copy .bs-welcome-main {
+  margin: 0;
+  color: white;
+  font-family: Arab, serif;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.bs-brand-copy .bs-welcome-meaning {
+  margin: 2px 0 0;
+  color: white;
+  font-family: Akzidenz, Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+/* ===== NAVIGASI ATAS ===== */
+.bs-main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 14px 12px;
+  background: rgba(229, 231, 235, 0.75);
+  border-top: 1px solid rgba(55, 65, 81, 0.15);
+  border-bottom: 1px solid rgba(55, 65, 81, 0.15);
+  font-size: 14px;
+}
+.bs-main-nav a { color: var(--text); text-decoration: none; }
+.bs-main-nav a:hover { color: var(--teal-dark); text-decoration: underline; }
+.bs-main-nav span { color: #aaa397; }
+
+/* ===== KONTEN ===== */
+main {
+  width: 100%;
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 14px;
+}
+.panel {
+  margin-bottom: 16px;
+  padding: 20px;
+  background: transparent;
+  border-radius: 10px;
+}
+.hidden { display: none !important; }
+h2 { margin-top: 0; color: var(--teal-dark); }
+
+/* Tombol: standby = teks hitam, hover/ditekan = gelap + teks putih */
+button {
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 6px;
+  background: #E5E7EB;
+  color: #000;
+  font: inherit;
+  cursor: pointer;
+}
+button:hover,
+button:active {
+  background: #374151;
+  color: #fff;
+}
+button:disabled {
+  background: #E5E7EB;
+  color: #000;
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+#beranda { background: transparent; }
+#beranda button { display: block; margin: 20px auto; }
+#koleksi > button, #kitab > button { margin: 4px 4px 10px 0; }
+
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 13px;
+  border: 1px solid #c8ceca;
+  border-radius: 6px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+input:focus {
+  outline: 2px solid rgba(83,125,125,.25);
+  border-color: var(--teal-dark);
+}
+
+.muted { color: #6B7280; font-size: 14px; }
+
+/* ===== KARTU HADIS ===== */
+.hadith {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  color: #374151;
+}
+.hadith > div:nth-child(2) { color: #374151; }
+.number { color: var(--teal-dark); font-weight: bold; }
+.arabic {
+  margin: 14px 0;
+  color: #374151;
+  font-family: 'Amiri', serif;
+  font-size: 24px;
+  line-height: 1.8;
+  text-align: right;
+  direction: rtl;
+}
+
+/* Navigasi halaman: hanya angka, di tepi kiri dan kanan */
+#halaman {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+#halaman button { min-width: 44px; }
+
+footer { padding: 24px 15px; color: #6B7280; text-align: center; font-size: 13px; }
+
+/* Judul bab */
+.bab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  color: #374151;
+}
+
+/* Tabel referensi */
+.ref { margin-top: 14px; font-size: 10px; }
+.ref-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; line-height: 1.5; }
+.ref-row.kecil { color: #9CA3AF; font-size: 13px; }
+.ref-v::before { content: ": "; }
+.ref-row:first-child .ref-v { color: #4F9A9A; }
+
+/* Menu Report Error | Share | Salin ▼ : tiap menu berborder seperti tautan Reference, garis hijau di atas */
+.aksi {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.aksi .tautan {
+  display: inline-block;
+  padding: 2px 8px;
+  color: #374151;
+  font-weight: 500;
+  background: #fff;
+  border: 1px solid #c8ceca;
+  border-top: 3px solid #4F9A9A;      /* list hijau di atas, seperti kartu hadis */
+  border-radius: 5px;
+  text-decoration: none;
+}
+.aksi .tautan:hover,
+.aksi .tautan:active {
+  background: #E5E7EB;
+  text-decoration: none;
+}
+
+/* Tanda | antar menu dibuat samar */
+.aksi > span:not(.tautan) { color: #9CA3AF; }
+
+/* Tanda ▼ tetap kecil, menempel ke Salin */
+.aksi .tautan.panah {
+  font-size: 11px;
+  margin-left: -2px;
+  padding: 3px 7px;
+}
+
+@media (min-width: 801px) {
+  .hadith > .aksi {
+    grid-column: 1 / -1;             /* satu baris penuh di bawah dua kolom */
+    grid-row: 4;
+    justify-self: stretch;
+    align-self: auto;
+    margin: 6px -20px -20px;
+    padding: 12px 24px;
+  }
+}
+
+/* Navigasi hadis sebelumnya / berikutnya */
+.nav-hadis { display: flex; justify-content: space-between; margin: 12px 0 20px; }
+.nav-hadis-btn {
+  padding: 3px 6px;
+  background: #fff;
+  border: 1px solid #D1D5DB; 
+  border-radius: 4px;
+  color: #374151;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.nav-hadis-btn:active { background: #E5E7EB; }
+
+/* Daftar kitab ala sunnah.com: kartu lebar */
+#kitab { padding-left: 0; padding-right: 0; }
+#kitab > h2,
+#kitab > button { margin-left: 12px; }
+
+main:has(#kitab:not(.hidden)) { padding-left: 4px; padding-right: 4px; }
+
+#daftar-kitab {
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid #D1D5DB;
+  border-top: 3px solid #80959A;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(55, 65, 81, .10);
+  overflow: hidden;
+}
+.kitab-item {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  column-gap: 8px;
+  row-gap: 8px;
+  align-items: center;
+  padding: 16px 10px;
+  background: #fff;
+  border-bottom: 1px solid #E5E7EB;
+  color: #374151;
+  cursor: pointer;
+}
+.kitab-item:last-child { border-bottom: 0; }
+.kitab-item:nth-child(even) { background: #F9FAFB; }
+.kitab-item:active { background: #E5E7EB; }
+.kitab-no { color: #4F9A9A; font-size: 20px; text-align: center; }
+.kitab-en { color: #4F9A9A; font-size: 20px; line-height: 1.3; }
+.kitab-ar { font-family: 'Amiri', serif; font-size: 26px; line-height: 1.5; text-align: right; color: #171717; }
+.kitab-range { grid-column: 2 / -1; font-size: 18px; color: #374151; word-spacing: 10px; }
+@media (min-width: 801px) {
+  .kitab-item { padding: 18px 24px; }
+  .kitab-en, .kitab-no { font-size: 22px; }
+  .kitab-ar { font-size: 30px; }
+}
+
+/* ===== HEADER HALAMAN DALAM ===== */
+.bsh {
+  background: var(--hdr);
+  color: #fff;
+  font-family: Akzidenz, Arial, sans-serif;
+  line-height: 1.4;
+}
+.bsh-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  background: rgba(255,255,255,.12);
+  font-size: 8px;
+}
+.bsh-donate {
+  background: #fff;
+  color: #374151;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 9px;
+  padding: 1px 5px;
+  border: 1px solid #d1d5db;
+  border-radius: 2px;
+  line-height: 1.3;
+}
+.bsh-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2px 8px;
+  background: rgba(0,0,0,.06);
+}
+.bsh-brand img { width: 60px; height: auto; object-fit: contain; flex-shrink: 0; display: block; }
+.bsh-brand-copy { flex: 1; min-width: 0; text-align: left; }
+.bsh-brand .ar { font-family: Arab, serif; font-size: 20px; line-height: 1.0; }
+.bsh-brand .id {
+  font-family: Akzidenz, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.bsh-search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  width: 100%;
+  max-width: 300px;
+  margin: 4px 0 4px 4px;
+  padding: 3px 6px;
+}
+.bsh-field {
+  flex: 1;
+  display: flex;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #E5E7EB;
+}
+.bsh .bsh-field input {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #374151;
+  font-size: 16px;
+}
+.bsh .bsh-field input:focus { outline: none; }
+.bsh .bsh-go {
+  width: 52px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #4E5D73;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bsh .bsh-go:hover { background: #5E6E85; }
+.bsh .bsh-ico {
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bsh .bsh-ico:hover { background: rgba(255,255,255,.18); border-radius: 8px; }
+
+.bsh-crumb {
+  padding: 5px 10px;
+  background: rgba(0,0,0,.1);
+  font-size: 12px;
+  line-height: 1.3;
+}
+.bsh-crumb a { color: #fff; text-decoration: none; }
+.bsh-crumb a:hover { text-decoration: underline; }
+.bsh-crumb strong { font-weight: 500; }
+
+/* ===== MENU FOOTER ===== */
+.bs-footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 100%;
+  padding: 18px 10px 18px;
+  margin-top: 20px;
+  background: rgba(229, 231, 235, 0.75);
+  border-top: 1px solid rgba(55, 65, 81, 0.15);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Markazi Text', serif;
+}
+.bs-footer-nav a { color: #374151; text-decoration: none; }
+.bs-footer-nav a:hover { text-decoration: underline; }
+
+/* ===== HP ===== */
+@media (max-width: 600px) {
+  .bs-logo { width: 84px; height: auto; flex-basis: 84px; }
+  .bs-brand { gap: 10px; padding: 0; }
+  .bs-brand-copy .bs-welcome-main { font-size: 29px; }
+  .bs-brand-copy .bs-welcome-meaning { font-size: 18px; }
+  .bs-main-nav { gap: 8px; padding: 10px 6px; font-size: 13px; }
+  main { margin: 16px auto; padding: 0 10px; }
+  .panel { padding: 16px; }
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 801px) {
+  main { max-width: 1100px; }
+
+  /* Kartu hadis: terjemahan kiri, Arab kanan */
+  .hadith {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 10px;
+    width: 100% !important;
+    margin: 12px 0 !important;
+    padding: 20px 24px !important;
+    border: 1px solid #D1D5DB !important;
+    border-radius: 8px !important;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08) !important;
+  }
+  .hadith > .number { grid-column: 1 / -1; }
+  .hadith > div:nth-child(2) { grid-column: 1; grid-row: 2; font-size: 18px; line-height: 1.7; }
+  .hadith > .arabic { grid-column: 2; grid-row: 2; margin: 0; font-size: 28px; }
+  .hadith > .ref { grid-column: 1; grid-row: 3; align-self: end; margin-top: 0; }
+  .hadith > .aksi { grid-column: 2; grid-row: 3; justify-self: end; align-self: end; margin-top: 0; }
+
+  /* Header halaman dalam: rata tengah */
+  .bsh-top { font-size: 14px; }
+  .bsh-top .bsh-donate { font-size: 14px; }
+  .bsh-brand { max-width: none; justify-content: center; padding: 8px 14px; }
+  .bsh-brand-copy { flex: 0 0 auto; text-align: center; }
+  .bsh-brand img { width: 72px; }
+  .bsh-brand .ar { font-size: 26px; }
+  .bsh-brand .id { font-size: 20px; }
+  .bsh-search { max-width: none; width: 100%; margin: 4px 0; padding: 4px 14px; justify-content: center; }
+  .bsh-search .bsh-field { flex: 0 1 420px; }
+  .bsh-crumb { text-align: center; padding: 6px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+.ref-v a {
+  display: inline-block;
+  font-size: 13px;
+  color: #374151;
+  text-decoration: none;
+  font-weight: 500;
+
+  /* Border */
+  border: 1px solid #c8ceca;
+  border-radius: 5px;
+  padding: 1px 2px;
+  margin: 0;
+}
+
+/* Merapatkan tampilan halaman detail hadis */
+/* Kartu hadis: berlaku di HP dan desktop (daftar hadis + halaman detail) */
+.hadith {
+  background: #fff;
+  border: 1px solid #D1D5DB;
+  border-top: 3px solid #80959A;      /* garis aksen di atas */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(55, 65, 81, .10);
+  padding: 16px 18px;
+  margin: 12px 0;
+}
+
+/* Pemisah halus antara terjemahan dan teks Arab (tampilan HP) */
+.hadith .arabic {
+  margin: 14px 0 6px;
+  padding-top: 14px;
+  border-top: 1px dashed #D1D5DB;
+}
+
+/* Halaman detail sedikit lebih rapat */
+#detail-hadis .hadith { margin-bottom: 8px; }
+#detail-hadis .nav-hadis { margin-top: 4px; }
+
+/* Halaman hadis: melebar hampir penuh layar */
+#koleksi { padding-left: 0; padding-right: 0; }
+
+main:has(#koleksi:not(.hidden)) {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* Teks status, tautan kembali, dan angka halaman tetap diberi sedikit jarak */
+#koleksi > h2,
+#koleksi > .muted,
+#detail-hadis > div:first-child,
+#halaman {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Isi kartu dirapatkan supaya teks punya lebih banyak ruang */
+.hadith {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 14px 10px;
+  border-radius: 8px;
+}
+.nav-hadis {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@media (min-width: 801px) {
+  .hadith { padding: 20px 20px; }
+}
+</style>
+</head>
+
+<body>
+<!-- VERSI 2026-11-06 v10: popup ▼ dan Saran rapat tepat di bawah tombol pemicunya -->
+
+<nav class="bs-main-nav" aria-label="Navigasi utama">
+  <a href="#beranda" onclick="buka('beranda');return false;">Belajar</a>
+  <span aria-hidden="true">|</span>
+  <a href="#sunnah" onclick="buka('sunnah');return false;">Sunnah</a>
+  <span aria-hidden="true">|</span>
+  <a href="#sanad" onclick="buka('sanad');return false;">Thalabul</a>
+  <span aria-hidden="true">|</span>
+  <a href="#perawi" onclick="buka('perawi');return false;">'ilmi</a>
+  <span aria-hidden="true">|</span>
+  <a href="https://www.muslimpro.com/prayer-times/" target="_blank" rel="noopener noreferrer">Prayer Times</a>
+</nav>
+
+<header class="bs-header" id="header-beranda">
+  <div class="bs-brand">
+    <img class="bs-logo" src="drawable/BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
+    <div class="bs-brand-copy">
+      <h1 class="bs-welcome-main">بلاجر سنة</h1>
+      <p class="bs-welcome-meaning">Belajar Sunnah</p>
+    </div>
+  </div>
+</header>
+
+<header class="bsh hidden" id="header-dalam">
+  <div class="bsh-top">
+    <span>Contribute to our mission</span>
+    <a class="bsh-donate" href="#" target="_blank" rel="noopener">Donate Now</a>
+  </div>
+
+  <div class="bsh-brand">
+    <img src="drawable/BelajarSunnah.9.png" alt="Logo Belajar Sunnah">
+    <div class="bsh-brand-copy">
+      <div class="ar">بلاجر سنة</div>
+      <div class="id">Belajar Sunnah</div>
+    </div>
+  </div>
+
+  <div class="bsh-search">
+    <div class="bsh-field">
+      <input id="cari-header" type="search" placeholder="Search ..."
+        onkeydown="if(event.key==='Enter'){cariHadis('cari-header')}">
+      <button type="button" class="bsh-go" aria-label="Cari" onclick="cariHadis('cari-header')">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <button type="button" class="bsh-ico" aria-label="Filter" title="Filter">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h5M14 6h7M3 12h9M18 12h3M3 18h3M12 18h9"/>
+        <circle cx="11" cy="6" r="2.2"/><circle cx="15" cy="12" r="2.2"/><circle cx="9" cy="18" r="2.2"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="bsh-crumb" id="bsh-crumb">
+    <a href="#beranda" onclick="buka('beranda');return false;">Home</a>
+  </div>
+</header>
+
+<main>
+  <!-- BERANDA -->
+  <section id="beranda" class="panel">
+
+    <p style="
+      font-size: 18px;
+      font-weight: 600;
+      width: max-content;
+      margin-left: 25px;
+      white-space: nowrap;
+    ">
+      PERPUSTAKAAN HADIST SUNNAH
+    </p>
+
+    <div style="position:relative; width:92%; margin:0 auto 12px; box-sizing:border-box;">
+      <input
+        id="cari-beranda"
+        type="search"
+        placeholder="Cari hadis..."
+        onkeydown="if(event.key==='Enter'){cariHadis('cari-beranda')}"
+        style="display:block; width:100%; box-sizing:border-box; margin:0; padding:8px 42px 8px 10px; font-size:14px; -webkit-appearance:none; appearance:none;"
+      >
+      <button
+        type="button"
+        onclick="cariHadis('cari-beranda')"
+        aria-label="Cari hadis"
+        style="position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; justify-content:center; width:36px; height:36px; margin:0; padding:4px; border:0; background:transparent; cursor:pointer;"
+      >
+        <img src="drawable/search.9.png" alt="" style="display:block; width:22px; height:22px; object-fit:contain;">
+      </button>
+    </div>
+
+    <h2 style="display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:0; width:92%; margin:0 auto; border-bottom:3px solid #ddd; padding-bottom:0px; text-align:center; font-size:26px; font-weight:500;">
+      <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-size:21px; font-weight:500;">
+        <span dir="rtl" style="flex:1; text-align:left;">الكتب الثلاثة</span>
+        <span style="flex:1; text-align:right;">Yang Ketiga</span>
+      </div>
+    </h2>
+
+    <table style="width:92%; margin:0 auto; box-sizing:border-box; border-collapse:separate; border-spacing:0 5px; font-size:18px;">
+      <tbody>
+        <tr>
+          <td data-buka="kitab" style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; color:#374151; cursor:pointer;">
+            <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
+              <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">صحيح البخاري</span>
+              <span style="flex:1; text-align:right; font-size:18px; font-family:'Lionking', sans-serif;">Sahih Bukhari</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-buka="muslim" style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; color:#374151; cursor:pointer;">
+            <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
+              <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">صحيح مسلم</span>
+              <span style="flex:1; text-align:right; font-size:18px; font-family:'Lionking', sans-serif;">Sahih Muslim</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-buka="abu-dawud" style="padding:4px 16px; border:1px solid #c8ceca; border-radius:6px; background:white; color:#374151; cursor:pointer;">
+            <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:24px; width:100%; font-weight:500;">
+              <span dir="rtl" style="flex:1; text-align:left; font-size:21px;">سنن أبي داود</span>
+              <span style="flex:1; text-align:right; font-size:19px; font-family:'Lionking', sans-serif;">Abu Dawud</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="sunnah" class="panel hidden">
+    <h2>Sunnah</h2>
+  </section>
+
+  <!-- DAFTAR KITAB BUKHARI -->
+  <section id="kitab" class="panel hidden">
+    <h2>Sahih al-Bukhari</h2>
+    <button type="button" onclick="lihatSemua()">Lihat semua hadis</button>
+    <div id="daftar-kitab"></div>
+  </section>
+
+  <!-- KOLEKSI HADIS: jangan dihapus -->
+  <section id="koleksi" class="panel hidden">
+    <h2></h2>
+    <p id="status" class="muted" aria-live="polite"></p>
+    <div id="hasil"></div>
+    <div id="detail-hadis" class="hidden"></div>
+    <div id="halaman"></div>
+  </section>
+
+  <section id="sanad" class="panel hidden">
+    <h2>Sanad Hadis</h2>
+    <p>Pilih hadis pada menu Koleksi Hadis untuk melihat data sanad yang tersedia.</p>
+  </section>
+
+  <section id="perawi" class="panel hidden">
+    <h2>Perawi Hadis</h2>
+    <p>Data perawi ditampilkan berdasarkan informasi yang tersedia dalam file hadis.</p>
+  </section>
+
+  <section id="muslim" class="panel hidden">
+    <h2>Sahih Muslim</h2>
+    <p>Koleksi hadis Sahih Muslim belum tersedia di halaman ini.</p>
+  </section>
+
+  <section id="abu-dawud" class="panel hidden">
+    <h2>Sunan Abu Dawud</h2>
+    <p>Koleksi hadis Sunan Abi Dawud belum tersedia di halaman ini.</p>
+  </section>
+</main>
+
+<footer></footer>
+
+<script>
+let semua = [];
+let cocok = [];
+let hal = 0;
+const perHalaman = 10;
+
+let tombolSalinAktif = null;
+let tombolSaranAktif = null;
+
+function ukurScrollbar() {
+  const de = document.documentElement;
+  de.style.setProperty("--sbw", (window.innerWidth - de.clientWidth) + "px");
+}
+window.addEventListener("resize", ukurScrollbar);
+
+const namaHalaman = {
+  kitab: "Sahih al-Bukhari",
+  koleksi: "Sahih al-Bukhari",
+  muslim: "Sahih Muslim",
+  "abu-dawud": "Sunan Abu Dawud",
+  sunnah: "Sunnah",
+  sanad: "Thalabul",
+  perawi: "'ilmi"
+};
+
+function perbaruiBreadcrumb(id) {
+  const el = document.getElementById("bsh-crumb");
+  if (!el) return;
+  const nama = namaHalaman[id];
+  el.innerHTML =
+    `<a href="#beranda" onclick="buka('beranda');return false;">Home</a>` +
+    (nama ? ` <span aria-hidden="true">»</span> <strong>${nama}</strong>` : "");
+}
+
+function simpan(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+function ambil(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+
+function buka(id) {
+  simpan("halamanAktif", id);
+  try { history.replaceState(null, "", id === "beranda" ? location.pathname + location.search : "#" + id); } catch (e) {}
+  document.querySelectorAll("main section").forEach(function (bagian) {
+    bagian.classList.add("hidden");
+  });
+  const target = document.getElementById(id);
+  if (target) target.classList.remove("hidden");
+
+  const awal = (id === "beranda");
+  document.getElementById("header-beranda").classList.toggle("hidden", !awal);
+  document.getElementById("header-dalam").classList.toggle("hidden", awal);
+
+  perbaruiBreadcrumb(id);
+  ukurScrollbar();
+}
+
+function bersih(nilai) {
+  if (nilai === null || nilai === undefined) return "";
+  if (typeof nilai === "string") return nilai;
+  if (Array.isArray(nilai)) return nilai.map(bersih).filter(Boolean).join("، ");
+  if (typeof nilai === "object") return nilai.inline_name || nilai.name || nilai.tooltip || "";
+  return String(nilai);
+}
+
+function amanHTML(nilai) {
+  return bersih(nilai).replace(/[&<>"']/g, function (k) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[k];
+  });
+}
+
+function bersihArab(nilai) {
+  return amanHTML(nilai).replace(/\[\s*\/?\s*[a-z][^\]]*\]/gi, "");
+}
+
+async function muat() {
+  const status = document.getElementById("status");
+  status.textContent = "Memuat data hadis…";
+  try {
+    const respons = await fetch("./belajar-sunnah-bukhari.json");
+    if (!respons.ok) throw new Error("HTTP " + respons.status);
+    const data = await respons.json();
+    semua = Array.isArray(data)
+      ? data
+      : (Array.isArray(data.hadiths)
+          ? data.hadiths
+          : (data && typeof data === "object" &&
+              (data.number != null || data.hadith_number != null)
+              ? [data]
+              : []));
+
+    cocok = semua.slice();
+    hal = parseInt(ambil("halHadis"), 10) || 0;
+    hal = Math.max(0, Math.min(hal, Math.ceil(cocok.length / perHalaman) - 1));
+    tampilkan();
+  } catch (kesalahan) {
+    status.textContent = "Gagal memuat JSON. Pastikan file belajar-sunnah-bukhari.json tersedia.";
+  }
+}
+
+/* ============ DAFTAR KITAB ============ */
+let kitab = [];
+
+async function muatKitab() {
+  const wadah = document.getElementById("daftar-kitab");
+  try {
+    const r = await fetch("./bukhari-kitab.json");
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+    kitab = Array.isArray(d.books) ? d.books : (Array.isArray(d) ? d : []);
+    if (!kitab.length) throw new Error("isi JSON tidak punya daftar books");
+    tampilkanKitab(kitab);
+  } catch (e) {
+    wadah.textContent = "Gagal memuat bukhari-kitab.json (" + e.message + "). Cek nama file, lokasi, dan isi JSON.";
+  }
+}
+
+function tampilkanKitab(daftar) {
+  document.getElementById("daftar-kitab").innerHTML = daftar.map(function (k) {
+    return `
+      <div class="kitab-item" role="button" tabindex="0"
+           onclick="bukaKitab('${amanHTML(k.first)}','${amanHTML(k.last)}')">
+        <span class="kitab-no">${amanHTML(k.book)}</span>
+        <span class="kitab-en">${amanHTML(k.nameEn)}</span>
+        <span class="kitab-ar" dir="rtl">${amanHTML(k.nameAr)}</span>
+        <span class="kitab-range">${amanHTML(k.first)} to ${amanHTML(k.last)}</span>
+      </div>`;
+  }).join("") || "<p>Kitab tidak ditemukan.</p>";
+}
+
+function saringKitab(teks) {
+  const kata = teks.trim().toLocaleLowerCase();
+  tampilkanKitab(kitab.filter(function (k) {
+    return String(k.book) === kata ||
+      (k.nameEn + " " + k.nameAr).toLocaleLowerCase().includes(kata);
+  }));
+}
+
+function bukaKitab(awal, akhir) {
+  const a = parseInt(awal, 10), b = parseInt(akhir, 10);
+  cocok = semua.filter(function (h) {
+    const n = parseInt(h.hadith_number ?? h.number, 10);
+    return n >= a && n <= b;
+  });
+  hal = 0;
+  simpan("halHadis", 0);
+  buka("koleksi");
+  tampilkan();
+  window.scrollTo({ top: 0 });
+}
+
+function lihatSemua() {
+  cocok = semua.slice();
+  hal = 0;
+  simpan("halHadis", 0);
+  buka("koleksi");
+  tampilkan();
+  window.scrollTo({ top: 0 });
+}
+
+/* ============ PENCARIAN ============ */
+function cariHadis(idInput = "cari-beranda") {
+  const input = document.getElementById(idInput);
+  if (!input) return;
+
+  const kata = input.value.trim().toLocaleLowerCase();
+  simpan("halHadis", 0);
+
+  if (!kata) {
+    cocok = semua.slice();
+  } else if (/^\d+$/.test(kata)) {
+    const indeks = semua.findIndex(function (hadis) {
+      return [hadis.hadith_number, hadis.number].some(function (nomor) {
+        return String(nomor == null ? "" : nomor).trim() === kata;
+      });
+    });
+    cocok = indeks < 0 ? [] : semua.slice(indeks, indeks + 10);
+  } else {
+    cocok = semua.filter(function (hadis) {
+      return [
+        hadis.collection, hadis.number, hadis.hadith_number, hadis.narrator,
+        hadis.arabic, hadis.chain, hadis.english_text, hadis.english_title,
+        hadis.english_grade, hadis.arabic_grade, hadis.reference, hadis.translation_id
+      ].some(function (nilai) {
+        return bersih(nilai).toLocaleLowerCase().includes(kata);
+      });
+    }).slice(0, 10);
+  }
+
+  hal = 0;
+  buka("koleksi");
+  tampilkan();
+}
+
+/* ============ TAMPILKAN HADIS ============ */
+function tampilkan() {
+  const hasil = document.getElementById("hasil");
+  const status = document.getElementById("status");
+  const mulai = hal * perHalaman;
+  const bagian = cocok.slice(mulai, mulai + perHalaman);
+
+  status.textContent =
+    "Ditemukan " + cocok.length + " entri dari " + semua.length + " entri hadis.";
+
+  // Kembali ke mode daftar: sembunyikan halaman detail
+  hasil.classList.remove("hidden");
+  document.getElementById("detail-hadis").classList.add("hidden");
+  document.getElementById("halaman").classList.remove("hidden");
+
+  hasil.innerHTML = bagian.map(function (hadis, indeks) {
+    const nomor = hadis.hadith_number || hadis.number || mulai + indeks + 1;
+    const nomorAman = amanHTML(nomor);
+
+    const terjemahan = amanHTML(
+      hadis.translation_id ?? hadis.indonesian ?? hadis.translation ?? ""
+    );
+    const sanadTeks = amanHTML(hadis.sanad_id ?? hadis.sanad ?? "");
+    const arab = hadis.arabic ? bersihArab(hadis.arabic) : "Teks Arab belum tersedia";
+
+    const babNama = amanHTML(hadis.chapter_title || hadis.english_title);
+    const babNo = amanHTML(hadis.chapter_number);
+    const sebelumnya = indeks > 0 ? bagian[indeks - 1] : null;
+    const babSama = sebelumnya &&
+      bersih(sebelumnya.chapter_title || sebelumnya.english_title) ===
+      bersih(hadis.chapter_title || hadis.english_title);
+
+    const rujukan = "Sahih al-Bukhari no. " + nomorAman;
+
+    const judulBab = (babSama || !babNama)
+      ? ""
+      : `<h3 class="bab">Bab ${babNo}: ${babNama}</h3>`;
+
+    const inBook = hadis.book_number
+      ? `<div class="ref-row"><span class="ref-k"><b>Nomer kitab</b></span>
+           <span class="ref-v">ke-${amanHTML(hadis.book_number)}${hadis.hadith_number ? ", hadis ke-" + amanHTML(hadis.hadith_number) : ""}</span></div>`
+      : (hadis.in_book_number
+        ? `<div class="ref-row"><span class="ref-k">In-book reference</span>
+           <span class="ref-v">Kitab ${babNo}, Hadis ${amanHTML(hadis.in_book_number)}</span></div>`
+        : "");
+    const usc = hadis.usc_msa_reference
+      ? `<div class="ref-row kecil"><span class="ref-k">USC-MSA web (English) reference<br><i>(penomoran lama)</i></span>
+           <span class="ref-v">${amanHTML(hadis.usc_msa_reference)}</span></div>`
+      : "";
+
+    return `
+      ${judulBab}
+      <div class="hadith" data-sanad="${sanadTeks}">
+        <div class="number">📚 Shahih al-Bukhari no. ${nomorAman}</div>
+        <div>${terjemahan}</div>
+        <div class="arabic">${arab}</div>
+
+        <div class="ref">
+          <div class="ref-row"><span class="ref-k"><b>Reference</b></span>
+            <span class="ref-v">
+  <a href="javascript:void(0)" onclick="bukaDetailHadis('${nomorAman}')">
+    ${rujukan}
+  </a>
+</span></div>
+          ${inBook}
+          ${usc}
+        </div>
+
+        <div class="aksi">
+          <span class="tautan" role="button" tabindex="0" onclick="bukaSaran(this)">Saran</span>
+          <span>|</span>
+          <span class="tautan" role="button" tabindex="0" onclick="berbagiHadis(this)">Share</span>
+          <span>|</span>
+          <span class="tautan" role="button" tabindex="0" onclick="salinHadis(this)">Salin</span>
+          <span class="tautan panah" role="button" tabindex="0" onclick="bukaOpsiSalin(this)">▼</span>
+        </div>
+      </div>`;
+  }).join("") || "<p>Hadis tidak ditemukan.</p>";
+
+  const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
+  const kontrol = document.getElementById("halaman");
+
+  // Hanya angka halaman: kiri = halaman sebelumnya, kanan = halaman berikutnya
+  kontrol.innerHTML = jumlahHalaman > 1
+    ? (hal > 0
+        ? `<button onclick="pindah(-1)">${hal}</button>`
+        : "<span></span>") +
+      (hal < jumlahHalaman - 1
+        ? `<button onclick="pindah(1)">${hal + 2}</button>`
+        : "<span></span>")
+    : "";
+
+  ukurScrollbar();
+}
+
+function pindah(arah) {
+  const jumlahHalaman = Math.ceil(cocok.length / perHalaman);
+  hal = Math.max(0, Math.min(hal + arah, jumlahHalaman - 1));
+  simpan("halHadis", hal);
+  tampilkan();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function lompatHadis(nomor) {
+  const i = semua.findIndex(function (h) {
+    return String(h.hadith_number ?? h.number) === String(nomor);
+  });
+  if (i < 0) return;
+  cocok = semua.slice(i, i + perHalaman);
+  hal = 0;
+  simpan("halHadis", 0);
+  tampilkan();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function bukaDetailHadis(nomor) {
+  const idx = semua.findIndex(function (h) {
+    return String(h.hadith_number ?? h.number) === String(nomor);
+  });
+  if (idx < 0) return;
+
+  const hadis = semua[idx];
+  const nomorHadis = hadis.hadith_number ?? hadis.number;
+  const terjemahan = amanHTML(
+    hadis.translation_id ?? hadis.indonesian ?? hadis.translation ?? ""
+  );
+  const arab = hadis.arabic ? bersihArab(hadis.arabic) : "Teks Arab belum tersedia";
+  const sanad = amanHTML(hadis.sanad_id ?? hadis.sanad ?? "");
+
+  const sebelumnya = semua[idx - 1];
+  const sesudahnya = semua[idx + 1];
+
+  document.getElementById("hasil").classList.add("hidden");
+  document.getElementById("halaman").classList.add("hidden");
+
+  const detail = document.getElementById("detail-hadis");
+  detail.classList.remove("hidden");
+
+  detail.innerHTML = `
+    <div style="margin:0 0 6px;font-size:14px;">
+      <span class="tautan" role="button" onclick="tampilkan()">‹ Kembali ke daftar</span>
+    </div>
+
+    <div class="hadith" data-sanad="${sanad}">
+      <div class="number">📚 Shahih al-Bukhari no. ${amanHTML(nomorHadis)}</div>
+      <div>${terjemahan}</div>
+      <div class="arabic">${arab}</div>
+      <div class="ref">
+        <div class="ref-row">
+          <span class="ref-k"><b>Reference</b></span>
+          <span class="ref-v">Sahih al-Bukhari no. ${amanHTML(nomorHadis)}</span>
+        </div>
+        ${hadis.book_number ? `<div class="ref-row"><span class="ref-k"><b>Nomer kitab</b></span>
+          <span class="ref-v">ke-${amanHTML(hadis.book_number)}${hadis.hadith_number ? ", hadis ke-" + amanHTML(hadis.hadith_number) : ""}</span></div>` : ""}
+      </div>
+    </div>
+
+    <div class="nav-hadis">
+      ${sebelumnya
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${amanHTML(sebelumnya.hadith_number ?? sebelumnya.number)}')">‹ ${amanHTML(sebelumnya.hadith_number ?? sebelumnya.number)}</a>`
+        : "<span></span>"}
+      ${sesudahnya
+        ? `<a class="nav-hadis-btn" onclick="bukaDetailHadis('${amanHTML(sesudahnya.hadith_number ?? sesudahnya.number)}')">${amanHTML(sesudahnya.hadith_number ?? sesudahnya.number)} ›</a>`
+        : "<span></span>"}
+    </div>
+  `;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ============ POSISI POPUP (dipakai ▼ Salin dan Saran) ============ */
+/* Popup dipusatkan tepat di bawah tombol pemicu (jarak 1px),
+   lalu digeser seperlunya agar tetap berada di dalam layar. */
+function posisikanDiBawah(tombol, kotak) {
+  const p = tombol.getBoundingClientRect();
+  const lebar = kotak.offsetWidth;
+
+  let kiri = p.left + p.width / 2 - lebar / 2;
+  kiri = Math.max(4, Math.min(kiri, window.innerWidth - lebar - 4));
+
+  kotak.style.left = kiri + "px";
+  kotak.style.top = (p.bottom + 1) + "px";
+}
+
+/* ============ POPUP SARAN (Report Error) ============ */
+function aturPosisiPopupSaran() {
+  if (!tombolSaranAktif) return;
+  const kotak = document.getElementById("popupSaran").firstElementChild;
+  posisikanDiBawah(tombolSaranAktif, kotak);
+}
+
+function bukaSaran(tombol) {
+  const popup = document.getElementById("popupSaran");
+
+  if (popup.style.display !== "none" && tombolSaranAktif === tombol) {
+    tutupSaran();
+    return;
+  }
+
+  tutupOpsiSalin();
+  tombolSaranAktif = tombol;
+
+  const artikel = tombol.closest(".hadith");
+  popup.dataset.nomor = artikel ? artikel.querySelector(".number")?.innerText || "" : "";
+
+  popup.style.display = "block";
+  aturPosisiPopupSaran();
+}
+
+function tutupSaran() {
+  document.getElementById("popupSaran").style.display = "none";
+  tombolSaranAktif = null;
+}
+
+document.addEventListener("change", function (event) {
+  if (event.target.matches('input[name="jenisKesalahan"]')) {
+    const lainnya = document.getElementById("jenisLainnya");
+    lainnya.style.display = event.target.value === "Lainnya" ? "block" : "none";
+    lainnya.required = event.target.value === "Lainnya";
+    aturPosisiPopupSaran();   // tinggi/lebar berubah, posisi dihitung ulang
+  }
+});
+
+document.addEventListener("submit", function (e) {
+  if (e.target.id !== "formSaran") return;
+  e.preventDefault();
+  alert("Terima kasih, saran Anda tercatat.");
+  e.target.reset();
+  document.getElementById("jenisLainnya").style.display = "none";
+  tutupSaran();
+});
+
+/* ============ SHARE & SALIN ============ */
+function tampilkanCeklis() {
+  const ceklis = document.createElement("div");
+  ceklis.innerHTML = "✓";
+  ceklis.style.cssText =
+    "position:fixed;top:20px;left:50%;transform:translateX(-50%);" +
+    "width:48px;height:48px;border-radius:50%;background:#00e676;" +
+    "color:white;display:flex;align-items:center;justify-content:center;" +
+    "font-size:32px;font-weight:bold;z-index:99999;" +
+    "box-shadow:0 3px 12px #0003;pointer-events:none;";
+  document.body.appendChild(ceklis);
+  setTimeout(function () { ceklis.remove(); }, 1200);
+}
+
+function salinCadangan(teks) {
+  const area = document.createElement("textarea");
+  area.value = teks;
+  area.setAttribute("readonly", "");
+  area.style.cssText = "position:fixed;top:0;left:0;opacity:0;";
+  document.body.appendChild(area);
+  area.select();
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch (e) {}
+  area.remove();
+  return ok;
+}
+
+async function salinKeClipboard(teks) {
+  try {
+    await navigator.clipboard.writeText(teks);
+    tampilkanCeklis();
+    return;
+  } catch (e) {}
+  if (salinCadangan(teks)) {
+    tampilkanCeklis();
+  } else {
+    window.prompt("Salin teks hadis berikut:", teks);
+  }
+}
+
+const normNomor = function (v) {
+  return String(v ?? "").trim().replace(/^0+/, "");
+};
+
+function ambilSanad(artikel) {
+  let sanad = (artikel.dataset.sanad || "").trim();
+  if (sanad) return sanad;
+
+  const angka = (artikel.querySelector(".number")?.innerText || "").match(/\d+/g) || [];
+  for (const n of angka) {
+    const h = semua.find(function (x) {
+      return normNomor(x.hadith_number ?? x.number) === normNomor(n);
+    });
+    if (h) {
+      sanad = String(bersih(h.sanad_id ?? h.sanad ?? "") || "").trim();
+      if (sanad) return sanad;
+    }
+  }
+  return "";
+}
+
+/* Salin sesuai pilihan popup ▼: Sanad > Indonesia (Matan) > Arab > Referensi */
+function terapkanOpsiSalin() {
+  if (!tombolSalinAktif) return;
+  const artikel = tombolSalinAktif.closest(".hadith");
+  if (!artikel) return;
+
+  const bagian = [];
+
+  if (document.getElementById("opsiSanad")?.checked) {
+    const sanad = ambilSanad(artikel);
+    if (sanad) bagian.push("Sanad:\n" + sanad);
+  }
+
+  if (document.getElementById("opsiIndonesia")?.checked) {
+    const teks = artikel.querySelector(":scope > div:nth-child(2)")?.innerText.trim();
+    if (teks) bagian.push("Matan:\n" + teks);
+  }
+
+  if (document.getElementById("opsiArabic")?.checked) {
+    const teks = artikel.querySelector(".arabic")?.innerText.trim();
+    if (teks) bagian.push("Arab:\n" + teks);
+  }
+
+  const nomorTeks = artikel.querySelector(".number")?.innerText.trim() || "";
+  const pilihanReferensi =
+    document.querySelector('input[name="opsiReferensi"]:checked')?.value;
+  const teksReferensi =
+    artikel.querySelector(".ref-row:first-child .ref-v")?.innerText.replace(/^:\s*/, "").trim() ||
+    nomorTeks;
+
+  if (pilihanReferensi === "ringkas" && teksReferensi) {
+    bagian.push(teksReferensi);
+  } else if (pilihanReferensi === "sitasi" && teksReferensi) {
+    bagian.push("Sitasi: " + teksReferensi);
+  }
+
+  const teksSalin = bagian.join("\n\n");
+  tutupOpsiSalin();
+
+  if (!teksSalin.trim()) {
+    alert("Pilih minimal satu teks yang tersedia untuk disalin.");
+    return;
+  }
+  salinKeClipboard(teksSalin);
+}
+
+/* ============ FORMAT SALIN & SHARE LANGSUNG ============ */
+const KITAB = "Sahih al-Bukhari";
+
+function ambilSahabat(sanad) {
+  const radi = [...sanad.matchAll(/radhi(?:y|a)allahu\s+['’‘`]?(anh\w*)/gi)];
+  if (!radi.length) return null;
+
+  const m = radi[radi.length - 1];
+  const bagian = sanad.slice(0, m.index)
+    .split(/\b(?:mendengar|dari|bahwa|kepadaku|mengabarkan|menceritakan|berkata)\b|[:,]/i)
+    .map(function (s) { return s.trim(); })
+    .filter(Boolean);
+
+  const nama = bagian[bagian.length - 1];
+  return nama ? { nama: nama, akhiran: m[1].toLowerCase() } : null;
+}
+
+function teksFormatBaru(artikel) {
+  const nomor = (artikel.querySelector(".number")?.innerText.match(/\d+/) || [""])[0];
+  const matan = artikel.querySelector(":scope > div:nth-child(2)")?.innerText.trim() || "";
+
+  const sahabat = ambilSahabat(ambilSanad(artikel));
+  const pembuka =
+    (sahabat
+      ? "dari " + sahabat.nama + " radhiyallahu '" + sahabat.akhiran + " berkata bahwa "
+      : "") +
+    "Rasulullah shallallahu alaihi wa sallam bersabda;";
+
+  return nomor + ". " + pembuka + "\n\n" + matan +
+    "\n\n📚 HR." + KITAB + ", No ;" + nomor;
+}
+
+function berbagiHadis(tombol) {
+  const artikel = tombol.closest(".hadith");
+  if (!artikel) return;
+
+  const teks = teksFormatBaru(artikel);
+
+  if (navigator.share) {
+    navigator.share({ title: "Belajar-Sunnah", text: teks })
+      .catch(function (error) {
+        if (error.name !== "AbortError") alert("Hadis belum berhasil dibagikan.");
+      });
+  } else {
+    window.prompt("Salin teks hadis untuk dibagikan:", teks);
+  }
+}
+
+async function salinHadis(tombol) {
+  const artikel = tombol.closest(".hadith");
+  if (!artikel) return;
+
+  const popup = document.getElementById("popupOpsiSalin");
+
+  if (popup && popup.style.display !== "none" &&
+      tombolSalinAktif && tombolSalinAktif.closest(".hadith") === artikel) {
+    terapkanOpsiSalin();
+    return;
+  }
+
+  if (popup && popup.style.display !== "none") tutupOpsiSalin();
+
+  salinKeClipboard(teksFormatBaru(artikel));
+}
+
+/* ============ POPUP PILIHAN SALIN (▼) ============ */
+function aturPosisiPopupSalin() {
+  if (!tombolSalinAktif) return;
+  const kotak = document.getElementById("popupOpsiSalin").firstElementChild;
+  posisikanDiBawah(tombolSalinAktif, kotak);
+}
+
+function bukaOpsiSalin(tombol) {
+  const popup = document.getElementById("popupOpsiSalin");
+
+  if (popup.style.display !== "none" && tombolSalinAktif === tombol) {
+    tutupOpsiSalin();
+    return;
+  }
+
+  tutupSaran();
+  tombolSalinAktif = tombol;
+  const kotak = popup.firstElementChild;
+
+  popup.style.display = "flex";
+  popup.style.background = "transparent";
+  popup.style.pointerEvents = "none";
+  popup.style.alignItems = "flex-start";
+  popup.style.justifyContent = "flex-start";
+  popup.style.padding = "0";
+
+  kotak.style.pointerEvents = "auto";
+  kotak.style.position = "fixed";
+  kotak.style.boxSizing = "border-box";
+  kotak.style.width = "fit-content";
+  kotak.style.maxWidth = "calc(100vw - 8px)";
+  kotak.style.margin = "0";
+  kotak.style.maxHeight = "calc(100vh - 24px)";
+  kotak.style.overflowY = "auto";
+
+  aturPosisiPopupSalin();
+}
+
+function tutupOpsiSalin() {
+  document.getElementById("popupOpsiSalin").style.display = "none";
+  tombolSalinAktif = null;
+}
+
+window.addEventListener("scroll", function () {
+  const popupSalin = document.getElementById("popupOpsiSalin");
+  if (popupSalin && popupSalin.style.display !== "none") aturPosisiPopupSalin();
+
+  const popupSaran = document.getElementById("popupSaran");
+  if (popupSaran && popupSaran.style.display !== "none") aturPosisiPopupSaran();
+}, true);
+
+window.addEventListener("resize", function () {
+  aturPosisiPopupSalin();
+  aturPosisiPopupSaran();
+});
+
+// Klik di luar popup menutupnya, kecuali klik pada menu pemicunya.
+document.addEventListener("click", function (event) {
+  const dalamMenu = event.target.closest(
+    '[onclick^="bukaOpsiSalin"], [onclick^="salinHadis"], [onclick^="bukaSaran"]'
+  );
+
+  const popupSalin = document.getElementById("popupOpsiSalin");
+  if (popupSalin && popupSalin.style.display !== "none" &&
+      !event.target.closest("#popupOpsiSalin > div") && !dalamMenu) {
+    tutupOpsiSalin();
+  }
+
+  const popupSaran = document.getElementById("popupSaran");
+  if (popupSaran && popupSaran.style.display !== "none" &&
+      !event.target.closest("#popupSaran > div") && !dalamMenu) {
+    tutupSaran();
+  }
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    tutupOpsiSalin();
+    tutupSaran();
+  }
+});
+
+// Nama kitab di beranda (delegasi klik, tidak bergantung urutan elemen)
+document.addEventListener("click", function (e) {
+  const el = e.target.closest("[data-buka]");
+  if (el) buka(el.dataset.buka);
+});
+
+muat();
+muatKitab();
+(function () {
+  const dariHash = decodeURIComponent((location.hash || "").slice(1));
+  const tersimpan = (dariHash && document.getElementById(dariHash)) ? dariHash : ambil("halamanAktif");
+  if (tersimpan && document.getElementById(tersimpan)) buka(tersimpan);
+})();
+</script>
+
+<!-- POPUP SARAN -->
+<div id="popupSaran" style="display:none;position:fixed;inset:0;z-index:10000;background:transparent;pointer-events:none;">
+  <div style="position:fixed;left:0;top:0;
+    width:min(320px,calc(100vw - 8px));max-height:calc(100vh - 24px);overflow-y:auto;
+    background-color:#E5E7EB;
+    background-image:linear-gradient(rgba(255,255,255,0.65),rgba(255,255,255,0.65)),url('./drawable/Bs_2.jpg');
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    border:1px solid #D1D5DB;border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    padding:10px 12px;box-sizing:border-box;
+    font-size:12px;color:#374151;pointer-events:auto;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="margin:0 0 8px;font-size:14px;">Kesalahan</h3>
+      <button type="button" onclick="tutupSaran()" style="border:none;background:transparent;color:#374151;font-size:20px;line-height:1;padding:0 4px;cursor:pointer;">✕</button>
+    </div>
+
+    <form id="formSaran">
+      <p style="margin:0 0 6px;">Jenis kesalahan:</p>
+
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Terjemahan tidak sesuai" required style="width:auto;margin:0;">
+          Terjemahan tidak sesuai
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Kesalahan ejaan" style="width:auto;margin:0;">
+          Kesalahan ejaan
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Teks tidak lengkap" style="width:auto;margin:0;">
+          Teks tidak lengkap
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Kesalahan terjemahan" style="width:auto;margin:0;">
+          Kesalahan terjemahan
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:0;">
+          <input type="radio" name="jenisKesalahan" value="Lainnya" style="width:auto;margin:0;">
+          Lainnya (harap sebutkan)
+        </label>
+      </div>
+
+      <input
+        type="text"
+        id="jenisLainnya"
+        placeholder="Sebutkan jenis kesalahan lainnya..."
+        style="display:none;width:100%;box-sizing:border-box;margin:8px 0;padding:10px;"
+      >
+
+      <p style="margin:12px 0 4px;">Detail kesalahan / saran perbaikan:</p>
+      <textarea
+        id="detailSaran"
+        rows="4"
+        required
+        placeholder="Tuliskan detail kesalahan atau saran perbaikan..."
+        style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
+      ></textarea>
+
+      <p style="margin:12px 0 4px;">Email:</p>
+      <input
+        type="email"
+        id="emailSaran"
+        required
+        placeholder="Alamat email Anda"
+        style="width:100%;box-sizing:border-box;padding:10px;margin:0;"
+      >
+
+      <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:16px;">
+        <button type="button" onclick="tutupSaran()"
+          style="border:1px solid #A7A6AF;background:transparent;color:#374151;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;cursor:pointer;">
+          Batal
+        </button>
+        <button type="submit"
+          style="border:1px solid #374151;background:#A7A6AF;color:#fff;font-family:inherit;font-size:14px;padding:8px 14px;border-radius:6px;cursor:pointer;">
+          Kirim
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<!-- POPUP PILIHAN SALIN -->
+<div id="popupOpsiSalin"
+  style="display:none;position:fixed;inset:0;z-index:10001;background:transparent;align-items:flex-start;justify-content:flex-start;padding:0;pointer-events:none;">
+
+  <div style="width:fit-content;max-width:calc(100vw - 8px);
+    background-color:#E5E7EB;
+    background-image:linear-gradient(rgba(255,255,255,0.65),rgba(255,255,255,0.65)),url('./drawable/Bs_2.jpg');
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    border:1px solid #D1D5DB;border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    padding:8px;box-sizing:border-box;
+    color:#374151;font-family:inherit;pointer-events:auto;">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:stretch;">
+
+      <div style="border:1px dashed #9CA3AF;border-radius:10px;padding:8px 10px;background:rgba(255,255,255,0.55);">
+        <div style="text-align:center;font-size:12px;font-weight:700;margin-bottom:6px;">Hadist Text</div>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiSanad" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Sanad
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiIndonesia" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Indonesia
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiArabic" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Arabic
+        </label>
+      </div>
+
+      <div style="border:1px dashed #9CA3AF;border-radius:10px;padding:8px 10px;background:rgba(255,255,255,0.55);">
+        <div style="text-align:center;font-size:12px;font-weight:700;margin-bottom:6px;">Referensi</div>
+
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="radio" name="opsiReferensi" value="ringkas" checked style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Ringkas
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="radio" name="opsiReferensi" value="sitasi" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          Sitasi
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;line-height:1.3;">
+          <input type="checkbox" id="opsiURL" style="width:14px;height:14px;accent-color:#2563eb;margin:0;">
+          URL
+        </label>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<nav class="bs-footer-nav" aria-label="Menu informasi">
+  <a href="#tentang">Tentang</a>
+  <span>|</span>
+  <a href="#berita">Berita</a>
+  <span>|</span>
+  <a href="#dukungan">Dukungan</a>
+  <span>|</span>
+  <a href="#pengembang">Pengembang</a>
+  <span>|</span>
+  <a href="#kontak">Kontak</a>
+  <span>|</span>
+  <a href="#donasi">Donasi</a>
+</nav>
+
+</body>
+</html>
