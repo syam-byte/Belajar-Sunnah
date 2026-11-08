@@ -914,6 +914,13 @@ function saringKitab(teks) {
 }
 
 
+/* Teks "In-book reference": Book N, Hadith M (hadith_number dipakai bila sudah terisi) */
+function teksInBook(h) {
+  if (h.in_book_reference) return String(h.in_book_reference);
+  if (!h.book_number) return "";
+  return "Book " + h.book_number + (h.hadith_number ? ", Hadith " + h.hadith_number : "");
+}
+
 function bukaKitab(awal, akhir) {
   const a = Number(awal);
   const b = Number(akhir);
@@ -1011,12 +1018,15 @@ function tampilkan() {
       ? ""
       : `<h3 class="bab">Bab ${babNo}: ${babNama}</h3>`;
 
-    const inBook = hadis.in_book_reference
-  ? `<div class="ref-row">
-       <span class="ref-k"><b>In-book reference</b></span>
-       <span class="ref-v">${amanHTML(hadis.in_book_reference)}</span>
-     </div>`
-  : "";
+    const inBookTeks = teksInBook(hadis);
+    const inBook = inBookTeks
+      ? `<div class="ref-row"><span class="ref-k"><b>In-book reference</b></span>
+           <span class="ref-v">${amanHTML(inBookTeks)}</span></div>`
+      : "";
+    const usc = hadis.usc_msa_reference
+      ? `<div class="ref-row kecil"><span class="ref-k">USC-MSA web (English) reference<br><i>(penomoran lama)</i></span>
+           <span class="ref-v">${amanHTML(hadis.usc_msa_reference)}</span></div>`
+      : "";
 
     return `
       ${judulBab}
@@ -1118,10 +1128,10 @@ function bukaDetailHadis(nomor) {
       <div class="ref">
         <div class="ref-row">
           <span class="ref-k"><b>Reference</b></span>
-          <span class="ref-k">Sahih al-Bukhari no. ${amanHTML(nomorHadis)}</span>
+          <span class="ref-v">${amanHTML(hadis.reference || ("Sahih al-Bukhari " + nomorHadis))}</span>
         </div>
-        ${hadis.book_number ? `<div class="ref-row"><span class="ref-k"><b>Nomer kitab</b></span>
-          <span class="ref-k">ke-${amanHTML(hadis.book_number)}${hadis.hadith_number ? ", hadis ke-" + amanHTML(hadis.hadith_number) : ""}</span></div>` : ""}
+        ${teksInBook(hadis) ? `<div class="ref-row"><span class="ref-k"><b>In-book reference</b></span>
+          <span class="ref-v">${amanHTML(teksInBook(hadis))}</span></div>` : ""}
       </div>
     </div>
 
